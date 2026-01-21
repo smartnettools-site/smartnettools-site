@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:ror="http://rorweb.com/0.1/" >
+<channel>
+  <title>ROR Sitemap for https://smartnettools.site/</title>
+  <link>https://smartnettools.site/</link>
+
+<item>
+     <link>https://smartnettools.site/</link>
+     <title>SmartTools – Free Online Tools</title>
+     <description>SmartTools offers free online tools like Find My IP, DNS Leak Test, SEO tools and developer utilities.</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>0</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://smartnettools.site/ip-tools/find-my-ip.html</link>
+     <title>SmartTools – Free Online Tools</title>
+     <description>SmartTools offers free online tools like Find My IP, DNS Leak Test, SEO tools and developer utilities.</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://smartnettools.site/ip-tools/dns-leak-test.html</link>
+     <title>SmartTools – Free Online Tools</title>
+     <description>SmartTools offers free online tools like Find My IP, DNS Leak Test, SEO tools and developer utilities.</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://smartnettools.site/dev-tools/json-formatter.html</link>
+     <title>SmartTools – Free Online Tools</title>
+     <description>SmartTools offers free online tools like Find My IP, DNS Leak Test, SEO tools and developer utilities.</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+</channel>
+</rss>
+  
