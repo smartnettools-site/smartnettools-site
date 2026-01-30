@@ -1,0 +1,370 @@
+{
+  "site_name": "SmartNet Tools",
+  "site_url": "https://smartnettools.site/",
+  "tools": {
+    "web": [
+      [
+        "HTML Formatter",
+        "html-formatter",
+        "Format and beautify HTML code with proper indentation"
+      ],
+      [
+        "HTML Minifier",
+        "html-minifier",
+        "Minify HTML code to reduce file size"
+      ],
+      [
+        "CSS Beautifier",
+        "css-beautifier",
+        "Format and beautify CSS stylesheets"
+      ],
+      [
+        "CSS Minifier",
+        "css-minifier",
+        "Minify CSS code for faster loading"
+      ],
+      [
+        "JS Formatter",
+        "js-formatter",
+        "Format and beautify JavaScript code"
+      ],
+      [
+        "JS Minifier",
+        "js-minifier",
+        "Minify JavaScript code to reduce file size"
+      ],
+      [
+        "Code Validator",
+        "code-validator",
+        "Validate HTML, CSS, and JavaScript syntax"
+      ],
+      [
+        "URL Encoder",
+        "url-encoder",
+        "Encode and decode URLs"
+      ],
+      [
+        "HTML to Markdown",
+        "html-to-markdown",
+        "Convert HTML to Markdown format"
+      ],
+      [
+        "Markdown to HTML",
+        "markdown-to-html",
+        "Convert Markdown to HTML"
+      ]
+    ],
+    "seo": [
+      [
+        "Meta Tag Generator",
+        "meta-tag-generator",
+        "Generate SEO-optimized meta tags"
+      ],
+      [
+        "Keyword Density Checker",
+        "keyword-density-checker",
+        "Analyze keyword density in your content"
+      ],
+      [
+        "Robots.txt Generator",
+        "robots-txt-generator",
+        "Generate robots.txt file for your website"
+      ],
+      [
+        "Sitemap Generator",
+        "sitemap-generator",
+        "Create XML sitemaps for search engines"
+      ],
+      [
+        "Open Graph Generator",
+        "open-graph-generator",
+        "Generate Open Graph meta tags"
+      ],
+      [
+        "Twitter Card Generator",
+        "twitter-card-generator",
+        "Generate Twitter Card meta tags"
+      ],
+      [
+        "Schema Validator",
+        "schema-validator",
+        "Validate structured data markup"
+      ],
+      [
+        "Heading Analyzer",
+        "heading-analyzer",
+        "Analyze heading structure for SEO"
+      ],
+      [
+        "SERP Simulator",
+        "serp-simulator",
+        "Preview how your page appears in search results"
+      ],
+      [
+        "Canonical URL Checker",
+        "canonical-url-checker",
+        "Check canonical URL implementation"
+      ]
+    ],
+    "accessibility": [
+      [
+        "Color Contrast Checker",
+        "color-contrast-checker",
+        "Check WCAG color contrast ratios"
+      ],
+      [
+        "WCAG Checker",
+        "wcag-checker",
+        "Analyze web accessibility compliance"
+      ],
+      [
+        "ARIA Validator",
+        "aria-validator",
+        "Validate ARIA attributes and roles"
+      ],
+      [
+        "Alt Text Checker",
+        "alt-text-checker",
+        "Check image alt text quality"
+      ],
+      [
+        "Heading Structure",
+        "heading-structure",
+        "Analyze heading hierarchy"
+      ],
+      [
+        "Accessible Color Picker",
+        "accessible-color-picker",
+        "Choose WCAG-compliant colors"
+      ],
+      [
+        "Readability Analyzer",
+        "readability-analyzer",
+        "Analyze text readability"
+      ],
+      [
+        "Form Label Checker",
+        "form-label-checker",
+        "Validate form accessibility"
+      ],
+      [
+        "Skip Link Generator",
+        "skip-link-generator",
+        "Generate skip navigation links"
+      ],
+      [
+        "Focus Indicator Test",
+        "focus-indicator-test",
+        "Test keyboard focus visibility"
+      ]
+    ],
+    "ai": [
+      [
+        "Text Summarizer",
+        "text-summarizer",
+        "Summarize long text with AI"
+      ],
+      [
+        "Sentiment Analyzer",
+        "sentiment-analyzer",
+        "Analyze sentiment in text"
+      ],
+      [
+        "Content Generator",
+        "content-generator",
+        "Generate content ideas with AI"
+      ],
+      [
+        "Paraphrasing Tool",
+        "paraphrasing-tool",
+        "Paraphrase text while maintaining meaning"
+      ],
+      [
+        "Keyword Extractor",
+        "keyword-extractor",
+        "Extract keywords from text"
+      ],
+      [
+        "Grammar Checker",
+        "grammar-checker",
+        "Check grammar and spelling"
+      ],
+      [
+        "Readability Scorer",
+        "readability-scorer",
+        "Score text readability"
+      ],
+      [
+        "Meta Description Generator",
+        "meta-description-generator",
+        "Generate SEO meta descriptions"
+      ],
+      [
+        "Headline Analyzer",
+        "headline-analyzer",
+        "Analyze headline effectiveness"
+      ],
+      [
+        "Content Optimizer",
+        "content-optimizer",
+        "Optimize content for SEO"
+      ]
+    ],
+    "vibe-code": [
+      [
+        "Code Playground",
+        "code-playground",
+        "Test HTML, CSS, JS code live"
+      ],
+      [
+        "Regex Tester",
+        "regex-tester",
+        "Test regular expressions"
+      ],
+      [
+        "Diff Checker",
+        "diff-checker",
+        "Compare two code files"
+      ],
+      [
+        "Code Beautifier",
+        "code-beautifier",
+        "Beautify code in multiple languages"
+      ],
+      [
+        "Syntax Highlighter",
+        "syntax-highlighter",
+        "Add syntax highlighting to code"
+      ],
+      [
+        "Variable Namer",
+        "variable-namer",
+        "Generate variable name suggestions"
+      ],
+      [
+        "Gitignore Generator",
+        "gitignore-generator",
+        "Generate .gitignore files"
+      ],
+      [
+        "Package.json Generator",
+        "package-json-generator",
+        "Create package.json files"
+      ],
+      [
+        "API Tester",
+        "api-tester",
+        "Test REST API endpoints"
+      ],
+      [
+        "CORS Tester",
+        "cors-tester",
+        "Test CORS configuration"
+      ]
+    ],
+    "utilities": [
+      [
+        "JSON Formatter",
+        "json-formatter",
+        "Format and validate JSON data"
+      ],
+      [
+        "Base64 Encoder",
+        "base64-encoder",
+        "Encode and decode Base64 data"
+      ],
+      [
+        "UUID Generator",
+        "uuid-generator",
+        "Generate unique identifiers"
+      ],
+      [
+        "Hash Generator",
+        "hash-generator",
+        "Generate MD5, SHA hashes"
+      ],
+      [
+        "QR Code Generator",
+        "qr-code-generator",
+        "Create QR codes"
+      ],
+      [
+        "Password Generator",
+        "password-generator",
+        "Generate secure passwords"
+      ],
+      [
+        "Text Case Converter",
+        "text-case-converter",
+        "Convert text case"
+      ],
+      [
+        "Word Counter",
+        "word-counter",
+        "Count words and characters"
+      ],
+      [
+        "Timestamp Converter",
+        "timestamp-converter",
+        "Convert Unix timestamps"
+      ],
+      [
+        "URL Parser",
+        "url-parser",
+        "Parse and analyze URLs"
+      ]
+    ],
+    "calculators": [
+      [
+        "Percentage Calculator",
+        "percentage-calculator",
+        "Calculate percentages"
+      ],
+      [
+        "Subnet Calculator",
+        "subnet-calculator",
+        "Calculate subnet masks and ranges"
+      ],
+      [
+        "IP Calculator",
+        "ip-calculator",
+        "Calculate IP addresses and subnets"
+      ],
+      [
+        "Color Converter",
+        "color-converter",
+        "Convert between color formats"
+      ],
+      [
+        "Unit Converter",
+        "unit-converter",
+        "Convert between units"
+      ],
+      [
+        "Time Zone Converter",
+        "time-zone-converter",
+        "Convert between time zones"
+      ],
+      [
+        "Date Calculator",
+        "date-calculator",
+        "Calculate date differences"
+      ],
+      [
+        "Age Calculator",
+        "age-calculator",
+        "Calculate age from birthdate"
+      ],
+      [
+        "BMI Calculator",
+        "bmi-calculator",
+        "Calculate Body Mass Index"
+      ],
+      [
+        "Bandwidth Calculator",
+        "bandwidth-calculator",
+        "Calculate bandwidth requirements"
+      ]
+    ]
+  }
+}

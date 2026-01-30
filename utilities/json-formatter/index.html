@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free online JSON formatter and validator. Format, validate, and beautify JSON data with syntax highlighting. Copy or download formatted JSON.">
+  <meta name="keywords" content="JSON formatter, JSON validator, JSON beautifier, format JSON online, validate JSON">
+  
+  <meta property="og:title" content="JSON Formatter & Validator - SmartNet Tools">
+  <meta property="og:description" content="Format and validate JSON data online. Free tool with syntax highlighting.">
+  <meta property="og:url" content="https://smartnettools.site/utilities/json-formatter/">
+  
+  <title>JSON Formatter & Validator - SmartNet Tools</title>
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <header class="site-header">
+    <div class="header-container">
+      <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
+        <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
+        <span>SmartNet Tools</span>
+      </a>
+      
+      <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
+      
+      <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/web/">Web</a></li>
+          <li><a href="/seo/">SEO</a></li>
+          <li><a href="/accessibility/">Accessibility</a></li>
+          <li><a href="/ai/">AI</a></li>
+          <li><a href="/vibe-code/">Vibe Code</a></li>
+          <li><a href="/utilities/">Utilities</a></li>
+          <li><a href="/calculators/">Calculators</a></li>
+          <li><a href="/certificates/">Certificates</a></li>
+          <li><a href="/get-advice/">Get Advice</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <div class="ad-container ad-header">
+    <!-- Google AdSense: paste script here -->
+    <!-- Adsterra: paste script here -->
+    <!-- Montag Ads: paste script here -->
+    <span>Advertisement</span>
+  </div>
+  
+  <main id="main-content">
+    <div class="page-header">
+      <h1>JSON Formatter & Validator</h1>
+      <p>Format, validate, and beautify JSON data with syntax highlighting. Your data is processed locally in your browser for maximum privacy.</p>
+    </div>
+    
+    <div class="tool-interface">
+      <div class="form-group">
+        <label for="jsonInput">Paste your JSON here:</label>
+        <textarea id="jsonInput" placeholder='{"example": "Paste your JSON here..."}'></textarea>
+      </div>
+      
+      <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-top: var(--spacing-md);">
+        <button onclick="formatJSON()" class="btn btn-primary">Format JSON</button>
+        <button onclick="minifyJSON()" class="btn btn-secondary">Minify JSON</button>
+        <button onclick="validateJSON()" class="btn btn-secondary">Validate Only</button>
+        <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+      </div>
+      
+      <div id="output" class="tool-output" style="display:none;"></div>
+      
+      <div id="actions" style="display:none; margin-top: var(--spacing-md); display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+        <button onclick="copyOutput()" class="btn btn-secondary">📋 Copy</button>
+        <button onclick="downloadJSON()" class="btn btn-secondary">⬇️ Download</button>
+      </div>
+    </div>
+    
+    <div class="ad-container ad-inline">
+      <!-- Google AdSense: paste script here -->
+      <!-- Adsterra: paste script here -->
+      <!-- Montag Ads: paste script here -->
+      <span>Advertisement</span>
+    </div>
+    
+    <section class="mt-lg">
+      <h2>About JSON Formatter</h2>
+      <div class="card">
+        <p>This JSON formatter helps you format, validate, and beautify JSON data. It provides syntax highlighting and clear error messages if your JSON is invalid.</p>
+        
+        <h3>Features:</h3>
+        <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+          <li>Format and beautify JSON with proper indentation</li>
+          <li>Minify JSON to reduce file size</li>
+          <li>Validate JSON syntax with clear error messages</li>
+          <li>Copy formatted JSON to clipboard</li>
+          <li>Download as .json file</li>
+          <li>100% client-side processing for privacy</li>
+        </ul>
+      </div>
+    </section>
+    
+    <section class="mt-lg">
+      <h2>Related Tools</h2>
+      <div class="grid grid-4">
+        <a href="/utilities/base64-encoder/" class="tool-card">
+          <h3>Base64 Encoder</h3>
+          <p>Encode and decode Base64 data</p>
+        </a>
+        <a href="/utilities/xml-formatter/" class="tool-card">
+          <h3>XML Formatter</h3>
+          <p>Format and validate XML documents</p>
+        </a>
+        <a href="/utilities/csv-to-json/" class="tool-card">
+          <h3>CSV to JSON</h3>
+          <p>Convert CSV data to JSON format</p>
+        </a>
+        <a href="/web/html-formatter/" class="tool-card">
+          <h3>HTML Formatter</h3>
+          <p>Format and beautify HTML code</p>
+        </a>
+      </div>
+    </section>
+  </main>
+  
+  <div class="ad-container ad-footer">
+    <!-- Google AdSense: paste script here -->
+    <!-- Adsterra: paste script here -->
+    <!-- Montag Ads: paste script here -->
+    <span>Advertisement</span>
+  </div>
+  
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>Tool Categories</h3>
+          <ul>
+            <li><a href="/web/">Web Tools</a></li>
+            <li><a href="/seo/">SEO Tools</a></li>
+            <li><a href="/accessibility/">Accessibility</a></li>
+            <li><a href="/ai/">AI Tools</a></li>
+            <li><a href="/vibe-code/">Vibe Code</a></li>
+            <li><a href="/utilities/">Utilities</a></li>
+            <li><a href="/calculators/">Calculators</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="/certificates/">Free IT Certificates</a></li>
+            <li><a href="/get-advice/">Get Expert Advice</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="/privacy-policy/">Privacy Policy</a></li>
+            <li><a href="/cookies-policy/">Cookies Policy</a></li>
+            <li><a href="/terms/">Terms & Conditions</a></li>
+            <li><a href="/disclaimer/">Disclaimer</a></li>
+            <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>About</h3>
+          <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="/assets/js/main.js"></script>
+  <script>
+    function formatJSON() {
+      const input = document.getElementById('jsonInput').value;
+      const output = document.getElementById('output');
+      const actions = document.getElementById('actions');
+      
+      try {
+        const parsed = JSON.parse(input);
+        const formatted = JSON.stringify(parsed, null, 2);
+        output.textContent = formatted;
+        output.style.display = 'block';
+        actions.style.display = 'flex';
+        showNotification('JSON formatted successfully!', 'success');
+      } catch (error) {
+        output.textContent = `Error: ${error.message}`;
+        output.style.display = 'block';
+        output.style.color = 'var(--error-color)';
+        actions.style.display = 'none';
+        showNotification('Invalid JSON', 'error');
+      }
+    }
+    
+    function minifyJSON() {
+      const input = document.getElementById('jsonInput').value;
+      const output = document.getElementById('output');
+      const actions = document.getElementById('actions');
+      
+      try {
+        const parsed = JSON.parse(input);
+        const minified = JSON.stringify(parsed);
+        output.textContent = minified;
+        output.style.display = 'block';
+        output.style.color = 'var(--text-primary)';
+        actions.style.display = 'flex';
+        showNotification('JSON minified successfully!', 'success');
+      } catch (error) {
+        output.textContent = `Error: ${error.message}`;
+        output.style.display = 'block';
+        output.style.color = 'var(--error-color)';
+        actions.style.display = 'none';
+        showNotification('Invalid JSON', 'error');
+      }
+    }
+    
+    function validateJSON() {
+      const input = document.getElementById('jsonInput').value;
+      const output = document.getElementById('output');
+      
+      try {
+        JSON.parse(input);
+        output.textContent = '✓ Valid JSON!';
+        output.style.display = 'block';
+        output.style.color = 'var(--success-color)';
+        showNotification('Valid JSON!', 'success');
+      } catch (error) {
+        output.textContent = `✗ Invalid JSON: ${error.message}`;
+        output.style.display = 'block';
+        output.style.color = 'var(--error-color)';
+        showNotification('Invalid JSON', 'error');
+      }
+    }
+    
+    function clearAll() {
+      document.getElementById('jsonInput').value = '';
+      document.getElementById('output').style.display = 'none';
+      document.getElementById('actions').style.display = 'none';
+    }
+    
+    function copyOutput() {
+      const output = document.getElementById('output').textContent;
+      copyToClipboard(output, event.target);
+    }
+    
+    function downloadJSON() {
+      const output = document.getElementById('output').textContent;
+      downloadAsFile(output, 'formatted.json', 'application/json');
+      showNotification('Downloaded!', 'success');
+    }
+  </script>
+</body>
+</html>
