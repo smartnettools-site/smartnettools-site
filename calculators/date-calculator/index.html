@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Calculate date differences, add or subtract days from dates.">
   <meta name="keywords" content="date calculator, date difference, days calculator">
-  
+
   <meta property="og:title" content="Date Calculator - SmartNet Tools">
   <meta property="og:description" content="Calculate date differences, add or subtract days from dates.">
   <meta property="og:url" content="https://smartnettools.site/calculators/date-calculator/">
-  
+
   <title>Date Calculator - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,44 +46,65 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>Date Calculator</h1>
       <p>Calculate date differences, add or subtract days from dates.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/calculators/" class="btn btn-primary">← Back to Calculators Tools</a>
-      </p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Calculate Date Difference</h3>
+          <div class="form-group">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate">
+          </div>
+          <div class="form-group">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate">
+          </div>
+          <button onclick="calculateDifference()" class="btn btn-primary" style="width: 100%;">Calculate
+            Difference</button>
+          <div id="diffOutput"
+            style="display:none; margin-top: var(--spacing-md); padding: var(--spacing-md); background: var(--bg-elevated); border-radius: var(--radius-md);">
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Add/Subtract Days</h3>
+          <div class="form-group">
+            <label for="baseDate">Base Date:</label>
+            <input type="date" id="baseDate">
+          </div>
+          <div class="form-group">
+            <label for="daysToAdd">Days to Add (use negative to subtract):</label>
+            <input type="number" id="daysToAdd" placeholder="e.g., 30 or -15">
+          </div>
+          <button onclick="addSubtractDays()" class="btn btn-primary" style="width: 100%;">Calculate New Date</button>
+          <div id="addOutput"
+            style="display:none; margin-top: var(--spacing-md); padding: var(--spacing-md); background: var(--bg-elevated); border-radius: var(--radius-md);">
+          </div>
+        </div>
+      </div>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Calculate date differences, add or subtract days from dates.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
-    
+
     <section class="mt-lg">
       <h2>Related Tools</h2>
       <div class="grid grid-4">
@@ -104,14 +127,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +150,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +159,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +170,39 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
+
   <script src="/assets/js/main.js"></script>
+  <script>
+    function calculateDifference() {
+      const start = document.getElementById('startDate').value; const end = document.getElementById('endDate').value;
+      if (!start || !end) { showNotification('Please enter both dates', 'error'); return; }
+      const startDate = new Date(start); const endDate = new Date(end); const diffTime = Math.abs(endDate - startDate); const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const diffWeeks = Math.floor(diffDays / 7); const diffMonths = Math.floor(diffDays / 30.44); const diffYears = Math.floor(diffDays / 365.25);
+      document.getElementById('diffOutput').innerHTML = `<strong>Total Difference:</strong><br>${diffDays} days<br>${diffWeeks} weeks<br>${diffMonths} months (approx.)<br>${diffYears} years (approx.)`;
+      document.getElementById('diffOutput').style.display = 'block'; showNotification('Difference calculated!', 'success');
+    }
+    function addSubtractDays() {
+      const base = document.getElementById('baseDate').value; const days = parseInt(document.getElementById('daysToAdd').value);
+      if (!base || isNaN(days)) { showNotification('Please enter both date and number of days', 'error'); return; }
+      const baseDate = new Date(base); baseDate.setDate(baseDate.getDate() + days); const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const resultDate = baseDate.toLocaleDateString('en-US', options); const iso = baseDate.toISOString().split('T')[0];
+      document.getElementById('addOutput').innerHTML = `<strong>New Date:</strong><br>${resultDate}<br><span style="color: var(--text-muted); font-size: 0.9em;">${iso}</span>`;
+      document.getElementById('addOutput').style.display = 'block'; showNotification('Date calculated!', 'success');
+    }
+  </script>
 </body>
+
 </html>

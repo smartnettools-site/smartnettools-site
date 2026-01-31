@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Minify CSS code to reduce file size. Remove whitespace, comments, and optimize your stylesheets.">
+  <meta name="description"
+    content="Minify CSS code to reduce file size. Remove whitespace, comments, and optimize your stylesheets.">
   <meta name="keywords" content="CSS minifier, minify CSS, compress CSS, optimize CSS">
-  
+
   <meta property="og:title" content="CSS Minifier - SmartNet Tools">
-  <meta property="og:description" content="Minify CSS code to reduce file size. Remove whitespace, comments, and optimize your stylesheets.">
+  <meta property="og:description"
+    content="Minify CSS code to reduce file size. Remove whitespace, comments, and optimize your stylesheets.">
   <meta property="og:url" content="https://smartnettools.site/web/css-minifier/">
-  
+
   <title>CSS Minifier - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,44 +48,45 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>CSS Minifier</h1>
       <p>Minify CSS code to reduce file size. Remove whitespace, comments, and optimize your stylesheets.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/web/" class="btn btn-primary">← Back to Web Tools</a>
-      </p>
+
+      <div class="form-group">
+        <label for="cssInput">Paste your CSS here:</label>
+        <textarea id="cssInput" placeholder=".class { color: red; }" style="min-height: 250px;"></textarea>
+      </div>
+
+      <button onclick="minifyCSS()" class="btn btn-primary">Minify CSS</button>
+
+      <div id="output" class="tool-output" style="display:none;"></div>
+      <div id="stats" style="margin-top: var(--spacing-md); display:none;"></div>
+
+      <div style="display: none; gap: var(--spacing-sm); margin-top: var(--spacing-md);" id="actions">
+        <button onclick="copyOutput()" class="btn btn-secondary">📋 Copy</button>
+        <button onclick="downloadFile()" class="btn btn-secondary">⬇️ Download</button>
+      </div>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Minify CSS code to reduce file size. Remove whitespace, comments, and optimize your stylesheets.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
-    
+
     <section class="mt-lg">
       <h2>Related Tools</h2>
       <div class="grid grid-4">
@@ -104,14 +109,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +132,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +141,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +152,63 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
   <script src="/assets/js/main.js"></script>
+  <script>
+    function minifyCSS() {
+      const input = document.getElementById('cssInput').value;
+      if (!input.trim()) {
+        showNotification('Please enter CSS code', 'error');
+        return;
+      }
+
+      const minified = input
+        .replace(/\/\*[\s\S]*?\*\//g, '')
+        .replace(/\n/g, '')
+        .replace(/\s{2,}/g, ' ')
+        .replace(/\s*{\s*/g, '{')
+        .replace(/\s*}\s*/g, '}')
+        .replace(/\s*:\s*/g, ':')
+        .replace(/\s*;\s*/g, ';')
+        .replace(/;\}/g, '}')
+        .trim();
+
+      const originalSize = new Blob([input]).size;
+      const minifiedSize = new Blob([minified]).size;
+      const savings = ((1 - minifiedSize / originalSize) * 100).toFixed(2);
+
+      document.getElementById('output').textContent = minified;
+      document.getElementById('output').style.display = 'block';
+
+      document.getElementById('stats').innerHTML = '<div class="card"><strong>Original:</strong> ' + originalSize + ' bytes | <strong>Minified:</strong> ' + minifiedSize + ' bytes | <strong>Savings:</strong> ' + savings + '%</div>';
+      document.getElementById('stats').style.display = 'block';
+
+      document.getElementById('actions').style.display = 'flex';
+
+      showNotification('CSS minified! Saved ' + savings + '%', 'success');
+    }
+
+    function copyOutput() {
+      copyToClipboard(document.getElementById('output').textContent, event.target);
+    }
+
+    function downloadFile() {
+      downloadAsFile(document.getElementById('output').textContent, 'minified.css', 'text/css');
+      showNotification('Downloaded!', 'success');
+    }
+  </script>
 </body>
+
 </html>

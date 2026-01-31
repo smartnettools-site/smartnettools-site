@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Format and beautify JavaScript code with proper indentation and structure.">
   <meta name="keywords" content="JavaScript formatter, JS formatter, format JavaScript, beautify JS">
-  
+
   <meta property="og:title" content="JavaScript Formatter - SmartNet Tools">
   <meta property="og:description" content="Format and beautify JavaScript code with proper indentation and structure.">
   <meta property="og:url" content="https://smartnettools.site/web/js-formatter/">
-  
+
   <title>JavaScript Formatter - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,45 +46,43 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>JavaScript Formatter</h1>
       <p>Format and beautify JavaScript code with proper indentation and structure.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/web/" class="btn btn-primary">← Back to Web Tools</a>
-      </p>
+
+      <div class="form-group">
+        <label for="jsInput">Paste your JavaScript here:</label>
+        <textarea id="jsInput" placeholder="function example(){return true;}" style="min-height: 250px;"></textarea>
+      </div>
+
+      <button onclick="formatJS()" class="btn btn-primary">Format JavaScript</button>
+
+      <div id="output" class="tool-output" style="display:none;"></div>
+      <button onclick="copyOutput()" class="btn btn-secondary" style="margin-top: var(--spacing-md); display:none;"
+        id="copyBtn">📋 Copy</button>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
+
     <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Format and beautify JavaScript code with proper indentation and structure.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
-    
-    <section class="mt-lg">
+
       <h2>Related Tools</h2>
       <div class="grid grid-4">
         <a href="/web/" class="tool-card">
@@ -104,14 +104,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +127,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +136,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +147,70 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
   <script src="/assets/js/main.js"></script>
+  <script>
+    function formatJS() {
+      const input = document.getElementById('jsInput').value;
+      if (!input.trim()) {
+        showNotification('Please enter JavaScript code', 'error');
+        return;
+      }
+
+      let formatted = input;
+      let indentLevel = 0;
+      const indent = '  ';
+
+      // Basic formatting algorithm
+      formatted = formatted
+        .replace(/([{;}])/g, '$1\n')
+        .replace(/}/g, '\n}')
+        .replace(/\n+/g, '\n')
+        .split('\n')
+        .map(line => {
+          line = line.trim();
+          if (!line) return '';
+
+          // Decrease indent for closing braces
+          if (line.startsWith('}')) {
+            indentLevel = Math.max(0, indentLevel - 1);
+          }
+
+          const indented = indent.repeat(indentLevel) + line;
+
+          // Increase indent for opening braces
+          if (line.endsWith('{')) {
+            indentLevel++;
+          }
+
+          return indented;
+        })
+        .join('\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+
+      document.getElementById('output').textContent = formatted;
+      document.getElementById('output').style.display = 'block';
+      document.getElementById('copyBtn').style.display = 'inline-block';
+      showNotification('JavaScript formatted!', 'success');
+    }
+
+    function copyOutput() {
+      copyToClipboard(document.getElementById('output').textContent, event.target);
+    }
+  </script>
 </body>
+
 </html>

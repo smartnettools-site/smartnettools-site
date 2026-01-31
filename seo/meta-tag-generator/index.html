@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Generate SEO-optimized meta tags including title, description, Open Graph, and Twitter Card tags.">
+  <meta name="description"
+    content="Generate SEO-optimized meta tags including title, description, Open Graph, and Twitter Card tags.">
   <meta name="keywords" content="meta tag generator, SEO meta tags, Open Graph, Twitter Card, meta description">
-  
+
   <meta property="og:title" content="Meta Tag Generator - SmartNet Tools">
-  <meta property="og:description" content="Generate SEO-optimized meta tags including title, description, Open Graph, and Twitter Card tags.">
+  <meta property="og:description"
+    content="Generate SEO-optimized meta tags including title, description, Open Graph, and Twitter Card tags.">
   <meta property="og:url" content="https://smartnettools.site/seo/meta-tag-generator/">
-  
+
   <title>Meta Tag Generator - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,44 +48,53 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>Meta Tag Generator</h1>
       <p>Generate SEO-optimized meta tags including title, description, Open Graph, and Twitter Card tags.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/seo/" class="btn btn-primary">← Back to Seo Tools</a>
-      </p>
+      <div class="form-group"><label for="title">Page Title:</label><input type="text" id="title"
+          placeholder="My Awesome Page"></div>
+      <div class="form-group"><label for="description">Meta Description:</label><textarea id="description"
+          placeholder="A brief description..."></textarea></div>
+      <div class="form-group"><label for="keywords">Keywords (comma-separated):</label><input type="text" id="keywords"
+          placeholder="web, tools, seo"></div>
+      <div class="form-group"><label for="url">Page URL:</label><input type="url" id="url"
+          placeholder="https://example.com/page"></div>
+      <div class="form-group"><label for="image">Image URL:</label><input type="url" id="image"
+          placeholder="https://example.com/image.jpg"></div>
+      <button onclick="generateTags()" class="btn btn-primary">Generate Meta Tags</button>
+      <div id="output" class="tool-output" style="display:none;"></div>
+      <button onclick="copyOutput()" class="btn btn-secondary" style="margin-top: var(--spacing-md); display:none;"
+        id="copyBtn">📋 Copy All</button>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
+
     <section class="mt-lg">
       <h2>About This Tool</h2>
       <div class="card">
         <p>Generate SEO-optimized meta tags including title, description, Open Graph, and Twitter Card tags.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
+        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our
+          servers.</p>
       </div>
     </section>
-    
+
     <section class="mt-lg">
       <h2>Related Tools</h2>
       <div class="grid grid-4">
@@ -104,14 +117,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +140,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +149,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +160,44 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
   <script src="/assets/js/main.js"></script>
+  <script>
+    function generateTags() {
+      const title = document.getElementById('title').value || 'Page Title';
+      const desc = document.getElementById('description').value || 'Page description';
+      const keywords = document.getElementById('keywords').value;
+      const url = document.getElementById('url').value;
+      const image = document.getElementById('image').value;
+      let html = `<!-- Basic Meta Tags -->\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<meta name="description" content="${desc}">\n`;
+      if (keywords) html += `<meta name="keywords" content="${keywords}">\n`;
+      html += `<title>${title}</title>\n`;
+      if (url || image) {
+        html += `\n<!-- Open Graph -->\n<meta property="og:title" content="${title}">\n<meta property="og:description" content="${desc}">\n`;
+        if (url) html += `<meta property="og:url" content="${url}">\n`;
+        if (image) html += `<meta property="og:image" content="${image}">\n`;
+        html += `\n<!-- Twitter Card -->\n<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="${title}">\n<meta name="twitter:description" content="${desc}">\n`;
+        if (image) html += `<meta name="twitter:image" content="${image}">\n`;
+      }
+      document.getElementById('output').textContent = html;
+      document.getElementById('output').style.display = 'block';
+      document.getElementById('copyBtn').style.display = 'inline-block';
+      showNotification('Meta tags generated!', 'success');
+    }
+    function copyOutput() { copyToClipboard(document.getElementById('output').textContent, event.target); }
+  </script>
 </body>
+
 </html>

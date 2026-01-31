@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Convert Unix timestamps to human-readable dates and vice versa.">
   <meta name="keywords" content="timestamp converter, Unix timestamp, epoch time, date converter">
-  
+
   <meta property="og:title" content="Unix Timestamp Converter - SmartNet Tools">
   <meta property="og:description" content="Convert Unix timestamps to human-readable dates and vice versa.">
   <meta property="og:url" content="https://smartnettools.site/utilities/timestamp-converter/">
-  
+
   <title>Unix Timestamp Converter - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,44 +46,78 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>Unix Timestamp Converter</h1>
       <p>Convert Unix timestamps to human-readable dates and vice versa.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/utilities/" class="btn btn-primary">← Back to Utilities Tools</a>
-      </p>
+
+      <div class="card" style="text-align: center; margin-bottom: var(--spacing-lg);">
+        <h3 style="color: var(--neon-cyan); margin: 0;">Current Unix Timestamp</h3>
+        <p id="currentTimestamp"
+          style="font-size: 2rem; font-weight: bold; color: var(--neon-yellow); margin: var(--spacing-sm) 0;">0</p>
+        <p id="currentDate" style="color: var(--text-secondary); margin: 0;"></p>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Timestamp → Date</h3>
+          <div class="form-group">
+            <label for="timestampInput">Unix Timestamp:</label>
+            <input type="number" id="timestampInput" placeholder="1609459200">
+          </div>
+          <button onclick="convertToDate()" class="btn btn-primary">Convert to Date</button>
+          <div id="dateOutput" style="margin-top: var(--spacing-md); display:none;">
+            <div
+              style="padding: var(--spacing-md); background: var(--bg-elevated); border-radius: var(--radius-md); margin-top: var(--spacing-sm);">
+              <strong>Full Date:</strong><br>
+              <span id="fullDate" style="color: var(--neon-cyan);"></span>
+            </div>
+            <div
+              style="padding: var(--spacing-md); background: var(--bg-elevated); border-radius: var(--radius-md); margin-top: var(--spacing-sm);">
+              <strong>ISO 8601:</strong><br>
+              <span id="isoDate" style="color: var(--neon-magenta);"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Date → Timestamp</h3>
+          <div class="form-group">
+            <label for="dateInput">Date and Time:</label>
+            <input type="datetime-local" id="dateInput">
+          </div>
+          <button onclick="convertToTimestamp()" class="btn btn-primary">Convert to Timestamp</button>
+          <div id="timestampOutput" style="margin-top: var(--spacing-md); display:none;">
+            <div
+              style="padding: var(--spacing-md); background: var(--bg-elevated); border-radius: var(--radius-md); margin-top: var(--spacing-sm);">
+              <strong>Unix Timestamp:</strong><br>
+              <span id="timestamp" style="color: var(--neon-green); font-size: 1.5rem; font-weight: bold;"></span><br>
+              <button onclick="copyText('timestamp')" class="btn btn-secondary"
+                style="margin-top: var(--spacing-sm);">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Convert Unix timestamps to human-readable dates and vice versa.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
-    
+
     <section class="mt-lg">
       <h2>Related Tools</h2>
       <div class="grid grid-4">
@@ -104,14 +140,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +163,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +172,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +183,67 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
+
   <script src="/assets/js/main.js"></script>
+  <script>
+    // Update current timestamp every second
+    function updateCurrentTimestamp() {
+      const now = new Date();
+      const timestamp = Math.floor(now.getTime() / 1000);
+      document.getElementById('currentTimestamp').textContent = timestamp;
+      document.getElementById('currentDate').textContent = now.toLocaleString();
+    }
+    updateCurrentTimestamp();
+    setInterval(updateCurrentTimestamp, 1000);
+
+    function convertToDate() {
+      const timestamp = parseInt(document.getElementById('timestampInput').value);
+
+      if (isNaN(timestamp)) {
+        showNotification('Please enter a valid timestamp', 'error');
+        return;
+      }
+
+      const date = new Date(timestamp * 1000);
+      document.getElementById('fullDate').textContent = date.toLocaleString();
+      document.getElementById('isoDate').textContent = date.toISOString();
+      document.getElementById('dateOutput').style.display = 'block';
+      showNotification('Converted successfully!', 'success');
+    }
+
+    function convertToTimestamp() {
+      const dateInput = document.getElementById('dateInput').value;
+
+      if (!dateInput) {
+        showNotification('Please select a date and time', 'error');
+        return;
+      }
+
+      const date = new Date(dateInput);
+      const timestamp = Math.floor(date.getTime() / 1000);
+      document.getElementById('timestamp').textContent = timestamp;
+      document.getElementById('timestampOutput').style.display = 'block';
+      showNotification('Converted successfully!', 'success');
+    }
+
+    function copyText(elementId) {
+      const text = document.getElementById(elementId).textContent;
+      copyToClipboard(text, event.target);
+    }
+  </script>
 </body>
+
 </html>
