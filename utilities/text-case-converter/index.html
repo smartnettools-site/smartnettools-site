@@ -59,12 +59,25 @@
     </div>
     
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/utilities/" class="btn btn-primary">← Back to Utilities Tools</a>
-      </p>
+
+      <div class="form-group">
+        <label for="textInput">Enter text:</label>
+        <textarea id="textInput" placeholder="Enter text to convert..."></textarea>
+      </div>
+      
+      <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+        <button onclick="convertCase('upper')" class="btn btn-primary">UPPERCASE</button>
+        <button onclick="convertCase('lower')" class="btn btn-primary">lowercase</button>
+        <button onclick="convertCase('title')" class="btn btn-primary">Title Case</button>
+        <button onclick="convertCase('sentence')" class="btn btn-primary">Sentence case</button>
+        <button onclick="convertCase('camel')" class="btn btn-secondary">camelCase</button>
+        <button onclick="convertCase('pascal')" class="btn btn-secondary">PascalCase</button>
+        <button onclick="convertCase('snake')" class="btn btn-secondary">snake_case</button>
+        <button onclick="convertCase('kebab')" class="btn btn-secondary">kebab-case</button>
+      </div>
+      
+      <div id="output" class="tool-output" style="display:none;"></div>
+      <button onclick="copyOutput()" class="btn btn-secondary" style="margin-top: var(--spacing-md); display:none;" id="copyBtn">📋 Copy</button>
     </div>
     
     <div class="ad-container ad-inline">
@@ -73,14 +86,6 @@
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Convert text between different cases: uppercase, lowercase, title case, camelCase, snake_case, and more.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
     
     <section class="mt-lg">
       <h2>Related Tools</h2>
@@ -127,7 +132,6 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +140,6 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,13 +150,11 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
@@ -161,5 +162,53 @@
   </footer>
   
   <script src="/assets/js/main.js"></script>
+  <script>
+
+    function convertCase(type) {
+      const input = document.getElementById('textInput').value;
+      if (!input) {
+        showNotification('Please enter text', 'error');
+        return;
+      }
+      
+      let result = '';
+      
+      switch(type) {
+        case 'upper':
+          result = input.toUpperCase();
+          break;
+        case 'lower':
+          result = input.toLowerCase();
+          break;
+        case 'title':
+          result = input.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+          break;
+        case 'sentence':
+          result = input.toLowerCase().replace(/(^\w|[.!?]\s+\w)/g, c => c.toUpperCase());
+          break;
+        case 'camel':
+          result = input.replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase()).replace(/^[A-Z]/, c => c.toLowerCase());
+          break;
+        case 'pascal':
+          result = input.replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase()).replace(/^[a-z]/, c => c.toUpperCase());
+          break;
+        case 'snake':
+          result = input.replace(/[^a-zA-Z0-9]+/g, '_').replace(/([A-Z])/g, '_$1').toLowerCase().replace(/^_/, '');
+          break;
+        case 'kebab':
+          result = input.replace(/[^a-zA-Z0-9]+/g, '-').replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '');
+          break;
+      }
+      
+      document.getElementById('output').textContent = result;
+      document.getElementById('output').style.display = 'block';
+      document.getElementById('copyBtn').style.display = 'inline-block';
+      showNotification('Text converted!', 'success');
+    }
+    
+    function copyOutput() {
+      copyToClipboard(document.getElementById('output').textContent, event.target);
+    }
+  </script>
 </body>
 </html>

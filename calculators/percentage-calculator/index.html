@@ -59,12 +59,59 @@
     </div>
     
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/calculators/" class="btn btn-primary">← Back to Calculators Tools</a>
-      </p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>What is X% of Y?</h3>
+          <div class="form-group">
+            <input type="number" id="percent1" placeholder="Percentage" step="any">
+          </div>
+          <div class="form-group">
+            <input type="number" id="of1" placeholder="Of" step="any">
+          </div>
+          <button onclick="calculate1()" class="btn btn-primary">Calculate</button>
+          <div id="result1" style="margin-top: var(--spacing-md); font-size: 1.5rem; color: var(--neon-cyan); font-weight: bold;"></div>
+        </div>
+        
+        <div class="card">
+          <h3>X is what % of Y?</h3>
+          <div class="form-group">
+            <input type="number" id="num2" placeholder="Number" step="any">
+          </div>
+          <div class="form-group">
+            <input type="number" id="of2" placeholder="Of" step="any">
+          </div>
+          <button onclick="calculate2()" class="btn btn-primary">Calculate</button>
+          <div id="result2" style="margin-top: var(--spacing-md); font-size: 1.5rem; color: var(--neon-magenta); font-weight: bold;"></div>
+        </div>
+        
+        <div class="card">
+          <h3>Percentage Change</h3>
+          <div class="form-group">
+            <input type="number" id="old" placeholder="Original Value" step="any">
+          </div>
+          <div class="form-group">
+            <input type="number" id="new" placeholder="New Value" step="any">
+          </div>
+          <button onclick="calculate3()" class="btn btn-primary">Calculate</button>
+          <div id="result3" style="margin-top: var(--spacing-md); font-size: 1.5rem; color: var(--neon-yellow); font-weight: bold;"></div>
+        </div>
+        
+        <div class="card">
+          <h3>Increase/Decrease by %</h3>
+          <div class="form-group">
+            <input type="number" id="base" placeholder="Base Number" step="any">
+          </div>
+          <div class="form-group">
+            <input type="number" id="percent4" placeholder="Percentage" step="any">
+          </div>
+          <div style="display: flex; gap: var(--spacing-sm);">
+            <button onclick="calculate4('increase')" class="btn btn-primary">Increase</button>
+            <button onclick="calculate4('decrease')" class="btn btn-secondary">Decrease</button>
+          </div>
+          <div id="result4" style="margin-top: var(--spacing-md); font-size: 1.5rem; color: var(--neon-green); font-weight: bold;"></div>
+        </div>
+      </div>
     </div>
     
     <div class="ad-container ad-inline">
@@ -73,14 +120,6 @@
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Calculate percentages easily. Find percentage of a number, percentage change, and more.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
     
     <section class="mt-lg">
       <h2>Related Tools</h2>
@@ -127,7 +166,6 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +174,6 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,13 +184,11 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
@@ -161,5 +196,57 @@
   </footer>
   
   <script src="/assets/js/main.js"></script>
+  <script>
+
+    function calculate1() {
+      const percent = parseFloat(document.getElementById('percent1').value);
+      const of = parseFloat(document.getElementById('of1').value);
+      if (isNaN(percent) || isNaN(of)) {
+        showNotification('Please enter valid numbers', 'error');
+        return;
+      }
+      const result = (percent / 100) * of;
+      document.getElementById('result1').textContent = '= ' + result.toFixed(2);
+      showNotification('Calculated!', 'success');
+    }
+    
+    function calculate2() {
+      const num = parseFloat(document.getElementById('num2').value);
+      const of = parseFloat(document.getElementById('of2').value);
+      if (isNaN(num) || isNaN(of) || of === 0) {
+        showNotification('Please enter valid numbers', 'error');
+        return;
+      }
+      const result = (num / of) * 100;
+      document.getElementById('result2').textContent = '= ' + result.toFixed(2) + '%';
+      showNotification('Calculated!', 'success');
+    }
+    
+    function calculate3() {
+      const oldVal = parseFloat(document.getElementById('old').value);
+      const newVal = parseFloat(document.getElementById('new').value);
+      if (isNaN(oldVal) || isNaN(newVal) || oldVal === 0) {
+        showNotification('Please enter valid numbers', 'error');
+        return;
+      }
+      const change = ((newVal - oldVal) / oldVal) * 100;
+      const sign = change >= 0 ? '+' : '';
+      document.getElementById('result3').textContent = sign + change.toFixed(2) + '%';
+      showNotification('Calculated!', 'success');
+    }
+    
+    function calculate4(type) {
+      const base = parseFloat(document.getElementById('base').value);
+      const percent = parseFloat(document.getElementById('percent4').value);
+      if (isNaN(base) || isNaN(percent)) {
+        showNotification('Please enter valid numbers', 'error');
+        return;
+      }
+      const change = (percent / 100) * base;
+      const result = type === 'increase' ? base + change : base - change;
+      document.getElementById('result4').textContent = '= ' + result.toFixed(2);
+      showNotification('Calculated!', 'success');
+    }
+  </script>
 </body>
 </html>

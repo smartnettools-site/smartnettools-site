@@ -59,12 +59,21 @@
     </div>
     
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/web/" class="btn btn-primary">← Back to Web Tools</a>
-      </p>
+
+      <div class="form-group">
+        <label for="htmlInput">Paste your HTML here:</label>
+        <textarea id="htmlInput" placeholder="<html>...</html>" style="min-height: 250px;"></textarea>
+      </div>
+      
+      <button onclick="minifyHTML()" class="btn btn-primary">Minify HTML</button>
+      
+      <div id="output" class="tool-output" style="display:none;"></div>
+      <div id="stats" style="margin-top: var(--spacing-md); display:none;"></div>
+      
+      <div style="display:none; margin-top: var(--spacing-md); gap: var(--spacing-sm);" id="actions">
+        <button onclick="copyOutput()" class="btn btn-secondary">📋 Copy</button>
+        <button onclick="downloadFile()" class="btn btn-secondary">⬇️ Download</button>
+      </div>
     </div>
     
     <div class="ad-container ad-inline">
@@ -73,14 +82,6 @@
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Minify HTML code to reduce file size and improve page load speed. Remove unnecessary whitespace and comments.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
     
     <section class="mt-lg">
       <h2>Related Tools</h2>
@@ -127,7 +128,6 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +136,6 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,13 +146,11 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
@@ -161,5 +158,45 @@
   </footer>
   
   <script src="/assets/js/main.js"></script>
+  <script>
+
+    function minifyHTML() {
+      const input = document.getElementById('htmlInput').value;
+      if (!input.trim()) {
+        showNotification('Please enter HTML code', 'error');
+        return;
+      }
+      
+      const minified = input
+        .replace(/<!--[\s\S]*?-->/g, '')
+        .replace(/\n/g, '')
+        .replace(/\s{2,}/g, ' ')
+        .replace(/> </g, '><')
+        .trim();
+      
+      const originalSize = new Blob([input]).size;
+      const minifiedSize = new Blob([minified]).size;
+      const savings = ((1 - minifiedSize / originalSize) * 100).toFixed(2);
+      
+      document.getElementById('output').textContent = minified;
+      document.getElementById('output').style.display = 'block';
+      
+      document.getElementById('stats').innerHTML = '<div class="card"><strong>Original:</strong> ' + originalSize + ' bytes | <strong>Minified:</strong> ' + minifiedSize + ' bytes | <strong>Savings:</strong> ' + savings + '%</div>';
+      document.getElementById('stats').style.display = 'block';
+      
+      document.getElementById('actions').style.display = 'flex';
+      
+      showNotification('HTML minified! Saved ' + savings + '%', 'success');
+    }
+    
+    function copyOutput() {
+      copyToClipboard(document.getElementById('output').textContent, event.target);
+    }
+    
+    function downloadFile() {
+      downloadAsFile(document.getElementById('output').textContent, 'minified.html', 'text/html');
+      showNotification('Downloaded!', 'success');
+    }
+  </script>
 </body>
 </html>

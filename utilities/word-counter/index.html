@@ -59,12 +59,42 @@
     </div>
     
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/utilities/" class="btn btn-primary">← Back to Utilities Tools</a>
-      </p>
+
+      <div class="form-group">
+        <label for="textInput">Enter or paste your text:</label>
+        <textarea id="textInput" placeholder="Type or paste your text here..." oninput="countWords()" style="min-height: 200px;"></textarea>
+      </div>
+      
+      <div id="stats" class="card" style="display:none;">
+        <div class="grid grid-3">
+          <div style="text-align: center;">
+            <h3 style="color: var(--neon-cyan); margin: 0; font-size: 2rem;" id="wordCount">0</h3>
+            <p style="margin: 0; color: var(--text-secondary);">Words</p>
+          </div>
+          <div style="text-align: center;">
+            <h3 style="color: var(--neon-magenta); margin: 0; font-size: 2rem;" id="charCount">0</h3>
+            <p style="margin: 0; color: var(--text-secondary);">Characters</p>
+          </div>
+          <div style="text-align: center;">
+            <h3 style="color: var(--neon-yellow); margin: 0; font-size: 2rem;" id="charNoSpaces">0</h3>
+            <p style="margin: 0; color: var(--text-secondary);">Chars (no spaces)</p>
+          </div>
+        </div>
+        <div class="grid grid-3" style="margin-top: var(--spacing-md);">
+          <div style="text-align: center;">
+            <h3 style="color: var(--neon-green); margin: 0; font-size: 2rem;" id="sentenceCount">0</h3>
+            <p style="margin: 0; color: var(--text-secondary);">Sentences</p>
+          </div>
+          <div style="text-align: center;">
+            <h3 style="color: var(--neon-blue); margin: 0; font-size: 2rem;" id="paragraphCount">0</h3>
+            <p style="margin: 0; color: var(--text-secondary);">Paragraphs</p>
+          </div>
+          <div style="text-align: center;">
+            <h3 style="color: var(--neon-cyan); margin: 0; font-size: 2rem;" id="readingTime">0</h3>
+            <p style="margin: 0; color: var(--text-secondary);">Reading Time (min)</p>
+          </div>
+        </div>
+      </div>
     </div>
     
     <div class="ad-container ad-inline">
@@ -73,14 +103,6 @@
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Count words, characters, sentences, and paragraphs. Calculate reading time for your text.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
     
     <section class="mt-lg">
       <h2>Related Tools</h2>
@@ -127,7 +149,6 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +157,6 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,13 +167,11 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
@@ -161,5 +179,32 @@
   </footer>
   
   <script src="/assets/js/main.js"></script>
+  <script>
+
+    function countWords() {
+      const text = document.getElementById('textInput').value;
+      
+      if (!text.trim()) {
+        document.getElementById('stats').style.display = 'none';
+        return;
+      }
+      
+      const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+      const characters = text.length;
+      const charactersNoSpaces = text.replace(/\s/g, '').length;
+      const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+      const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 0).length;
+      const readingTime = Math.ceil(words / 200);
+      
+      document.getElementById('wordCount').textContent = words;
+      document.getElementById('charCount').textContent = characters;
+      document.getElementById('charNoSpaces').textContent = charactersNoSpaces;
+      document.getElementById('sentenceCount').textContent = sentences;
+      document.getElementById('paragraphCount').textContent = paragraphs;
+      document.getElementById('readingTime').textContent = readingTime;
+      
+      document.getElementById('stats').style.display = 'block';
+    }
+  </script>
 </body>
 </html>

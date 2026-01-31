@@ -59,12 +59,23 @@
     </div>
     
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/web/" class="btn btn-primary">← Back to Web Tools</a>
-      </p>
+
+      <div class="form-group">
+        <label for="htmlInput">Paste your HTML here:</label>
+        <textarea id="htmlInput" placeholder="<html>...</html>" style="min-height: 250px;"></textarea>
+      </div>
+      
+      <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+        <button onclick="formatHTML()" class="btn btn-primary">Format HTML</button>
+        <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+      </div>
+      
+      <div id="output" class="tool-output" style="display:none;"></div>
+      
+      <div id="actions" style="display:none; margin-top: var(--spacing-md); display: flex; gap: var(--spacing-sm);">
+        <button onclick="copyOutput()" class="btn btn-secondary">📋 Copy</button>
+        <button onclick="downloadFile()" class="btn btn-secondary">⬇️ Download</button>
+      </div>
     </div>
     
     <div class="ad-container ad-inline">
@@ -73,14 +84,6 @@
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Format and beautify HTML code with proper indentation. Makes your HTML readable and well-structured.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
     
     <section class="mt-lg">
       <h2>Related Tools</h2>
@@ -127,7 +130,6 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +138,6 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,13 +148,11 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
@@ -161,5 +160,66 @@
   </footer>
   
   <script src="/assets/js/main.js"></script>
+  <script>
+
+    function formatHTML() {
+      const input = document.getElementById('htmlInput').value;
+      if (!input.trim()) {
+        showNotification('Please enter HTML code', 'error');
+        return;
+      }
+      
+      try {
+        let formatted = input;
+        let indent = 0;
+        const indentSize = 2;
+        
+        formatted = formatted.replace(/></g, '>\n<');
+        
+        const lines = formatted.split('\n');
+        const result = [];
+        
+        for (let line of lines) {
+          line = line.trim();
+          if (!line) continue;
+          
+          if (line.match(/^<\/\w/)) {
+            indent = Math.max(0, indent - 1);
+          }
+          
+          result.push(' '.repeat(indent * indentSize) + line);
+          
+          if (line.match(/^<\w[^>]*[^/]>$/)) {
+            indent++;
+          }
+        }
+        
+        formatted = result.join('\n');
+        
+        document.getElementById('output').textContent = formatted;
+        document.getElementById('output').style.display = 'block';
+        document.getElementById('actions').style.display = 'flex';
+        showNotification('HTML formatted successfully!', 'success');
+      } catch (error) {
+        showNotification('Error formatting HTML: ' + error.message, 'error');
+      }
+    }
+    
+    function clearAll() {
+      document.getElementById('htmlInput').value = '';
+      document.getElementById('output').style.display = 'none';
+      document.getElementById('actions').style.display = 'none';
+    }
+    
+    function copyOutput() {
+      copyToClipboard(document.getElementById('output').textContent, event.target);
+    }
+    
+    function downloadFile() {
+      const output = document.getElementById('output').textContent;
+      downloadAsFile(output, 'formatted.html', 'text/html');
+      showNotification('Downloaded!', 'success');
+    }
+  </script>
 </body>
 </html>

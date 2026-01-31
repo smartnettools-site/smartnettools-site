@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Calculate your Body Mass Index (BMI) from height and weight.">
-  <meta name="keywords" content="BMI calculator, body mass index, health calculator">
+  <meta name="description" content="Calculate your Body Mass Index (BMI) from height and weight. Get health insights based on WHO standards.">
+  <meta name="keywords" content="BMI calculator, body mass index, health calculator, BMI chart">
   
   <meta property="og:title" content="BMI Calculator (Body Mass Index) - SmartNet Tools">
-  <meta property="og:description" content="Calculate your Body Mass Index (BMI) from height and weight.">
+  <meta property="og:description" content="Calculate your Body Mass Index (BMI) from height and weight. Get health insights based on WHO standards.">
   <meta property="og:url" content="https://smartnettools.site/calculators/bmi-calculator/">
   
   <title>BMI Calculator (Body Mass Index) - SmartNet Tools</title>
@@ -55,16 +55,50 @@
   <main id="main-content">
     <div class="page-header">
       <h1>BMI Calculator (Body Mass Index)</h1>
-      <p>Calculate your Body Mass Index (BMI) from height and weight.</p>
+      <p>Calculate your Body Mass Index (BMI) from height and weight. Get health insights based on WHO standards.</p>
     </div>
     
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/calculators/" class="btn btn-primary">← Back to Calculators Tools</a>
-      </p>
+
+      <div class="card" style="max-width: 600px; margin: 0 auto;">
+        <div class="form-group">
+          <label>Unit System:</label>
+          <div style="display: flex; gap: var(--spacing-md);">
+            <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+              <input type="radio" name="unit" value="metric" checked onchange="toggleUnits()"> Metric (kg, cm)
+            </label>
+            <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+              <input type="radio" name="unit" value="imperial" onchange="toggleUnits()"> Imperial (lbs, inches)
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="weight">Weight: <span id="weightUnit">(kg)</span></label>
+          <input type="number" id="weight" placeholder="Enter weight" step="0.1">
+        </div>
+        
+        <div class="form-group">
+          <label for="height">Height: <span id="heightUnit">(cm)</span></label>
+          <input type="number" id="height" placeholder="Enter height" step="0.1">
+        </div>
+        
+        <button onclick="calculateBMI()" class="btn btn-primary" style="width: 100%;">Calculate BMI</button>
+        
+        <div id="result" style="display:none; margin-top: var(--spacing-lg); text-align: center;">
+          <h2 style="color: var(--neon-cyan); font-size: 3rem; margin: 0;" id="bmiValue"></h2>
+          <p style="font-size: 1.2rem; margin: var(--spacing-sm) 0;" id="category"></p>
+          <div id="healthInfo" style="margin-top: var(--spacing-md); padding: var(--spacing-md); background: var(--bg-tertiary); border-radius: var(--radius-md); text-align: left;"></div>
+        </div>
+        
+        <div style="margin-top: var(--spacing-lg); font-size: 0.9rem; color: var(--text-muted);">
+          <strong>BMI Categories (WHO):</strong><br>
+          Underweight: < 18.5<br>
+          Normal weight: 18.5 - 24.9<br>
+          Overweight: 25 - 29.9<br>
+          Obese: ≥ 30
+        </div>
+      </div>
     </div>
     
     <div class="ad-container ad-inline">
@@ -73,14 +107,6 @@
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Calculate your Body Mass Index (BMI) from height and weight.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
     
     <section class="mt-lg">
       <h2>Related Tools</h2>
@@ -127,7 +153,6 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +161,6 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,13 +171,11 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
@@ -161,5 +183,60 @@
   </footer>
   
   <script src="/assets/js/main.js"></script>
+  <script>
+
+    function toggleUnits() {
+      const isMetric = document.querySelector('input[name="unit"]:checked').value === 'metric';
+      document.getElementById('weightUnit').textContent = isMetric ? '(kg)' : '(lbs)';
+      document.getElementById('heightUnit').textContent = isMetric ? '(cm)' : '(inches)';
+    }
+    
+    function calculateBMI() {
+      const isMetric = document.querySelector('input[name="unit"]:checked').value === 'metric';
+      let weight = parseFloat(document.getElementById('weight').value);
+      let height = parseFloat(document.getElementById('height').value);
+      
+      if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+        showNotification('Please enter valid weight and height', 'error');
+        return;
+      }
+      
+      if (!isMetric) {
+        weight = weight * 0.453592;
+        height = height * 2.54;
+      }
+      
+      const heightInMeters = height / 100;
+      const bmi = weight / (heightInMeters * heightInMeters);
+      
+      let category, color, healthInfo;
+      
+      if (bmi < 18.5) {
+        category = 'Underweight';
+        color = 'var(--neon-blue)';
+        healthInfo = 'You may need to gain weight. Consult with a healthcare provider for personalized advice.';
+      } else if (bmi < 25) {
+        category = 'Normal Weight';
+        color = 'var(--success-color)';
+        healthInfo = 'You have a healthy weight. Maintain it through balanced diet and regular exercise.';
+      } else if (bmi < 30) {
+        category = 'Overweight';
+        color = 'var(--neon-yellow)';
+        healthInfo = 'Consider adopting a healthier lifestyle with balanced diet and increased physical activity.';
+      } else {
+        category = 'Obese';
+        color = 'var(--error-color)';
+        healthInfo = 'High BMI may increase health risks. Consider consulting with a healthcare provider.';
+      }
+      
+      document.getElementById('bmiValue').textContent = bmi.toFixed(1);
+      document.getElementById('bmiValue').style.color = color;
+      document.getElementById('category').innerHTML = '<strong style="color: ' + color + '">' + category + '</strong>';
+      document.getElementById('healthInfo').innerHTML = '<strong>Health Information:</strong><br>' + healthInfo;
+      document.getElementById('result').style.display = 'block';
+      
+      showNotification('BMI calculated!', 'success');
+    }
+  </script>
 </body>
 </html>

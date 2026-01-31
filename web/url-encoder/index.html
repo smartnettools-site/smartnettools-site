@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Encode and decode URLs. Convert special characters to URL-safe format.">
+  <meta name="description" content="Encode and decode URLs. Convert special characters to URL-safe format and vice versa.">
   <meta name="keywords" content="URL encoder, URL decoder, encode URL, decode URL, percent encoding">
   
   <meta property="og:title" content="URL Encoder & Decoder - SmartNet Tools">
-  <meta property="og:description" content="Encode and decode URLs. Convert special characters to URL-safe format.">
+  <meta property="og:description" content="Encode and decode URLs. Convert special characters to URL-safe format and vice versa.">
   <meta property="og:url" content="https://smartnettools.site/web/url-encoder/">
   
   <title>URL Encoder & Decoder - SmartNet Tools</title>
@@ -55,16 +55,24 @@
   <main id="main-content">
     <div class="page-header">
       <h1>URL Encoder & Decoder</h1>
-      <p>Encode and decode URLs. Convert special characters to URL-safe format.</p>
+      <p>Encode and decode URLs. Convert special characters to URL-safe format and vice versa.</p>
     </div>
     
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/web/" class="btn btn-primary">← Back to Web Tools</a>
-      </p>
+
+      <div class="form-group">
+        <label for="urlInput">Enter URL or text:</label>
+        <textarea id="urlInput" placeholder="https://example.com/path with spaces"></textarea>
+      </div>
+      
+      <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+        <button onclick="encodeURL()" class="btn btn-primary">Encode</button>
+        <button onclick="decodeURL()" class="btn btn-secondary">Decode</button>
+        <button onclick="encodeComponent()" class="btn btn-secondary">Encode Component</button>
+      </div>
+      
+      <div id="output" class="tool-output" style="display:none;"></div>
+      <button onclick="copyOutput()" class="btn btn-secondary" style="margin-top: var(--spacing-md); display:none;" id="copyBtn">📋 Copy</button>
     </div>
     
     <div class="ad-container ad-inline">
@@ -73,14 +81,6 @@
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Encode and decode URLs. Convert special characters to URL-safe format.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
     
     <section class="mt-lg">
       <h2>Related Tools</h2>
@@ -127,7 +127,6 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +135,6 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,13 +145,11 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
@@ -161,5 +157,62 @@
   </footer>
   
   <script src="/assets/js/main.js"></script>
+  <script>
+
+    function encodeURL() {
+      const input = document.getElementById('urlInput').value;
+      if (!input) {
+        showNotification('Please enter URL or text', 'error');
+        return;
+      }
+      try {
+        const encoded = encodeURI(input);
+        document.getElementById('output').textContent = encoded;
+        document.getElementById('output').style.display = 'block';
+        document.getElementById('copyBtn').style.display = 'inline-block';
+        showNotification('URL encoded!', 'success');
+      } catch (error) {
+        showNotification('Error encoding URL', 'error');
+      }
+    }
+    
+    function decodeURL() {
+      const input = document.getElementById('urlInput').value;
+      if (!input) {
+        showNotification('Please enter URL to decode', 'error');
+        return;
+      }
+      try {
+        const decoded = decodeURI(input);
+        document.getElementById('output').textContent = decoded;
+        document.getElementById('output').style.display = 'block';
+        document.getElementById('copyBtn').style.display = 'inline-block';
+        showNotification('URL decoded!', 'success');
+      } catch (error) {
+        showNotification('Error decoding URL', 'error');
+      }
+    }
+    
+    function encodeComponent() {
+      const input = document.getElementById('urlInput').value;
+      if (!input) {
+        showNotification('Please enter text', 'error');
+        return;
+      }
+      try {
+        const encoded = encodeURIComponent(input);
+        document.getElementById('output').textContent = encoded;
+        document.getElementById('output').style.display = 'block';
+        document.getElementById('copyBtn').style.display = 'inline-block';
+        showNotification('Component encoded!', 'success');
+      } catch (error) {
+        showNotification('Error encoding', 'error');
+      }
+    }
+    
+    function copyOutput() {
+      copyToClipboard(document.getElementById('output').textContent, event.target);
+    }
+  </script>
 </body>
 </html>

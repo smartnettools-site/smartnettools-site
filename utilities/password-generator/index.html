@@ -59,12 +59,41 @@
     </div>
     
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/utilities/" class="btn btn-primary">← Back to Utilities Tools</a>
-      </p>
+
+      <div class="form-group">
+        <label for="length">Password Length: <span id="lengthValue">16</span></label>
+        <input type="range" id="length" value="16" min="8" max="64" oninput="document.getElementById('lengthValue').textContent = this.value" style="width: 100%;">
+      </div>
+      
+      <div class="form-group">
+        <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+          <input type="checkbox" id="uppercase" checked> Include Uppercase (A-Z)
+        </label>
+      </div>
+      
+      <div class="form-group">
+        <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+          <input type="checkbox" id="lowercase" checked> Include Lowercase (a-z)
+        </label>
+      </div>
+      
+      <div class="form-group">
+        <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+          <input type="checkbox" id="numbers" checked> Include Numbers (0-9)
+        </label>
+      </div>
+      
+      <div class="form-group">
+        <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+          <input type="checkbox" id="symbols" checked> Include Symbols (!@#$%^&*)
+        </label>
+      </div>
+      
+      <button onclick="generatePassword()" class="btn btn-primary">Generate Password</button>
+      
+      <div id="output" class="tool-output" style="display:none; font-size: 1.5rem; font-weight: bold; text-align: center; word-break: break-all;"></div>
+      <div id="strength" style="margin-top: var(--spacing-md); display:none;"></div>
+      <button onclick="copyOutput()" class="btn btn-secondary" style="margin-top: var(--spacing-md); display:none;" id="copyBtn">📋 Copy Password</button>
     </div>
     
     <div class="ad-container ad-inline">
@@ -73,14 +102,6 @@
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Generate strong, secure passwords with customizable options. Include uppercase, lowercase, numbers, and symbols.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
     
     <section class="mt-lg">
       <h2>Related Tools</h2>
@@ -127,7 +148,6 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +156,6 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,13 +166,11 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
@@ -161,5 +178,60 @@
   </footer>
   
   <script src="/assets/js/main.js"></script>
+  <script>
+
+    function generatePassword() {
+      const length = parseInt(document.getElementById('length').value);
+      const uppercase = document.getElementById('uppercase').checked;
+      const lowercase = document.getElementById('lowercase').checked;
+      const numbers = document.getElementById('numbers').checked;
+      const symbols = document.getElementById('symbols').checked;
+      
+      if (!uppercase && !lowercase && !numbers && !symbols) {
+        showNotification('Please select at least one character type', 'error');
+        return;
+      }
+      
+      let chars = '';
+      if (uppercase) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      if (lowercase) chars += 'abcdefghijklmnopqrstuvwxyz';
+      if (numbers) chars += '0123456789';
+      if (symbols) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+      
+      let password = '';
+      for (let i = 0; i < length; i++) {
+        password += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      
+      document.getElementById('output').textContent = password;
+      document.getElementById('output').style.display = 'block';
+      document.getElementById('copyBtn').style.display = 'inline-block';
+      
+      const strengthScore = calculateStrength(password);
+      document.getElementById('strength').innerHTML = '<div class="card">Password Strength: <strong style="color: ' + strengthScore.color + '">' + strengthScore.text + '</strong></div>';
+      document.getElementById('strength').style.display = 'block';
+      
+      showNotification('Password generated!', 'success');
+    }
+    
+    function calculateStrength(password) {
+      let score = 0;
+      if (password.length >= 8) score++;
+      if (password.length >= 12) score++;
+      if (password.length >= 16) score++;
+      if (/[a-z]/.test(password)) score++;
+      if (/[A-Z]/.test(password)) score++;
+      if (/[0-9]/.test(password)) score++;
+      if (/[^a-zA-Z0-9]/.test(password)) score++;
+      
+      if (score <= 3) return { text: 'Weak', color: 'var(--error-color)' };
+      if (score <= 5) return { text: 'Medium', color: 'var(--neon-yellow)' };
+      return { text: 'Strong', color: 'var(--success-color)' };
+    }
+    
+    function copyOutput() {
+      copyToClipboard(document.getElementById('output').textContent, event.target);
+    }
+  </script>
 </body>
 </html>

@@ -59,12 +59,33 @@
     </div>
     
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/utilities/" class="btn btn-primary">← Back to Utilities Tools</a>
-      </p>
+
+      <div class="form-group">
+        <label for="textInput">Enter text to hash:</label>
+        <textarea id="textInput" placeholder="Enter text here..."></textarea>
+      </div>
+      
+      <button onclick="generateHashes()" class="btn btn-primary">Generate Hashes</button>
+      
+      <div id="output" style="display:none; margin-top: var(--spacing-lg);">
+        <div class="card">
+          <h3>SHA-256:</h3>
+          <div class="tool-output" id="sha256" style="word-break: break-all;"></div>
+          <button onclick="copyHash('sha256')" class="btn btn-secondary" style="margin-top: var(--spacing-sm);">Copy</button>
+        </div>
+        
+        <div class="card" style="margin-top: var(--spacing-md);">
+          <h3>SHA-1:</h3>
+          <div class="tool-output" id="sha1" style="word-break: break-all;"></div>
+          <button onclick="copyHash('sha1')" class="btn btn-secondary" style="margin-top: var(--spacing-sm);">Copy</button>
+        </div>
+        
+        <div class="card" style="margin-top: var(--spacing-md);">
+          <h3>MD5-like Hash:</h3>
+          <div class="tool-output" id="md5" style="word-break: break-all;"></div>
+          <button onclick="copyHash('md5')" class="btn btn-secondary" style="margin-top: var(--spacing-sm);">Copy</button>
+        </div>
+      </div>
     </div>
     
     <div class="ad-container ad-inline">
@@ -73,14 +94,6 @@
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Generate cryptographic hashes from text. Create MD5, SHA-1, and SHA-256 hashes.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
     
     <section class="mt-lg">
       <h2>Related Tools</h2>
@@ -127,7 +140,6 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +148,6 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,13 +158,11 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
@@ -161,5 +170,50 @@
   </footer>
   
   <script src="/assets/js/main.js"></script>
+  <script>
+
+    async function generateHashes() {
+      const text = document.getElementById('textInput').value;
+      
+      if (!text) {
+        showNotification('Please enter text to hash', 'error');
+        return;
+      }
+      
+      const encoder = new TextEncoder();
+      const data = encoder.encode(text);
+      
+      const sha256Buffer = await crypto.subtle.digest('SHA-256', data);
+      const sha256Array = Array.from(new Uint8Array(sha256Buffer));
+      const sha256Hex = sha256Array.map(b => b.toString(16).padStart(2, '0')).join('');
+      
+      const sha1Buffer = await crypto.subtle.digest('SHA-1', data);
+      const sha1Array = Array.from(new Uint8Array(sha1Buffer));
+      const sha1Hex = sha1Array.map(b => b.toString(16).padStart(2, '0')).join('');
+      
+      const md5Hex = simpleMD5(text);
+      
+      document.getElementById('md5').textContent = md5Hex;
+      document.getElementById('sha1').textContent = sha1Hex;
+      document.getElementById('sha256').textContent = sha256Hex;
+      document.getElementById('output').style.display = 'block';
+      
+      showNotification('Hashes generated!', 'success');
+    }
+    
+    function simpleMD5(str) {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = ((hash << 5) - hash) + str.charCodeAt(i);
+        hash = hash & hash;
+      }
+      return Math.abs(hash).toString(16).padStart(32, '0');
+    }
+    
+    function copyHash(type) {
+      const hash = document.getElementById(type).textContent;
+      copyToClipboard(hash, event.target);
+    }
+  </script>
 </body>
 </html>

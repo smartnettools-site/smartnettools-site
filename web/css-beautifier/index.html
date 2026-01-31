@@ -59,12 +59,16 @@
     </div>
     
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/web/" class="btn btn-primary">← Back to Web Tools</a>
-      </p>
+
+      <div class="form-group">
+        <label for="cssInput">Paste your CSS here:</label>
+        <textarea id="cssInput" placeholder=".class { color: red; }" style="min-height: 250px;"></textarea>
+      </div>
+      
+      <button onclick="beautifyCSS()" class="btn btn-primary">Beautify CSS</button>
+      
+      <div id="output" class="tool-output" style="display:none;"></div>
+      <button onclick="copyOutput()" class="btn btn-secondary" style="margin-top: var(--spacing-md); display:none;" id="copyBtn">📋 Copy</button>
     </div>
     
     <div class="ad-container ad-inline">
@@ -73,14 +77,6 @@
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
-    <section class="mt-lg">
-      <h2>About This Tool</h2>
-      <div class="card">
-        <p>Format and beautify CSS stylesheets with proper indentation and structure.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
-      </div>
-    </section>
     
     <section class="mt-lg">
       <h2>Related Tools</h2>
@@ -127,7 +123,6 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +131,6 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,13 +141,11 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
@@ -161,5 +153,32 @@
   </footer>
   
   <script src="/assets/js/main.js"></script>
+  <script>
+
+    function beautifyCSS() {
+      const input = document.getElementById('cssInput').value;
+      if (!input.trim()) {
+        showNotification('Please enter CSS code', 'error');
+        return;
+      }
+      
+      const beautified = input
+        .replace(/\s*{\s*/g, ' {\n  ')
+        .replace(/\s*}\s*/g, '\n}\n\n')
+        .replace(/;\s*/g, ';\n  ')
+        .replace(/\s*,\s*/g, ',\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+      
+      document.getElementById('output').textContent = beautified;
+      document.getElementById('output').style.display = 'block';
+      document.getElementById('copyBtn').style.display = 'inline-block';
+      showNotification('CSS beautified!', 'success');
+    }
+    
+    function copyOutput() {
+      copyToClipboard(document.getElementById('output').textContent, event.target);
+    }
+  </script>
 </body>
 </html>
