@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Paraphrase text while maintaining meaning. Rewrite sentences and paragraphs with different words.">
+    <meta name="keywords" content="paraphrasing tool, rewrite text, rephrase, paraphrase online, text rewriter">
+
+    <meta property="og:title" content="Paraphrasing Tool - SmartNet Tools">
+    <meta property="og:description"
+        content="Paraphrase text while maintaining meaning. Rewrite sentences and paragraphs with different words.">
+    <meta property="og:url" content="https://smartnettools.site/ai/paraphrasing-tool/">
+
+    <title>Paraphrasing Tool - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+
+            <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
+
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="ad-container ad-header">
+        <!-- Google AdSense: paste script here -->
+        <!-- Adsterra: paste script here -->
+        <!-- Montag Ads: paste script here -->
+        <span>Advertisement</span>
+    </div>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Paraphrasing Tool</h1>
+            <p>Paraphrase text while maintaining meaning. Rewrite sentences and paragraphs with different words.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div class="form-group">
+                <label for="textInput">Enter text to paraphrase:</label>
+                <textarea id="textInput" rows="10" placeholder="Enter the text you want to paraphrase..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="paraphraseMode">Paraphrase Mode:</label>
+                <select id="paraphraseMode">
+                    <option value="standard">Standard - Balanced rewriting</option>
+                    <option value="formal">Formal - More professional language</option>
+                    <option value="simple">Simple - Easier to understand</option>
+                    <option value="creative">Creative - More varied vocabulary</option>
+                </select>
+            </div>
+
+            <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-top: var(--spacing-md);">
+                <button onclick="paraphraseText()" class="btn btn-primary">Paraphrase Text</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+            </div>
+
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+
+            <div id="comparison" style="display:none; margin-top: var(--spacing-lg);"></div>
+
+            <div id="actions"
+                style="display:none; margin-top: var(--spacing-md); display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+                <button onclick="copyParaphrased()" class="btn btn-secondary">📋 Copy Paraphrased Text</button>
+                <button onclick="downloadParaphrased()" class="btn btn-secondary">⬇️ Download</button>
+                <button onclick="paraphraseText()" class="btn btn-secondary">🔄 Rephrase Again</button>
+            </div>
+        </div>
+
+        <div class="ad-container ad-inline">
+            <!-- Google AdSense: paste script here -->
+            <!-- Adsterra: paste script here -->
+            <!-- Montag Ads: paste script here -->
+            <span>Advertisement</span>
+        </div>
+
+        <section class="mt-lg">
+            <h2>About Paraphrasing Tool</h2>
+            <div class="card">
+                <p>This paraphrasing tool helps you rewrite text while preserving its original meaning. Perfect for
+                    creating unique content, avoiding plagiarism, or improving readability.</p>
+
+                <h3>Features:</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>Multiple paraphrasing modes for different needs</li>
+                    <li>Preserves original meaning and context</li>
+                    <li>Improves text clarity and flow</li>
+                    <li>Side-by-side comparison view</li>
+                    <li>Word count and changes tracking</li>
+                    <li>100% client-side processing for privacy</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mt-lg">
+            <h2>Related Tools</h2>
+            <div class="grid grid-4">
+                <a href="/ai/" class="tool-card">
+                    <h3>All AI Tools</h3>
+                    <p>Browse all tools in this category</p>
+                </a>
+                <a href="/ai/text-summarizer/" class="tool-card">
+                    <h3>Text Summarizer</h3>
+                    <p>Summarize long text into key points</p>
+                </a>
+                <a href="/ai/content-generator/" class="tool-card">
+                    <h3>Content Generator</h3>
+                    <p>Generate content ideas with AI</p>
+                </a>
+                <a href="/utilities/word-counter/" class="tool-card">
+                    <h3>Word Counter</h3>
+                    <p>Count words and characters</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div class="ad-container ad-footer">
+        <!-- Google AdSense: paste script here -->
+        <!-- Adsterra: paste script here -->
+        <!-- Montag Ads: paste script here -->
+        <span>Advertisement</span>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Synonym dictionaries for paraphrasing
+        const synonyms = {
+            'important': ['crucial', 'significant', 'vital', 'essential', 'key'],
+            'good': ['excellent', 'great', 'fine', 'positive', 'beneficial'],
+            'bad': ['poor', 'negative', 'unfavorable', 'unfortunate', 'adverse'],
+            'big': ['large', 'substantial', 'considerable', 'significant', 'major'],
+            'small': ['little', 'minor', 'slight', 'modest', 'limited'],
+            'use': ['utilize', 'employ', 'apply', 'implement', 'leverage'],
+            'make': ['create', 'produce', 'generate', 'develop', 'form'],
+            'show': ['demonstrate', 'display', 'reveal', 'illustrate', 'exhibit'],
+            'help': ['assist', 'aid', 'support', 'facilitate', 'enable'],
+            'think': ['consider', 'believe', 'suppose', 'assume', 'reckon'],
+            'need': ['require', 'necessitate', 'demand', 'call for', 'want'],
+            'want': ['desire', 'wish', 'seek', 'prefer', 'aspire'],
+            'get': ['obtain', 'acquire', 'receive', 'gain', 'secure'],
+            'give': ['provide', 'offer', 'supply', 'deliver', 'present'],
+            'find': ['discover', 'locate', 'identify', 'detect', 'uncover'],
+            'tell': ['inform', 'notify', 'advise', 'communicate', 'reveal'],
+            'ask': ['inquire', 'question', 'request', 'query', 'seek'],
+            'work': ['function', 'operate', 'perform', 'execute', 'run'],
+            'seem': ['appear', 'look', 'sound', 'feel', 'suggest'],
+            'feel': ['sense', 'experience', 'perceive', 'undergo', 'encounter'],
+            'try': ['attempt', 'endeavor', 'strive', 'effort', 'seek'],
+            'leave': ['depart', 'exit', 'abandon', 'vacate', 'withdraw'],
+            'call': ['name', 'term', 'label', 'designate', 'refer'],
+            'keep': ['maintain', 'preserve', 'retain', 'sustain', 'continue'],
+            'let': ['allow', 'permit', 'enable', 'authorize', 'facilitate'],
+            'begin': ['start', 'commence', 'initiate', 'launch', 'undertake'],
+            'run': ['operate', 'manage', 'conduct', 'execute', 'administer'],
+            'move': ['shift', 'transfer', 'relocate', 'transport', 'progress'],
+            'like': ['enjoy', 'appreciate', 'favor', 'prefer', 'admire'],
+            'know': ['understand', 'comprehend', 'realize', 'recognize', 'grasp'],
+            'take': ['accept', 'receive', 'adopt', 'embrace', 'seize'],
+            'see': ['observe', 'notice', 'view', 'perceive', 'witness'],
+            'come': ['arrive', 'approach', 'reach', 'appear', 'emerge'],
+            'look': ['appear', 'seem', 'examine', 'observe', 'view'],
+            'very': ['extremely', 'highly', 'remarkably', 'particularly', 'quite'],
+            'also': ['additionally', 'furthermore', 'moreover', 'likewise', 'too'],
+            'because': ['since', 'as', 'due to', 'owing to', 'given that'],
+            'however': ['nevertheless', 'nonetheless', 'yet', 'still', 'though'],
+            'therefore': ['thus', 'consequently', 'hence', 'accordingly', 'so'],
+            'different': ['various', 'diverse', 'distinct', 'varied', 'alternative'],
+            'same': ['identical', 'similar', 'equivalent', 'equal', 'comparable'],
+            'new': ['novel', 'fresh', 'recent', 'modern', 'innovative'],
+            'old': ['ancient', 'aged', 'previous', 'former', 'traditional'],
+            'many': ['numerous', 'several', 'various', 'multiple', 'countless'],
+            'few': ['several', 'some', 'handful', 'limited', 'scarce']
+        };
+
+        function paraphraseText() {
+            const input = document.getElementById('textInput').value.trim();
+            const mode = document.getElementById('paraphraseMode').value;
+            const output = document.getElementById('output');
+            const comparison = document.getElementById('comparison');
+            const actions = document.getElementById('actions');
+
+            if (!input) {
+                showNotification('Please enter some text to paraphrase', 'error');
+                return;
+            }
+
+            try {
+                // Split into sentences
+                const sentences = input.match(/[^.!?]+[.!?]+/g) || [input];
+                let paraphrased = '';
+
+                sentences.forEach(sentence => {
+                    let newSentence = sentence;
+
+                    // Apply paraphrasing based on mode
+                    if (mode === 'standard' || mode === 'creative') {
+                        // Replace words with synonyms
+                        Object.keys(synonyms).forEach(word => {
+                            const regex = new RegExp(`\\b${word}\\b`, 'gi');
+                            newSentence = newSentence.replace(regex, (match) => {
+                                const syns = synonyms[word.toLowerCase()];
+                                if (syns && Math.random() > 0.5) {
+                                    const replacement = syns[Math.floor(Math.random() * syns.length)];
+                                    // Preserve capitalization
+                                    if (match[0] === match[0].toUpperCase()) {
+                                        return replacement.charAt(0).toUpperCase() + replacement.slice(1);
+                                    }
+                                    return replacement;
+                                }
+                                return match;
+                            });
+                        });
+                    }
+
+                    if (mode === 'formal') {
+                        // Make more formal
+                        newSentence = newSentence
+                            .replace(/\bdon't\b/gi, 'do not')
+                            .replace(/\bcan't\b/gi, 'cannot')
+                            .replace(/\bwon't\b/gi, 'will not')
+                            .replace(/\bhasn't\b/gi, 'has not')
+                            .replace(/\bisn't\b/gi, 'is not')
+                            .replace(/\baren't\b/gi, 'are not');
+                    }
+
+                    if (mode === 'simple') {
+                        // Simplify complex words
+                        newSentence = newSentence
+                            .replace(/\butilize\b/gi, 'use')
+                            .replace(/\bcommence\b/gi, 'start')
+                            .replace(/\bfacilitate\b/gi, 'help')
+                            .replace(/\ben devour\b/gi, 'try')
+                            .replace(/\balleviate\b/gi, 'reduce');
+                    }
+
+                    paraphrased += newSentence + ' ';
+                });
+
+                // Clean up
+                paraphrased = paraphrased.trim();
+
+                // Calculate statistics
+                const originalWords = input.split(/\s+/).length;
+                const paraphrasedWords = paraphrased.split(/\s+/).length;
+                const changedWords = calculateChanges(input, paraphrased);
+                const changePercent = ((changedWords / originalWords) * 100).toFixed(1);
+
+                // Display paraphrased text
+                output.innerHTML = `
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+              <h3>Paraphrased Text</h3>
+              <span style="background: var(--success-color); color: white; padding: 4px 12px; border-radius: var(--radius-md); font-size: 0.875rem;">
+                ${changePercent}% Changed
+              </span>
+            </div>
+            <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-md); border-left: 4px solid var(--success-color);">
+              <p style="margin: 0; line-height: 1.6; color: var(--text-primary);">${paraphrased}</p>
+            </div>
+            
+            <div style="margin-top: var(--spacing-lg); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--spacing-md);">
+              <div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Original Words</div>
+                <div style="font-size: 1.25rem; font-weight: 600;">${originalWords}</div>
+              </div>
+              <div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Paraphrased Words</div>
+                <div style="font-size: 1.25rem; font-weight: 600;">${paraphrasedWords}</div>
+              </div>
+              <div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Words Changed</div>
+                <div style="font-size: 1.25rem; font-weight: 600; color: var(--success-color);">${changedWords}</div>
+              </div>
+            </div>
+          </div>
+        `;
+
+                // Display comparison
+                comparison.innerHTML = `
+          <div class="card">
+            <h3>Side-by-Side Comparison</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg); margin-top: var(--spacing-md);">
+              <div>
+                <h4 style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-sm);">ORIGINAL TEXT</h4>
+                <div style="background: var(--bg-secondary); padding: var(--spacing-md); border-radius: var(--radius-md); min-height: 100px;">
+                  <p style="margin: 0; line-height: 1.6; font-size: 0.9rem;">${input}</p>
+                </div>
+              </div>
+              <div>
+                <h4 style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-sm);">PARAPHRASED TEXT</h4>
+                <div style="background: var(--bg-secondary); padding: var(--spacing-md); border-radius: var(--radius-md); min-height: 100px;">
+                  <p style="margin: 0; line-height: 1.6; font-size: 0.9rem;">${paraphrased}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+                output.style.display = 'block';
+                comparison.style.display = 'block';
+                actions.style.display = 'flex';
+
+                showNotification('Text paraphrased successfully!', 'success');
+            } catch (error) {
+                output.textContent = `Error: ${error.message}`;
+                output.style.display = 'block';
+                comparison.style.display = 'none';
+                actions.style.display = 'none';
+                showNotification('Error paraphrasing text', 'error');
+            }
+        }
+
+        function calculateChanges(original, paraphrased) {
+            const originalWords = original.toLowerCase().split(/\s+/);
+            const paraphrasedWords = paraphrased.toLowerCase().split(/\s+/);
+            let changes = 0;
+
+            for (let i = 0; i < Math.min(originalWords.length, paraphrasedWords.length); i++) {
+                if (originalWords[i] !== paraphrasedWords[i]) {
+                    changes++;
+                }
+            }
+
+            // Add difference in length
+            changes += Math.abs(originalWords.length - paraphrasedWords.length);
+
+            return changes;
+        }
+
+        function clearAll() {
+            document.getElementById('textInput').value = '';
+            document.getElementById('output').style.display = 'none';
+            document.getElementById('comparison').style.display = 'none';
+            document.getElementById('actions').style.display = 'none';
+        }
+
+        function copyParaphrased() {
+            const paraphrased = document.querySelector('#output p');
+            if (paraphrased) {
+                copyToClipboard(paraphrased.textContent, event.target);
+            }
+        }
+
+        function downloadParaphrased() {
+            const paraphrased = document.querySelector('#output p');
+            if (paraphrased) {
+                downloadAsFile(paraphrased.textContent, 'paraphrased-text.txt', 'text/plain');
+                showNotification('Downloaded!', 'success');
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Free online grammar and spelling checker. Check your text for grammar errors, spelling mistakes, and punctuation issues.">
+    <meta name="keywords"
+        content="grammar checker, spell checker, grammar check online, spelling check, punctuation checker">
+
+    <meta property="og:title" content="Grammar Checker - SmartNet Tools">
+    <meta property="og:description"
+        content="Check your text for grammar errors, spelling mistakes, and punctuation issues.">
+    <meta property="og:url" content="https://smartnettools.site/ai/grammar-checker/">
+
+    <title>Grammar Checker - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+
+            <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
+
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="ad-container ad-header">
+        <span>Advertisement</span>
+    </div>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Grammar Checker</h1>
+            <p>Check your text for grammar errors, spelling mistakes, and punctuation issues.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div class="form-group">
+                <label for="textInput">Enter your text:</label>
+                <textarea id="textInput" rows="12"
+                    placeholder="Type or paste your text here to check for grammar and spelling errors..."></textarea>
+            </div>
+
+            <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-top: var(--spacing-md);">
+                <button onclick="checkGrammar()" class="btn btn-primary">Check Grammar</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+            </div>
+
+            <div id="results" style="display:none; margin-top: var(--spacing-lg);"></div>
+
+            <div id="correctedText" style="display:none; margin-top: var(--spacing-lg);"></div>
+
+            <div id="actions"
+                style="display:none; margin-top: var(--spacing-md); display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+                <button onclick="copyCorrected()" class="btn btn-secondary">📋 Copy Corrected Text</button>
+                <button onclick="downloadCorrected()" class="btn btn-secondary">⬇️ Download</button>
+            </div>
+        </div>
+
+        <div class="ad-container ad-inline">
+            <span>Advertisement</span>
+        </div>
+
+        <section class="mt-lg">
+            <h2>About Grammar Checker</h2>
+            <div class="card">
+                <p>This grammar checker helps you identify and fix common writing mistakes including grammar errors,
+                    spelling issues, punctuation problems, and style improvements.</p>
+
+                <h3>Features:</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>Grammar error detection</li>
+                    <li>Spelling mistake identification</li>
+                    <li>Punctuation checking</li>
+                    <li>Capitalization validation</li>
+                    <li>Style and clarity suggestions</li>
+                    <li>100% client-side processing for privacy</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mt-lg">
+            <h2>Related Tools</h2>
+            <div class="grid grid-4">
+                <a href="/ai/" class="tool-card">
+                    <h3>All AI Tools</h3>
+                    <p>Browse all tools in this category</p>
+                </a>
+                <a href="/ai/readability-scorer/" class="tool-card">
+                    <h3>Readability Scorer</h3>
+                    <p>Score text readability</p>
+                </a>
+                <a href="/ai/paraphrasing-tool/" class="tool-card">
+                    <h3>Paraphrasing Tool</h3>
+                    <p>Rewrite text while maintaining meaning</p>
+                </a>
+                <a href="/utilities/word-counter/" class="tool-card">
+                    <h3>Word Counter</h3>
+                    <p>Count words and characters</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div class="ad-container ad-footer">
+        <span>Advertisement</span>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        const commonMisspellings = {
+            'recieve': 'receive', 'beleive': 'believe', 'occured': 'occurred', 'seperate': 'separate',
+            'definately': 'definitely', 'occassion': 'occasion', 'untill': 'until', 'wich': 'which',
+            'wierd': 'weird', 'thier': 'their', 'freind': 'friend', 'writting': 'writing',
+            'begining': 'beginning', 'occuring': 'occurring', 'realy': 'really', 'similiar': 'similar',
+            'succesful': 'successful', 'sucessful': 'successful', 'accomodate': 'accommodate'
+        };
+
+        const grammarRules = [
+            { pattern: /\b(a)\s+([aeiou]\w+)/gi, type: 'grammar', message: 'Use "an" before words starting with a vowel sound', fix: (match, a, word) => `an ${word}` },
+            { pattern: /\b(an)\s+([^aeiou]\w+)/gi, type: 'grammar', message: 'Use "a" before words starting with a consonant sound', fix: (match, an, word) => `a ${word}` },
+            { pattern: /\s{2,}/g, type: 'spacing', message: 'Multiple spaces detected', fix: () => ' ' },
+            { pattern: /\.\./g, type: 'punctuation', message: 'Double period detected', fix: () => '.' },
+            { pattern: /,,/g, type: 'punctuation', message: 'Double comma detected', fix: () => ',' },
+            { pattern: /\b(there)\s+(is|are)\s+(alot)\b/gi, type: 'spelling', message: 'Use "a lot" (two words)', fix: (match, there, verb, alot) => `${there} ${verb} a lot` },
+            { pattern: /\b(your)\s+(going|coming|doing)/gi, type: 'grammar', message: 'Use "you\'re" (you are) instead of "your"', fix: (match, your, verb) => `you're ${verb}` },
+            { pattern: /\b(its)\s+(a|the|an|very|really)\b/gi, type: 'grammar', message: 'Use "it\'s" (it is) instead of "its"', fix: (match, its, word) => `it's ${word}` },
+            { pattern: /\b(could|would|should)\s+of\b/gi, type: 'grammar', message: 'Use "have" instead of "of"', fix: (match, modal) => `${modal} have` }
+        ];
+
+        function checkGrammar() {
+            const input = document.getElementById('textInput').value.trim();
+            const resultsDiv = document.getElementById('results');
+            const correctedDiv = document.getElementById('correctedText');
+            const actions = document.getElementById('actions');
+
+            if (!input) {
+                showNotification('Please enter some text to check', 'error');
+                return;
+            }
+
+            try {
+                const errors = [];
+                let correctedText = input;
+
+                // Check for spelling errors
+                const words = input.match(/\b[a-z]+\b/gi) || [];
+                words.forEach(word => {
+                    const lowerWord = word.toLowerCase();
+                    if (commonMisspellings[lowerWord]) {
+                        errors.push({
+                            type: 'spelling',
+                            word: word,
+                            suggestion: commonMisspellings[lowerWord],
+                            message: `Possible spelling error: "${word}" might be "${commonMisspellings[lowerWord]}"`
+                        });
+                        const regex = new RegExp(`\\b${word}\\b`, 'gi');
+                        correctedText = correctedText.replace(regex, commonMisspellings[lowerWord]);
+                    }
+                });
+
+                // Check grammar rules
+                grammarRules.forEach(rule => {
+                    const matches = [...input.matchAll(rule.pattern)];
+                    matches.forEach(match => {
+                        errors.push({
+                            type: rule.type,
+                            original: match[0],
+                            message: rule.message,
+                            suggestion: rule.fix(...match)
+                        });
+                        correctedText = correctedText.replace(rule.pattern, rule.fix);
+                    });
+                });
+
+                // Check capitalization
+                const sentences = input.match(/[^.!?]+[.!?]+/g) || [input];
+                sentences.forEach(sentence => {
+                    const trimmed = sentence.trim();
+                    if (trimmed && trimmed[0] !== trimmed[0].toUpperCase()) {
+                        errors.push({
+                            type: 'capitalization',
+                            message: 'Sentence should start with a capital letter',
+                            original: trimmed.substring(0, 20) + '...'
+                        });
+                    }
+                });
+
+                // Display results
+                const errorCount = errors.length;
+                const errorsByType = errors.reduce((acc, err) => {
+                    acc[err.type] = (acc[err.type] || 0) + 1;
+                    return acc;
+                }, {});
+
+                if (errorCount === 0) {
+                    resultsDiv.innerHTML = `
+            <div class="card" style="text-align: center; padding: var(--spacing-xl); background: linear-gradient(135deg, #10b98115, #10b98105); border: 2px solid #10b981;">
+              <div style="font-size: 4rem; margin-bottom: var(--spacing-md);">✅</div>
+              <h2 style="color: #10b981; margin: 0;">No Errors Found!</h2>
+              <p style="color: var(--text-secondary); margin-top: var(--spacing-sm);">Your text appears to be error-free.</p>
+            </div>
+          `;
+                } else {
+                    resultsDiv.innerHTML = `
+            <div class="card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg);">
+                <h3>Grammar Check Results</h3>
+                <span style="background: ${errorCount > 5 ? '#ef4444' : '#f59e0b'}; color: white; padding: 6px 16px; border-radius: var(--radius-md); font-weight: 600;">
+                  ${errorCount} Issue${errorCount > 1 ? 's' : ''} Found
+                </span>
+              </div>
+              
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--spacing-md); margin-bottom: var(--spacing-lg); padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                ${Object.entries(errorsByType).map(([type, count]) => `
+                  <div style="text-align: center;">
+                    <div style="color: var(--text-secondary); font-size: 0.875rem; text-transform: capitalize;">${type}</div>
+                    <div style="font-size: 1.5rem; font-weight: 600; color: var(--primary-color);">${count}</div>
+                  </div>
+                `).join('')}
+              </div>
+              
+              <div style="max-height: 400px; overflow-y: auto;">
+                ${errors.map((error, i) => `
+                  <div style="padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-secondary); border-left: 4px solid ${getErrorColor(error.type)}; border-radius: var(--radius-sm);">
+                    <div style="display: flex; align-items: start; gap: var(--spacing-md);">
+                      <span style="background: ${getErrorColor(error.type)}; color: white; padding: 4px 8px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 600; text-transform: uppercase;">
+                        ${error.type}
+                      </span>
+                      <div style="flex: 1;">
+                        <p style="margin: 0 0 var(--spacing-xs) 0; font-weight: 500;">${error.message}</p>
+                        ${error.original ? `
+                          <div style="font-size: 0.875rem; color: var(--text-secondary);">
+                            <span style="text-decoration: line-through; color: #ef4444;">${error.original}</span>
+                            ${error.suggestion ? `<span> → </span><span style="color: #10b981; font-weight: 500;">${error.suggestion}</span>` : ''}
+                          </div>
+                        ` : ''}
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+                }
+
+                // Display corrected text if there were errors
+                if (errorCount > 0) {
+                    correctedDiv.innerHTML = `
+            <div class="card">
+              <h3>Corrected Text</h3>
+              <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-md); margin-top: var(--spacing-md); border-left: 4px solid #10b981;">
+                <p style="margin: 0; line-height: 1.6; white-space: pre-wrap;">${correctedText}</p>
+              </div>
+            </div>
+          `;
+                    correctedDiv.style.display = 'block';
+                    actions.style.display = 'flex';
+                } else {
+                    correctedDiv.style.display = 'none';
+                    actions.style.display = 'none';
+                }
+
+                resultsDiv.style.display = 'block';
+                showNotification(`Found ${errorCount} issue${errorCount !== 1 ? 's' : ''}`, errorCount === 0 ? 'success' : 'warning');
+            } catch (error) {
+                resultsDiv.textContent = `Error: ${error.message}`;
+                resultsDiv.style.display = 'block';
+                showNotification('Error checking grammar', 'error');
+            }
+        }
+
+        function getErrorColor(type) {
+            const colors = {
+                'spelling': '#ef4444',
+                'grammar': '#f59e0b',
+                'punctuation': '#3b82f6',
+                'capitalization': '#8b5cf6',
+                'spacing': '#6b7280'
+            };
+            return colors[type] || '#6b7280';
+        }
+
+        function clearAll() {
+            document.getElementById('textInput').value = '';
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('correctedText').style.display = 'none';
+            document.getElementById('actions').style.display = 'none';
+        }
+
+        function copyCorrected() {
+            const text = document.querySelector('#correctedText p');
+            if (text) {
+                copyToClipboard(text.textContent, event.target);
+            }
+        }
+
+        function downloadCorrected() {
+            const text = document.querySelector('#correctedText p');
+            if (text) {
+                downloadAsFile(text.textContent, 'corrected-text.txt', 'text/plain');
+                showNotification('Downloaded!', 'success');
+            }
+        }
+    </script>
+</body>
+
+</html>

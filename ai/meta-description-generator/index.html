@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Generate SEO-optimized meta descriptions. Create compelling meta descriptions within the ideal character count.">
+    <meta name="keywords"
+        content="meta description generator, SEO meta description, meta tag generator, description generator">
+
+    <meta property="og:title" content="Meta Description Generator - SmartNet Tools">
+    <meta property="og:description" content="Generate SEO-optimized meta descriptions with AI assistance.">
+    <meta property="og:url" content="https://smartnettools.site/ai/meta-description-generator/">
+
+    <title>Meta Description Generator - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+
+            <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
+
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="ad-container ad-header">
+        <span>Advertisement</span>
+    </div>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Meta Description Generator</h1>
+            <p>Generate SEO-optimized meta descriptions that drive clicks and improve search rankings.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div class="form-group">
+                <label for="topicInput">Page Topic or Main Keyword:</label>
+                <input type="text" id="topicInput" placeholder="e.g., Web Development Tools, SEO Tips, etc.">
+            </div>
+
+            <div class="form-group">
+                <label for="keywordsInput">Additional Keywords (optional):</label>
+                <input type="text" id="keywordsInput" placeholder="Separate with commas: tool, free, online">
+            </div>
+
+            <div class="form-group">
+                <label for="toneSelect">Tone:</label>
+                <select id="toneSelect">
+                    <option value="professional">Professional</option>
+                    <option value="casual">Casual</option>
+                    <option value="urgent">Urgent/Action-Oriented</option>
+                    <option value="informative">Informative</option>
+                </select>
+            </div>
+
+            <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-top: var(--spacing-md);">
+                <button onclick="generateDescriptions()" class="btn btn-primary">Generate Descriptions</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+            </div>
+
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+        </div>
+
+        <div class="ad-container ad-inline">
+            <span>Advertisement</span>
+        </div>
+
+        <section class="mt-lg">
+            <h2>About Meta Description Generator</h2>
+            <div class="card">
+                <p>Generate compelling meta descriptions that improve your click-through rates and SEO performance. Our
+                    tool creates multiple variations optimized for search engines.</p>
+
+                <h3>Best Practices:</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>Keep descriptions between 150-160 characters</li>
+                    <li>Include your primary keyword naturally</li>
+                    <li>Write compelling copy that encourages clicks</li>
+                    <li>Include a call-to-action when appropriate</li>
+                    <li>Be accurate and relevant to page content</li>
+                    <li>Make each description unique</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mt-lg">
+            <h2>Related Tools</h2>
+            <div class="grid grid-4">
+                <a href="/ai/" class="tool-card">
+                    <h3>All AI Tools</h3>
+                    <p>Browse all tools in this category</p>
+                </a>
+                <a href="/seo/meta-tag-generator/" class="tool-card">
+                    <h3>Meta Tag Generator</h3>
+                    <p>Generate complete meta tags</p>
+                </a>
+                <a href="/ai/headline-analyzer/" class="tool-card">
+                    <h3>Headline Analyzer</h3>
+                    <p>Analyze headline effectiveness</p>
+                </a>
+                <a href="/ai/content-optimizer/" class="tool-card">
+                    <h3>Content Optimizer</h3>
+                    <p>Optimize content for SEO</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div class="ad-container ad-footer">
+        <span>Advertisement</span>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        const templates = {
+            professional: [
+                `Discover {topic} with our comprehensive guide. Learn best practices, tips, and strategies to {action}. Free tools and resources available.`,
+                `Professional {topic} solutions for businesses and individuals. Get started with our expert guidance and powerful tools. Try it free today.`,
+                `Master {topic} with our step-by-step tutorials and expert insights. Improve your skills and achieve better results. Start now!`,
+                `Everything you need to know about {topic}. Expert tips, detailed guides, and practical advice for success. Get started for free.`,
+                `Explore {topic} with professional-grade tools and resources. Enhance your workflow and boost productivity. Try it today!`
+            ],
+            casual: [
+                `Want to learn about {topic}? We've got you covered! Check out our easy guides, cool tips, and free tools. Let's get started!`,
+                `{topic} made simple! Get free tools, helpful tips, and practical advice that actually works. No fluff, just results.`,
+                `Everything you need for {topic} in one place. Easy to use, totally free, and actually useful. Give it a try!`,
+                `Looking for {topic} help? You're in the right place! Free tools, practical guides, and tips that make sense. Check it out!`,
+                `{topic} doesn't have to be complicated. Get free tools and straightforward advice that helps you succeed. Start now!`
+            ],
+            urgent: [
+                `Get instant access to {topic} tools and resources. Start improving your results today. Free to use, no signup required!`,
+                `Don't miss out! Learn {topic} with our powerful free tools. Get started now and see results immediately. Try it today!`,
+                `Transform your approach to {topic} right now. Free tools, instant results, no obligations. Click to get started!`,
+                `Ready to master {topic}? Start now with our comprehensive free tools and expert guidance. Don't wait - try it today!`,
+                `Boost your {topic} skills immediately with our free tools and resources. Get instant access now. Start improving today!`
+            ],
+            informative: [
+                `Learn about {topic} with comprehensive guides, tutorials, and free tools. Detailed information for all skill levels. Explore now.`,
+                `Complete guide to {topic}: features, benefits, best practices, and free tools. Everything you need to succeed in one place.`,
+                `Understand {topic} better with our detailed explanations, practical examples, and free tools. Educational resources for everyone.`,
+                `Comprehensive {topic} resource center. Tutorials, guides, tools, and expert advice. Learn at your own pace. Get started today.`,
+                `Detailed information about {topic} including how-to guides, best practices, and free tools. Perfect for beginners and experts alike.`
+            ]
+        };
+
+        function generateDescriptions() {
+            const topic = document.getElementById('topicInput').value.trim();
+            const keywords = document.getElementById('keywordsInput').value.trim();
+            const tone = document.getElementById('toneSelect').value;
+            const output = document.getElementById('output');
+
+            if (!topic) {
+                showNotification('Please enter a topic', 'error');
+                return;
+            }
+
+            try {
+                const selectedTemplates = templates[tone];
+                const descriptions = [];
+
+                // Generate 5 unique descriptions
+                for (let i = 0; i < 5; i++) {
+                    let desc = selectedTemplates[i];
+
+                    // Replace placeholders
+                    desc = desc.replace(/{topic}/g, topic);
+
+                    // Add action words
+                    const actions = ['succeed', 'excel', 'improve', 'grow', 'achieve more'];
+                    desc = desc.replace(/{action}/g, actions[i % actions.length]);
+
+                    // Optionally add keywords
+                    if (keywords && i < 2) {
+                        const keywordList = keywords.split(',').map(k => k.trim()).filter(k => k);
+                        if (keywordList.length > 0) {
+                            desc = desc.replace('.', `. Keywords: ${keywordList.join(', ')}.`);
+                        }
+                    }
+
+                    descriptions.push(desc);
+                }
+
+                // Display results
+                output.innerHTML = `
+          <div class="card">
+            <h3>Generated Meta Descriptions</h3>
+            <p style="color: var(--text-secondary); margin-top: var(--spacing-sm);">
+              Choose the description that best fits your page. Click to copy.
+            </p>
+            
+            <div style="margin-top: var(--spacing-lg);">
+              ${descriptions.map((desc, i) => {
+                    const charCount = desc.length;
+                    const isOptimal = charCount >= 150 && charCount <= 160;
+                    const status = charCount > 160 ? 'too-long' : charCount < 150 ? 'too-short' : 'optimal';
+                    const statusColor = isOptimal ? '#10b981' : charCount > 160 ? '#ef4444' : '#f59e0b';
+                    const statusText = isOptimal ? '✓ Optimal' : charCount > 160 ? '⚠ Too Long' : '⚠ Too Short';
+
+                    return `
+                  <div style="margin-bottom: var(--spacing-md); padding: var(--spacing-lg); background: var(--bg-secondary); border-radius: var(--radius-md); border-left: 4px solid ${statusColor}; cursor: pointer; transition: transform 0.2s;" 
+                       onclick="copyDescription(this, '${desc.replace(/'/g, "\\'")}')">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-sm);">
+                      <span style="background: var(--primary-color); color: white; padding: 4px 12px; border-radius: var(--radius-md); font-size: 0.75rem; font-weight: 600;">
+                        Option ${i + 1}
+                      </span>
+                      <div style="text-align: right;">
+                        <span style="background: ${statusColor}; color: white; padding: 4px 12px; border-radius: var(--radius-md); font-size: 0.75rem; font-weight: 600;">
+                          ${statusText}
+                        </span>
+                        <div style="color: var(--text-secondary); font-size: 0.75rem; margin-top: var(--spacing-xs);">
+                          ${charCount} characters
+                        </div>
+                      </div>
+                    </div>
+                    <p style="margin: var(--spacing-md) 0; line-height: 1.6; color: var(--text-primary);">${desc}</p>
+                    <div style="text-align: center; margin-top: var(--spacing-md);">
+                      <span style="color: var(--text-secondary); font-size: 0.875rem;">📋 Click to copy</span>
+                    </div>
+                  </div>
+                `;
+                }).join('')}
+            </div>
+            
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: #3b82f615; border-left: 4px solid #3b82f6; border-radius: var(--radius-sm);">
+              <h4 style="margin: 0 0 var(--spacing-sm) 0; color: #3b82f6;">💡 SEO Tips</h4>
+              <ul style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.875rem;">
+                <li>Ideal length is 150-160 characters (including spaces)</li>
+                <li>Include your primary keyword naturally</li>
+                <li>Write unique descriptions for each page</li>
+                <li>Make it compelling to encourage clicks</li>
+                <li>Accurately describe the page content</li>
+              </ul>
+            </div>
+          </div>
+        `;
+
+                output.style.display = 'block';
+                showNotification('Meta descriptions generated!', 'success');
+            } catch (error) {
+                output.textContent = `Error: ${error.message}`;
+                output.style.display = 'block';
+                showNotification('Error generating descriptions', 'error');
+            }
+        }
+
+        function copyDescription(element, text) {
+            copyToClipboard(text, element);
+            element.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        function clearAll() {
+            document.getElementById('topicInput').value = '';
+            document.getElementById('keywordsInput').value = '';
+            document.getElementById('output').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Generate content ideas and templates with AI. Create blog posts, social media content, and more.">
+    <meta name="keywords" content="content generator, AI content, content ideas, blog generator, social media content">
+
+    <meta property="og:title" content="Content Generator - SmartNet Tools">
+    <meta property="og:description"
+        content="Generate content ideas and templates with AI. Create blog posts, social media content, and more.">
+    <meta property="og:url" content="https://smartnettools.site/ai/content-generator/">
+
+    <title>Content Generator - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+
+            <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
+
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="ad-container ad-header">
+        <!-- Google AdSense: paste script here -->
+        <!-- Adsterra: paste script here -->
+        <!-- Montag Ads: paste script here -->
+        <span>Advertisement</span>
+    </div>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Content Generator</h1>
+            <p>Generate content ideas and templates with AI. Create blog posts, social media content, and more.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div class="form-group">
+                <label for="contentType">Content Type:</label>
+                <select id="contentType">
+                    <option value="blog-intro">Blog Post Introduction</option>
+                    <option value="blog-outline">Blog Post Outline</option>
+                    <option value="social-post">Social Media Post</option>
+                    <option value="email-subject">Email Subject Lines</option>
+                    <option value="product-desc">Product Description</option>
+                    <option value="meta-desc">Meta Description</option>
+                    <option value="headline">Headlines/Titles</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="topicInput">Topic or Keywords:</label>
+                <input type="text" id="topicInput" placeholder="Enter your topic or main keywords...">
+            </div>
+
+            <div class="form-group">
+                <label for="toneInput">Tone (optional):</label>
+                <select id="toneInput">
+                    <option value="">Default</option>
+                    <option value="professional">Professional</option>
+                    <option value="casual">Casual</option>
+                    <option value="friendly">Friendly</option>
+                    <option value="formal">Formal</option>
+                    <option value="enthusiastic">Enthusiastic</option>
+                </select>
+            </div>
+
+            <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-top: var(--spacing-md);">
+                <button onclick="generateContent()" class="btn btn-primary">Generate Content</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+            </div>
+
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+
+            <div id="actions"
+                style="display:none; margin-top: var(--spacing-md); display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+                <button onclick="copyContent()" class="btn btn-secondary">📋 Copy</button>
+                <button onclick="downloadContent()" class="btn btn-secondary">⬇️ Download</button>
+                <button onclick="generateContent()" class="btn btn-secondary">🔄 Regenerate</button>
+            </div>
+        </div>
+
+        <div class="ad-container ad-inline">
+            <!-- Google AdSense: paste script here -->
+            <!-- Adsterra: paste script here -->
+            <!-- Montag Ads: paste script here -->
+            <span>Advertisement</span>
+        </div>
+
+        <section class="mt-lg">
+            <h2>About Content Generator</h2>
+            <div class="card">
+                <p>This AI-powered content generator helps you create various types of content quickly. Perfect for
+                    bloggers, marketers, and content creators.</p>
+
+                <h3>Features:</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>Generate blog post introductions and outlines</li>
+                    <li>Create engaging social media posts</li>
+                    <li>Write compelling email subject lines</li>
+                    <li>Generate product descriptions</li>
+                    <li>Create SEO-optimized meta descriptions</li>
+                    <li>100% client-side processing for privacy</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mt-lg">
+            <h2>Related Tools</h2>
+            <div class="grid grid-4">
+                <a href="/ai/" class="tool-card">
+                    <h3>All AI Tools</h3>
+                    <p>Browse all tools in this category</p>
+                </a>
+                <a href="/ai/paraphrasing-tool/" class="tool-card">
+                    <h3>Paraphrasing Tool</h3>
+                    <p>Rewrite text while maintaining meaning</p>
+                </a>
+                <a href="/ai/keyword-extractor/" class="tool-card">
+                    <h3>Keyword Extractor</h3>
+                    <p>Extract keywords from text</p>
+                </a>
+                <a href="/seo/meta-tag-generator/" class="tool-card">
+                    <h3>Meta Tag Generator</h3>
+                    <p>Generate SEO meta tags</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div class="ad-container ad-footer">
+        <!-- Google AdSense: paste script here -->
+        <!-- Adsterra: paste script here -->
+        <!-- Montag Ads: paste script here -->
+        <span>Advertisement</span>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Content templates
+        const templates = {
+            'blog-intro': {
+                name: 'Blog Post Introduction',
+                generate: (topic, tone) => {
+                    const intros = [
+                        `Have you ever wondered about ${topic}? In today's digital landscape, understanding ${topic} has become more important than ever. This comprehensive guide will walk you through everything you need to know.`,
+                        `${topic} is transforming the way we work and live. Whether you're a beginner or an expert, this article will provide valuable insights into ${topic} and how you can leverage it effectively.`,
+                        `Let's dive deep into ${topic}. In this post, we'll explore the fundamentals, best practices, and practical applications that can help you master ${topic}.`,
+                        `When it comes to ${topic}, there's a lot to consider. This guide breaks down the complexities and provides actionable strategies you can implement immediately.`
+                    ];
+                    return intros[Math.floor(Math.random() * intros.length)];
+                }
+            },
+            'blog-outline': {
+                name: 'Blog Post Outline',
+                generate: (topic, tone) => {
+                    return `# The Complete Guide to ${topic}\n\n## Introduction\n- Hook: Why ${topic} matters\n- Brief overview of what readers will learn\n- Statistics or interesting fact about ${topic}\n\n## What is ${topic}?\n- Definition and background\n- Key concepts explained\n- Common misconceptions\n\n## Why ${topic} is Important\n- Main benefits\n- Real-world applications\n- Industry trends\n\n## How to Get Started with ${topic}\n- Step 1: Foundation basics\n- Step 2: Intermediate techniques\n- Step 3: Advanced strategies\n\n## Best Practices for ${topic}\n- Expert tips\n- Common mistakes to avoid\n- Tools and resources\n\n## Conclusion\n- Recap of key points\n- Call to action\n- Next steps for readers`;
+                }
+            },
+            'social-post': {
+                name: 'Social Media Post',
+                generate: (topic, tone) => {
+                    const posts = [
+                        `🚀 Exciting insights on ${topic}! \n\nDid you know that ${topic} can revolutionize your workflow? Here are 3 key takeaways:\n\n✨ Benefit #1\n💡 Benefit #2\n🎯 Benefit #3\n\n${tone === 'professional' ? 'Learn more in our latest article.' : 'What's your experience with this ? Drop a comment! 👇'}\n\n#${topic.replace(/\s+/g, '')} #Tips #Growth`,
+                            `💭 Let's talk about ${topic}\n\nEveryone's discussing ${topic}, but what does it really mean for you?\n\n${tone === 'casual' ? '🤔 Here\'s the deal:' : 'Key insights:'}\n\n→ Impact on your business\n→ Practical applications\n→ Future trends\n\n${tone === 'enthusiastic' ? 'Ready to level up? 🚀' : 'Share your thoughts below.'}\n\n#${topic.replace(/\s+/g, '')} #Innovation`,
+                            `📊 Quick guide to ${topic}\n\n${tone === 'professional' ? 'Industry professionals are leveraging' : 'Smart people are using'} ${topic} to achieve better results.\n\nHere's how you can too:\n\n1️⃣ Start with the basics\n2️⃣ Apply best practices\n3️⃣ Measure and optimize\n\n${tone === 'friendly' ? '💬 Questions? Ask away!' : '📈 Results speak for themselves.'}\n\n#${topic.replace(/\s+/g, '')} #Success`
+          ];
+        return posts[Math.floor(Math.random() * posts.length)];
+        }
+      },
+        'email-subject': {
+            name: 'Email Subject Lines',
+                generate: (topic, tone) => {
+                    const subjects = [
+                        `🎯 Everything You Need to Know About ${topic}`,
+                        `Your ${topic} Guide is Here`,
+                        `The Ultimate ${topic} Strategy [Inside]`,
+                        `Don't Miss: ${topic} Best Practices`,
+                        `New: ${topic} Tips That Actually Work`,
+                        `${topic}: What You're Missing Out On`,
+                        `Exclusive: Master ${topic} in 5 Steps`,
+                        `Breaking Down ${topic} for You`,
+                        `Quick Win: Improve Your ${topic} Today`,
+                        `The ${topic} Secret Everyone's Talking About`
+                    ];
+                    return subjects.slice(0, 5).join('\n');
+                }
+        },
+        'product-desc': {
+            name: 'Product Description',
+                generate: (topic, tone) => {
+                    return `Discover the power of ${topic} with our premium solution.\n\n${tone === 'professional' ? 'Our enterprise-grade' : 'Our innovative'} ${topic} platform is designed to help you achieve exceptional results. Whether you're looking to improve efficiency, boost productivity, or enhance performance, we've got you covered.\n\n✓ Key Features:\n• Advanced ${topic} capabilities\n• User-friendly interface\n• Seamless integration\n• 24/7 support\n• Regular updates and improvements\n\n${tone === 'casual' ? 'Try it today and see the difference!' : 'Experience the difference that professional-grade ${topic} solutions can make.'}\n\n${tone === 'enthusiastic' ? '🚀 Get started now and transform your workflow!' : 'Contact us to learn more about pricing and features.'}`;
+                }
+        },
+        'meta-desc': {
+            name: 'Meta Description',
+                generate: (topic, tone) => {
+                    const descs = [
+                        `Learn everything about ${topic} with our comprehensive guide. Discover best practices, tips, and strategies to master ${topic} today.`,
+                        `Explore ${topic} with expert insights and practical tips. Get started with our step-by-step guide and improve your results immediately.`,
+                        `Master ${topic} with our detailed tutorial. From basics to advanced techniques, we cover everything you need to know about ${topic}.`,
+                        `Unlock the power of ${topic}. Our complete guide provides actionable strategies and proven methods to succeed with ${topic}.`
+                    ];
+                    return descs[Math.floor(Math.random() * descs.length)];
+                }
+        },
+        'headline': {
+            name: 'Headlines/Titles',
+                generate: (topic, tone) => {
+                    const headlines = [
+                        `The Ultimate Guide to ${topic}: Everything You Need to Know`,
+                        `How to Master ${topic} in 2026 [Complete Guide]`,
+                        `${topic}: Best Practices and Expert Tips`,
+                        `10 Essential ${topic} Strategies for Success`,
+                        `Transform Your Approach to ${topic} [Proven Methods]`,
+                        `${topic} Explained: A Beginner's Guide`,
+                        `Advanced ${topic} Techniques That Actually Work`,
+                        `The Complete ${topic} Handbook for Professionals`,
+                        `Why ${topic} Matters: Insights and Analysis`,
+                        `Mastering ${topic}: From Basics to Advanced`
+                    ];
+                    return headlines.slice(0, 5).join('\n');
+                }
+        }
+    };
+
+        function generateContent() {
+            const contentType = document.getElementById('contentType').value;
+            const topic = document.getElementById('topicInput').value.trim();
+            const tone = document.getElementById('toneInput').value;
+            const output = document.getElementById('output');
+            const actions = document.getElementById('actions');
+
+            if (!topic) {
+                showNotification('Please enter a topic or keywords', 'error');
+                return;
+            }
+
+            try {
+                const template = templates[contentType];
+                const content = template.generate(topic, tone);
+
+                output.innerHTML = `
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+              <h3>${template.name}</h3>
+              <span style="background: var(--primary-color); color: white; padding: 4px 12px; border-radius: var(--radius-md); font-size: 0.875rem;">
+                ${tone || 'Default'} Tone
+              </span>
+            </div>
+            <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-md); border-left: 4px solid var(--primary-color);">
+              <pre style="white-space: pre-wrap; font-family: inherit; margin: 0; color: var(--text-primary);">${content}</pre>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: var(--spacing-md); font-style: italic;">
+              💡 Tip: This is AI-generated content. Feel free to customize and adapt it to your needs.
+            </p>
+          </div>
+        `;
+
+                output.style.display = 'block';
+                actions.style.display = 'flex';
+
+                showNotification('Content generated successfully!', 'success');
+            } catch (error) {
+                output.textContent = `Error: ${error.message}`;
+                output.style.display = 'block';
+                actions.style.display = 'none';
+                showNotification('Error generating content', 'error');
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('topicInput').value = '';
+            document.getElementById('output').style.display = 'none';
+            document.getElementById('actions').style.display = 'none';
+        }
+
+        function copyContent() {
+            const content = document.querySelector('#output pre');
+            if (content) {
+                copyToClipboard(content.textContent, event.target);
+            }
+        }
+
+        function downloadContent() {
+            const content = document.querySelector('#output pre');
+            if (content) {
+                downloadAsFile(content.textContent, 'generated-content.txt', 'text/plain');
+                showNotification('Downloaded!', 'success');
+            }
+        }
+    </script>
+</body>
+
+</html>

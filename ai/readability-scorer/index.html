@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Free readability scorer. Calculate Flesch Reading Ease, Flesch-Kincaid Grade Level, and other readability metrics.">
+    <meta name="keywords"
+        content="readability scorer, Flesch reading ease, reading level, text readability, grade level">
+
+    <meta property="og:title" content="Readability Scorer - SmartNet Tools">
+    <meta property="og:description" content="Calculate readability scores for your text with multiple metrics.">
+    <meta property="og:url" content="https://smartnettools.site/ai/readability-scorer/">
+
+    <title>Readability Scorer - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+
+            <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
+
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="ad-container ad-header">
+        <span>Advertisement</span>
+    </div>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Readability Scorer</h1>
+            <p>Calculate readability scores and grade levels for your text using multiple metrics.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div class="form-group">
+                <label for="textInput">Enter your text:</label>
+                <textarea id="textInput" rows="12"
+                    placeholder="Paste your text here to analyze its readability..."></textarea>
+            </div>
+
+            <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-top: var(--spacing-md);">
+                <button onclick="analyzeReadability()" class="btn btn-primary">Analyze Readability</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+            </div>
+
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+
+            <div id="actions"
+                style="display:none; margin-top: var(--spacing-md); display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+                <button onclick="copyResults()" class="btn btn-secondary">📋 Copy Results</button>
+                <button onclick="downloadResults()" class="btn btn-secondary">⬇️ Download Report</button>
+            </div>
+        </div>
+
+        <div class="ad-container ad-inline">
+            <span>Advertisement</span>
+        </div>
+
+        <section class="mt-lg">
+            <h2>About Readability Scorer</h2>
+            <div class="card">
+                <p>This readability scorer calculates multiple readability metrics to help you understand how easy your
+                    text is to read. Perfect for writers, educators, and content creators.</p>
+
+                <h3>Metrics Included:</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>Flesch Reading Ease Score (0-100)</li>
+                    <li>Flesch-Kincaid Grade Level</li>
+                    <li>Average words per sentence</li>
+                    <li>Average syllables per word</li>
+                    <li>Estimated reading time</li>
+                    <li>Complexity assessment</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mt-lg">
+            <h2>Related Tools</h2>
+            <div class="grid grid-4">
+                <a href="/ai/" class="tool-card">
+                    <h3>All AI Tools</h3>
+                    <p>Browse all tools in this category</p>
+                </a>
+                <a href="/ai/grammar-checker/" class="tool-card">
+                    <h3>Grammar Checker</h3>
+                    <p>Check grammar and spelling</p>
+                </a>
+                <a href="/ai/text-summarizer/" class="tool-card">
+                    <h3>Text Summarizer</h3>
+                    <p>Summarize long text</p>
+                </a>
+                <a href="/utilities/word-counter/" class="tool-card">
+                    <h3>Word Counter</h3>
+                    <p>Count words and characters</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div class="ad-container ad-footer">
+        <span>Advertisement</span>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function countSyllables(word) {
+            word = word.toLowerCase();
+            if (word.length <= 3) return 1;
+            word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+            word = word.replace(/^y/, '');
+            const syllables = word.match(/[aeiouy]{1,2}/g);
+            return syllables ? syllables.length : 1;
+        }
+
+        function analyzeReadability() {
+            const input = document.getElementById('textInput').value.trim();
+            const output = document.getElementById('output');
+            const actions = document.getElementById('actions');
+
+            if (!input) {
+                showNotification('Please enter some text to analyze', 'error');
+                return;
+            }
+
+            try {
+                // Calculate statistics
+                const sentences = input.match(/[^.!?]+[.!?]+/g) || [input];
+                const words = input.match(/\b[a-z]+\b/gi) || [];
+
+                const sentenceCount = sentences.length;
+                const wordCount = words.length;
+                let syllableCount = 0;
+
+                words.forEach(word => {
+                    syllableCount += countSyllables(word);
+                });
+
+                // Calculate metrics
+                const avgWordsPerSentence = wordCount / sentenceCount;
+                const avgSyllablesPerWord = syllableCount / wordCount;
+
+                // Flesch Reading Ease: 206.835 - 1.015(words/sentences) - 84.6(syllables/words)
+                const fleschReadingEase = 206.835 - (1.015 * avgWordsPerSentence) - (84.6 * avgSyllablesPerWord);
+                const fleschScore = Math.max(0, Math.min(100, fleschReadingEase)).toFixed(1);
+
+                // Flesch-Kincaid Grade Level: 0.39(words/sentences) + 11.8(syllables/words) - 15.59
+                const fleschKincaidGrade = (0.39 * avgWordsPerSentence) + (11.8 * avgSyllablesPerWord) - 15.59;
+                const gradeLevel = Math.max(0, fleschKincaidGrade).toFixed(1);
+
+                // Reading time (average 200 words per minute)
+                const readingTime = Math.ceil(wordCount / 200);
+
+                // Determine difficulty level
+                let difficulty, difficultyColor, difficultyDesc;
+                if (fleschScore >= 90) {
+                    difficulty = 'Very Easy';
+                    difficultyColor = '#10b981';
+                    difficultyDesc = 'Easily understood by 11-year-olds';
+                } else if (fleschScore >= 80) {
+                    difficulty = 'Easy';
+                    difficultyColor = '#22c55e';
+                    difficultyDesc = 'Conversational English';
+                } else if (fleschScore >= 70) {
+                    difficulty = 'Fairly Easy';
+                    difficultyColor = '#84cc16';
+                    difficultyDesc = 'Easy for most readers';
+                } else if (fleschScore >= 60) {
+                    difficulty = 'Standard';
+                    difficultyColor = '#eab308';
+                    difficultyDesc = 'Plain English, general audience';
+                } else if (fleschScore >= 50) {
+                    difficulty = 'Fairly Difficult';
+                    difficultyColor = '#f59e0b';
+                    difficultyDesc = 'Fairly difficult to read';
+                } else if (fleschScore >= 30) {
+                    difficulty = 'Difficult';
+                    difficultyColor = '#ef4444';
+                    difficultyDesc = 'College-level reading';
+                } else {
+                    difficulty = 'Very Difficult';
+                    difficultyColor = '#dc2626';
+                    difficultyDesc = 'Very difficult, best for experts';
+                }
+
+                // Display results
+                output.innerHTML = `
+          <div class="card">
+            <h2 style="text-align: center; margin-bottom: var(--spacing-lg);">Readability Analysis</h2>
+            
+            <div style="text-align: center; padding: var(--spacing-xl); background: linear-gradient(135deg, ${difficultyColor}15, ${difficultyColor}05); border-radius: var(--radius-lg); border: 2px solid ${difficultyColor}; margin-bottom: var(--spacing-lg);">
+              <div style="font-size: 3.5rem; font-weight: 700; color: ${difficultyColor}; margin-bottom: var(--spacing-sm);">
+                ${fleschScore}
+              </div>
+              <div style="font-size: 1.25rem; font-weight: 600; color: ${difficultyColor}; margin-bottom: var(--spacing-xs);">
+                ${difficulty}
+              </div>
+              <div style="color: var(--text-secondary); font-size: 0.875rem;">
+                ${difficultyDesc}
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
+              <div style="text-align: center; padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Flesch Reading Ease</div>
+                <div style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">${fleschScore}</div>
+                <div style="color: var(--text-secondary); font-size: 0.75rem;">out of 100</div>
+              </div>
+              
+              <div style="text-align: center; padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Grade Level</div>
+                <div style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">${gradeLevel}</div>
+                <div style="color: var(--text-secondary); font-size: 0.75rem;">Flesch-Kincaid</div>
+              </div>
+              
+              <div style="text-align: center; padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Reading Time</div>
+                <div style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">${readingTime}</div>
+                <div style="color: var(--text-secondary); font-size: 0.75rem;">minute${readingTime > 1 ? 's' : ''}</div>
+              </div>
+            </div>
+            
+            <h3 style="margin-bottom: var(--spacing-md);">Detailed Statistics</h3>
+            <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-md);">
+              <div style="display: grid; gap: var(--spacing-md);">
+                <div style="display: flex; justify-content: space-between; padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border-color);">
+                  <span>Total Words:</span>
+                  <span style="font-weight: 600;">${wordCount}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border-color);">
+                  <span>Total Sentences:</span>
+                  <span style="font-weight: 600;">${sentenceCount}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border-color);">
+                  <span>Total Syllables:</span>
+                  <span style="font-weight: 600;">${syllableCount}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border-color);">
+                  <span>Avg Words per Sentence:</span>
+                  <span style="font-weight: 600;">${avgWordsPerSentence.toFixed(1)}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: var(--spacing-sm) 0;">
+                  <span>Avg Syllables per Word:</span>
+                  <span style="font-weight: 600;">${avgSyllablesPerWord.toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: #3b82f615; border-left: 4px solid #3b82f6; border-radius: var(--radius-sm);">
+              <h4 style="margin: 0 0 var(--spacing-sm) 0; color: #3b82f6;">💡 Improvement Tips</h4>
+              <ul style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary);">
+                ${avgWordsPerSentence > 20 ? '<li>Try shortening your sentences for better readability</li>' : ''}
+                ${avgSyllablesPerWord > 1.7 ? '<li>Consider using simpler words where possible</li>' : ''}
+                ${fleschScore < 60 ? '<li>Break complex ideas into smaller, easier-to-digest parts</li>' : ''}
+                ${fleschScore >= 80 ? '<li>Your text is very accessible to most readers!</li>' : ''}
+              </ul>
+            </div>
+          </div>
+        `;
+
+                output.style.display = 'block';
+                actions.style.display = 'flex';
+
+                showNotification('Readability analyzed successfully!', 'success');
+            } catch (error) {
+                output.textContent = `Error: ${error.message}`;
+                output.style.display = 'block';
+                actions.style.display = 'none';
+                showNotification('Error analyzing readability', 'error');
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('textInput').value = '';
+            document.getElementById('output').style.display = 'none';
+            document.getElementById('actions').style.display = 'none';
+        }
+
+        function copyResults() {
+            const output = document.getElementById('output').textContent;
+            copyToClipboard(output, event.target);
+        }
+
+        function downloadResults() {
+            const output = document.getElementById('output').textContent;
+            downloadAsFile(output, 'readability-report.txt', 'text/plain');
+            showNotification('Downloaded!', 'success');
+        }
+    </script>
+</body>
+
+</html>

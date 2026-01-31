@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Analyze and score your headlines. Get actionable insights to create more effective, engaging headlines that drive clicks.">
+    <meta name="keywords" content="headline analyzer, title analyzer, headline score, SEO headline, clickbait checker">
+
+    <meta property="og:title" content="Headline Analyzer - SmartNet Tools">
+    <meta property="og:description" content="Analyze and optimize your headlines for maximum engagement and clicks.">
+    <meta property="og:url" content="https://smartnettools.site/ai/headline-analyzer/">
+
+    <title>Headline Analyzer - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+
+            <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
+
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="ad-container ad-header">
+        <span>Advertisement</span>
+    </div>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Headline Analyzer</h1>
+            <p>Analyze and score your headlines to maximize engagement and click-through rates.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div class="form-group">
+                <label for="headlineInput">Enter Your Headline:</label>
+                <input type="text" id="headlineInput" placeholder="Type your headline here..."
+                    style="font-size: 1.1rem; padding: var(--spacing-md);">
+            </div>
+
+            <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-top: var(--spacing-md);">
+                <button onclick="analyzeHeadline()" class="btn btn-primary">Analyze Headline</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+            </div>
+
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+        </div>
+
+        <div class="ad-container ad-inline">
+            <span>Advertisement</span>
+        </div>
+
+        <section class="mt-lg">
+            <h2>About Headline Analyzer</h2>
+            <div class="card">
+                <p>Our headline analyzer evaluates your headlines based on proven metrics that drive engagement,
+                    including word balance, sentiment, length, and power words.</p>
+
+                <h3>What We Analyze:</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>Overall headline score (0-100)</li>
+                    <li>Word balance (common, uncommon, emotional, power)</li>
+                    <li>Character and word count</li>
+                    <li>Sentiment analysis</li>
+                    <li>Readability and clarity</li>
+                    <li>Actionable improvement suggestions</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mt-lg">
+            <h2>Related Tools</h2>
+            <div class="grid grid-4">
+                <a href="/ai/" class="tool-card">
+                    <h3>All AI Tools</h3>
+                    <p>Browse all tools in this category</p>
+                </a>
+                <a href="/ai/meta-description-generator/" class="tool-card">
+                    <h3>Meta Description Generator</h3>
+                    <p>Generate SEO meta descriptions</p>
+                </a>
+                <a href="/ai/content-optimizer/" class="tool-card">
+                    <h3>Content Optimizer</h3>
+                    <p>Optimize content for SEO</p>
+                </a>
+                <a href="/ai/sentiment-analyzer/" class="tool-card">
+                    <h3>Sentiment Analyzer</h3>
+                    <p>Analyze text sentiment</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div class="ad-container ad-footer">
+        <span>Advertisement</span>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        const powerWords = new Set(['amazing', 'exclusive', 'incredible', 'perfect', 'best', 'ultimate', 'essential', 'complete', 'proven', 'powerful', 'secret', 'guaranteed', 'free', 'new', 'discover', 'unlock', 'master', 'transform', 'boost', 'skyrocket', 'revolutionary', 'shocking', 'stunning', 'brilliant']);
+        const emotionalWords = new Set(['love', 'hate', 'fear', 'amazing', 'terrible', 'wonderful', 'awful', 'fantastic', 'horrible', 'joy', 'sad', 'happy', 'angry', 'excited', 'worried', 'confident', 'nervous', 'delighted', 'disappointed']);
+        const commonWords = new Set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'is', 'are', 'was', 'were', 'be', 'have', 'has', 'do', 'does']);
+
+        function analyzeHeadline() {
+            const headline = document.getElementById('headlineInput').value.trim();
+            const output = document.getElementById('output');
+
+            if (!headline) {
+                showNotification('Please enter a headline to analyze', 'error');
+                return;
+            }
+
+            try {
+                const words = headline.toLowerCase().match(/\b[a-z]+\b/g) || [];
+                const wordCount = words.length;
+                const charCount = headline.length;
+
+                // Analyze word types
+                let commonCount = 0, unusualCount = 0, emotionalCount = 0, powerCount = 0;
+                const foundPowerWords = [], foundEmotionalWords = [];
+
+                words.forEach(word => {
+                    if (commonWords.has(word)) {
+                        commonCount++;
+                    } else {
+                        unusualCount++;
+                    }
+                    if (powerWords.has(word)) {
+                        powerCount++;
+                        if (!foundPowerWords.includes(word)) foundPowerWords.push(word);
+                    }
+                    if (emotionalWords.has(word)) {
+                        emotionalCount++;
+                        if (!foundEmotionalWords.includes(word)) foundEmotionalWords.push(word);
+                    }
+                });
+
+                // Calculate scores
+                let score = 50; // Base score
+
+                // Word count (optimal 6-12 words)
+                if (wordCount >= 6 && wordCount <= 12) {
+                    score += 15;
+                } else if (wordCount >= 4 && wordCount <= 15) {
+                    score += 10;
+                } else {
+                    score -= 5;
+                }
+
+                // Character count (optimal 50-70)
+                if (charCount >= 50 && charCount <= 70) {
+                    score += 15;
+                } else if (charCount >= 40 && charCount <= 80) {
+                    score += 10;
+                }
+
+                // Power words
+                score += Math.min(powerCount * 8, 20);
+
+                // Emotional words
+                score += Math.min(emotionalCount * 5, 15);
+
+                // Word balance
+                const commonPercent = (commonCount / wordCount) * 100;
+                const unusualPercent = (unusualCount / wordCount) * 100;
+                if (commonPercent >= 20 && commonPercent <= 40 && unusualPercent >= 10) {
+                    score += 10;
+                }
+
+                // Numbers in headline
+                if (/\d+/.test(headline)) {
+                    score += 10;
+                }
+
+                // Question mark
+                if (headline.includes('?')) {
+                    score += 5;
+                }
+
+                // Colon usage
+                if (headline.includes(':')) {
+                    score += 3;
+                }
+
+                // Cap score
+                score = Math.min(100, Math.max(0, score));
+
+                // Determine grade
+                let grade, color, message;
+                if (score >= 80) {
+                    grade = 'Excellent';
+                    color = '#10b981';
+                    message = 'This headline is highly effective!';
+                } else if (score >= 70) {
+                    grade = 'Good';
+                    color = '#22c55e';
+                    message = 'This headline should perform well.';
+                } else if (score >= 60) {
+                    grade = 'Average';
+                    color = '#eab308';
+                    message = 'This headline is decent but could be improved.';
+                } else if (score >= 50) {
+                    grade = 'Below Average';
+                    color = '#f59e0b';
+                    message = 'This headline needs improvement.';
+                } else {
+                    grade = 'Poor';
+                    color = '#ef4444';
+                    message = 'This headline needs significant work.';
+                }
+
+                // Display results
+                output.innerHTML = `
+          <div class="card">
+            <h2 style="text-align: center; margin-bottom: var(--spacing-lg);">Headline Analysis</h2>
+            
+            <div style="text-align: center; padding: var(--spacing-xl); background: linear-gradient(135deg, ${color}15, ${color}05); border-radius: var(--radius-lg); border: 2px solid ${color}; margin-bottom: var(--spacing-lg);">
+              <div style="font-size: 4rem; font-weight: 700; color: ${color}; margin-bottom: var(--spacing-sm);">
+                ${score}
+              </div>
+              <div style="font-size: 1.5rem; font-weight: 600; color: ${color}; margin-bottom: var(--spacing-xs);">
+                ${grade}
+              </div>
+              <div style="color: var(--text-secondary); font-size: 0.875rem;">
+                ${message}
+              </div>
+            </div>
+            
+            <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-md); margin-bottom: var(--spacing-lg); text-align: center;">
+              <div style="font-size: 1.25rem; color: var(--text-primary); line-height: 1.6; font-weight: 500;">
+                "${headline}"
+              </div>
+            </div>
+            
+            <h3>Word Analysis</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--spacing-md); margin-top: var(--spacing-md);">
+              <div style="text-align: center; padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="font-size: 2rem; font-weight: 700; color: #6366f1;">${commonCount}</div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Common</div>
+                <div style="color: var(--text-secondary); font-size: 0.75rem;">${commonPercent.toFixed(0)}%</div>
+              </div>
+              <div style="text-align: center; padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="font-size: 2rem; font-weight: 700; color: #8b5cf6;">${unusualCount}</div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Unusual</div>
+                <div style="color: var(--text-secondary); font-size: 0.75rem;">${unusualPercent.toFixed(0)}%</div>
+              </div>
+              <div style="text-align: center; padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="font-size: 2rem; font-weight: 700; color: #ec4899;">${emotionalCount}</div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Emotional</div>
+              </div>
+              <div style="text-align: center; padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="font-size: 2rem; font-weight: 700; color: #f59e0b;">${powerCount}</div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Power</div>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); margin-top: var(--spacing-lg);">
+              <div style="padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Word Count</div>
+                <div style="font-size: 1.5rem; font-weight: 600;">${wordCount} words</div>
+                <div style="color: var(--text-secondary); font-size: 0.75rem;">Optimal: 6-12 words</div>
+              </div>
+              <div style="padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Character Count</div>
+                <div style="font-size: 1.5rem; font-weight: 600;">${charCount} chars</div>
+                <div style="color: var(--text-secondary); font-size: 0.75rem;">Optimal: 50-70 chars</div>
+              </div>
+            </div>
+            
+            ${foundPowerWords.length > 0 || foundEmotionalWords.length > 0 ? `
+              <div style="margin-top: var(--spacing-lg);">
+                <h4>Impact Words Found</h4>
+                ${foundPowerWords.length > 0 ? `
+                  <div style="margin-top: var(--spacing-sm);">
+                    <span style="color: var(--text-secondary); font-size: 0.875rem;">Power Words: </span>
+                    ${foundPowerWords.map(w => `<span style="background: #f59e0b20; color: #f59e0b; padding: 4px 8px; border-radius: var(--radius-sm); margin-right: var(--spacing-xs); font-size: 0.875rem;">${w}</span>`).join('')}
+                  </div>
+                ` : ''}
+                ${foundEmotionalWords.length > 0 ? `
+                  <div style="margin-top: var(--spacing-sm);">
+                    <span style="color: var(--text-secondary); font-size: 0.875rem;">Emotional Words: </span>
+                    ${foundEmotionalWords.map(w => `<span style="background: #ec489920; color: #ec4899; padding: 4px 8px; border-radius: var(--radius-sm); margin-right: var(--spacing-xs); font-size: 0.875rem;">${w}</span>`).join('')}
+                  </div>
+                ` : ''}
+              </div>
+            ` : ''}
+            
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: #3b82f615; border-left: 4px solid #3b82f6; border-radius: var(--radius-sm);">
+              <h4 style="margin: 0 0 var(--spacing-sm) 0; color: #3b82f6;">💡 Improvement Tips</h4>
+              <ul style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.875rem;">
+                ${wordCount < 6 ? '<li>Add more words to make your headline more descriptive (aim for 6-12 words)</li>' : ''}
+                ${wordCount > 12 ? '<li>Shorten your headline for better impact (aim for 6-12 words)</li>' : ''}
+                ${powerCount === 0 ? '<li>Include power words like "ultimate", "essential", "proven", or "free"</li>' : ''}
+                ${emotionalCount === 0 ? '<li>Add emotional words to create a stronger connection</li>' : ''}
+                ${!/\d/.test(headline) ? '<li>Consider adding a number for specificity (e.g., "5 Ways", "10 Tips")</li>' : ''}
+                ${!headline.includes('?') && score < 70 ? '<li>Try using a question format to engage readers</li>' : ''}
+                ${score >= 80 ? '<li>Great job! Your headline is well-optimized.</li>' : ''}
+              </ul>
+            </div>
+          </div>
+        `;
+
+                output.style.display = 'block';
+                showNotification(`Headline Score: ${score}/100`, score >= 70 ? 'success' : 'warning');
+            } catch (error) {
+                output.textContent = `Error: ${error.message}`;
+                output.style.display = 'block';
+                showNotification('Error analyzing headline', 'error');
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('headlineInput').value = '';
+            document.getElementById('output').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

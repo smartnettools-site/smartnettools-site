@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Optimize your content for SEO. Analyze keyword density, readability, and get actionable recommendations to improve your content.">
+    <meta name="keywords" content="content optimizer, SEO optimizer, keyword density, content analysis, SEO score">
+
+    <meta property="og:title" content="Content Optimizer - SmartNet Tools">
+    <meta property="og:description" content="Optimize your content for search engines with comprehensive SEO analysis.">
+    <meta property="og:url" content="https://smartnettools.site/ai/content-optimizer/">
+
+    <title>Content Optimizer - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+
+            <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
+
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="ad-container ad-header">
+        <span>Advertisement</span>
+    </div>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Content Optimizer</h1>
+            <p>Optimize your content for search engines with comprehensive SEO analysis and recommendations.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div class="form-group">
+                <label for="contentInput">Your Content:</label>
+                <textarea id="contentInput" rows="15"
+                    placeholder="Paste your content here to analyze and optimize..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="keywordInput">Target Keyword:</label>
+                <input type="text" id="keywordInput" placeholder="Enter your main target keyword">
+            </div>
+
+            <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-top: var(--spacing-md);">
+                <button onclick="optimizeContent()" class="btn btn-primary">Analyze Content</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+            </div>
+
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+        </div>
+
+        <div class="ad-container ad-inline">
+            <span>Advertisement</span>
+        </div>
+
+        <section class="mt-lg">
+            <h2>About Content Optimizer</h2>
+            <div class="card">
+                <p>Our content optimizer analyzes your content for SEO effectiveness, providing actionable insights to
+                    improve search rankings and user engagement.</p>
+
+                <h3>What We Analyze:</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>Overall SEO score</li>
+                    <li>Keyword density and usage</li>
+                    <li>Content length and structure</li>
+                    <li>Readability metrics</li>
+                    <li>Heading and paragraph analysis</li>
+                    <li>Actionable optimization recommendations</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mt-lg">
+            <h2>Related Tools</h2>
+            <div class="grid grid-4">
+                <a href="/ai/" class="tool-card">
+                    <h3>All AI Tools</h3>
+                    <p>Browse all tools in this category</p>
+                </a>
+                <a href="/ai/keyword-extractor/" class="tool-card">
+                    <h3>Keyword Extractor</h3>
+                    <p>Extract keywords from text</p>
+                </a>
+                <a href="/ai/readability-scorer/" class="tool-card">
+                    <h3>Readability Scorer</h3>
+                    <p>Check text readability</p>
+                </a>
+                <a href="/seo/meta-tag-generator/" class="tool-card">
+                    <h3>Meta Tag Generator</h3>
+                    <p>Generate SEO meta tags</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div class="ad-container ad-footer">
+        <span>Advertisement</span>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function countSyllables(word) {
+            word = word.toLowerCase();
+            if (word.length <= 3) return 1;
+            word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+            word = word.replace(/^y/, '');
+            const syllables = word.match(/[aeiouy]{1,2}/g);
+            return syllables ? syllables.length : 1;
+        }
+
+        function optimizeContent() {
+            const content = document.getElementById('contentInput').value.trim();
+            const keyword = document.getElementById('keywordInput').value.trim().toLowerCase();
+            const output = document.getElementById('output');
+
+            if (!content) {
+                showNotification('Please enter content to analyze', 'error');
+                return;
+            }
+
+            if (!keyword) {
+                showNotification('Please enter a target keyword', 'error');
+                return;
+            }
+
+            try {
+                // Basic statistics
+                const words = content.match(/\b[a-z]+\b/gi) || [];
+                const sentences = content.match(/[^.!?]+[.!?]+/g) || [content];
+                const paragraphs = content.split(/\n\n+/).filter(p => p.trim());
+
+                const wordCount = words.length;
+                const sentenceCount = sentences.length;
+                const paragraphCount = paragraphs.length;
+
+                // Keyword analysis
+                const keywordCount = content.toLowerCase().split(keyword).length - 1;
+                const keywordDensity = ((keywordCount / wordCount) * 100).toFixed(2);
+
+                // Check keyword in important places
+                const inFirstParagraph = paragraphs[0] && paragraphs[0].toLowerCase().includes(keyword);
+                const inLastParagraph = paragraphs[paragraphs.length - 1] && paragraphs[paragraphs.length - 1].toLowerCase().includes(keyword);
+
+                // Readability
+                let syllableCount = 0;
+                words.forEach(word => {
+                    syllableCount += countSyllables(word);
+                });
+
+                const avgWordsPerSentence = wordCount / sentenceCount;
+                const avgSyllablesPerWord = syllableCount / wordCount;
+                const fleschScore = Math.max(0, Math.min(100, 206.835 - (1.015 * avgWordsPerSentence) - (84.6 * avgSyllablesPerWord))).toFixed(1);
+
+                // Calculate SEO Score
+                let seoScore = 0;
+
+                // Word count (optimal 300-2500)
+                if (wordCount >= 300 && wordCount <= 2500) {
+                    seoScore += 20;
+                } else if (wordCount >= 200 && wordCount <= 3000) {
+                    seoScore += 15;
+                } else if (wordCount >= 100) {
+                    seoScore += 10;
+                }
+
+                // Keyword density (optimal 1-3%)
+                const densityNum = parseFloat(keywordDensity);
+                if (densityNum >= 1 && densityNum <= 3) {
+                    seoScore += 20;
+                } else if (densityNum >= 0.5 && densityNum <= 4) {
+                    seoScore += 15;
+                } else if (densityNum > 0) {
+                    seoScore += 10;
+                }
+
+                // Keyword placement
+                if (inFirstParagraph) seoScore += 15;
+                if (inLastParagraph) seoScore += 10;
+
+                // Paragraph count
+                if (paragraphCount >= 3) {
+                    seoScore += 10;
+                }
+
+                // Readability
+                if (fleschScore >= 60) {
+                    seoScore += 15;
+                } else if (fleschScore >= 50) {
+                    seoScore += 10;
+                }
+
+                // Sentence length
+                if (avgWordsPerSentence <= 20) {
+                    seoScore += 10;
+                }
+
+                seoScore = Math.min(100, seoScore);
+
+                // Determine grade
+                let grade, color, message;
+                if (seoScore >= 80) {
+                    grade = 'Excellent';
+                    color = '#10b981';
+                    message = 'Your content is well-optimized!';
+                } else if (seoScore >= 70) {
+                    grade = 'Good';
+                    color = '#22c55e';
+                    message = 'Your content is fairly well optimized.';
+                } else if (seoScore >= 60) {
+                    grade = 'Average';
+                    color = '#eab308';
+                    message = 'Your content needs some improvement.';
+                } else if (seoScore >= 50) {
+                    grade = 'Below Average';
+                    color = '#f59e0b';
+                    message = 'Your content needs significant optimization.';
+                } else {
+                    grade = 'Poor';
+                    color = '#ef4444';
+                    message = 'Your content requires major improvements.';
+                }
+
+                // Generate recommendations
+                const recommendations = [];
+
+                if (wordCount < 300) {
+                    recommendations.push({ type: 'critical', text: 'Add more content. Aim for at least 300 words for better SEO.' });
+                } else if (wordCount > 2500) {
+                    recommendations.push({ type: 'warning', text: 'Consider breaking up very long content into multiple pages.' });
+                }
+
+                if (densityNum < 1) {
+                    recommendations.push({ type: 'critical', text: `Use your target keyword "${keyword}" more often (current: ${keywordCount} times).` });
+                } else if (densityNum > 3) {
+                    recommendations.push({ type: 'warning', text: 'Reduce keyword usage to avoid over-optimization (keyword stuffing).' });
+                }
+
+                if (!inFirstParagraph) {
+                    recommendations.push({ type: 'critical', text: 'Include your target keyword in the first paragraph.' });
+                }
+
+                if (!inLastParagraph) {
+                    recommendations.push({ type: 'info', text: 'Consider including your keyword in the conclusion.' });
+                }
+
+                if (paragraphCount < 3) {
+                    recommendations.push({ type: 'warning', text: 'Break content into more paragraphs for better readability.' });
+                }
+
+                if (fleschScore < 60) {
+                    recommendations.push({ type: 'warning', text: 'Simplify your writing for better readability.' });
+                }
+
+                if (avgWordsPerSentence > 20) {
+                    recommendations.push({ type: 'info', text: 'Use shorter sentences for improved readability.' });
+                }
+
+                if (seoScore >= 80) {
+                    recommendations.push({ type: 'success', text: 'Great job! Your content is well-optimized for SEO.' });
+                }
+
+                // Display results
+                output.innerHTML = `
+          <div class="card">
+            <h2 style="text-align: center; margin-bottom: var(--spacing-lg);">SEO Content Analysis</h2>
+            
+            <div style="text-align: center; padding: var(--spacing-xl); background: linear-gradient(135deg, ${color}15, ${color}05); border-radius: var(--radius-lg); border: 2px solid ${color}; margin-bottom: var(--spacing-lg);">
+              <div style="font-size: 4rem; font-weight: 700; color: ${color}; margin-bottom: var(--spacing-sm);">
+                ${seoScore}
+              </div>
+              <div style="font-size: 1.5rem; font-weight: 600; color: ${color}; margin-bottom: var(--spacing-xs);">
+                ${grade}
+              </div>
+              <div style="color: var(--text-secondary);">
+                ${message}
+              </div>
+            </div>
+            
+            <h3>Content Metrics</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--spacing-md); margin-top: var(--spacing-md);">
+              <div style="text-align: center; padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">${wordCount}</div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Words</div>
+                <div style="color: var(--text-secondary); font-size: 0.75rem;">Optimal: 300-2500</div>
+              </div>
+              <div style="text-align: center; padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">${sentenceCount}</div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Sentences</div>
+              </div>
+              <div style="text-align: center; padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">${paragraphCount}</div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Paragraphs</div>
+              </div>
+              <div style="text-align: center; padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">${fleschScore}</div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Readability</div>
+              </div>
+            </div>
+            
+            <h3 style="margin-top: var(--spacing-lg);">Keyword Analysis</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--spacing-md); margin-top: var(--spacing-md);">
+              <div style="padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Keyword Count</div>
+                <div style="font-size: 1.5rem; font-weight: 600;">${keywordCount}</div>
+              </div>
+              <div style="padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Keyword Density</div>
+                <div style="font-size: 1.5rem; font-weight: 600;">${keywordDensity}%</div>
+                <div style="color: var(--text-secondary); font-size: 0.75rem;">Optimal: 1-3%</div>
+              </div>
+              <div style="padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Placement</div>
+                <div style="font-size: 0.875rem;">
+                  <div>${inFirstParagraph ? '✅' : '❌'} First paragraph</div>
+                  <div>${inLastParagraph ? '✅' : '❌'} Last paragraph</div>
+                </div>
+              </div>
+            </div>
+            
+            ${recommendations.length > 0 ? `
+              <h3 style="margin-top: var(--spacing-lg);">Recommendations</h3>
+              <div style="margin-top: var(--spacing-md);">
+                ${recommendations.map(rec => {
+                    const colors = {
+                        critical: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#3b82f6',
+                        success: '#10b981'
+                    };
+                    const icons = {
+                        critical: '🔴',
+                        warning: '⚠️',
+                        info: '💡',
+                        success: '✅'
+                    };
+                    return `
+                    <div style="padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background: var(--bg-secondary); border-left: 4px solid ${colors[rec.type]}; border-radius: var(--radius-sm);">
+                      <div style="display: flex; align-items: start; gap: var(--spacing-sm);">
+                        <span style="font-size: 1.25rem;">${icons[rec.type]}</span>
+                        <p style="margin: 0; color: var(--text-primary);">${rec.text}</p>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            ` : ''}
+          </div>
+        `;
+
+                output.style.display = 'block';
+                showNotification(`SEO Score: ${seoScore}/100`, seoScore >= 70 ? 'success' : 'warning');
+            } catch (error) {
+                output.textContent = `Error: ${error.message}`;
+                output.style.display = 'block';
+                showNotification('Error analyzing content', 'error');
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('contentInput').value = '';
+            document.getElementById('keywordInput').value = '';
+            document.getElementById('output').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

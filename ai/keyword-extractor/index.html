@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Extract important keywords and phrases from text automatically.">
   <meta name="keywords" content="keyword extractor, extract keywords, keyword analysis">
-  
+
   <meta property="og:title" content="Keyword Extractor - SmartNet Tools">
   <meta property="og:description" content="Extract important keywords and phrases from text automatically.">
   <meta property="og:url" content="https://smartnettools.site/ai/keyword-extractor/">
-  
+
   <title>Keyword Extractor - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,44 +46,66 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>Keyword Extractor</h1>
       <p>Extract important keywords and phrases from text automatically.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/ai/" class="btn btn-primary">← Back to Ai Tools</a>
-      </p>
+      <div class="form-group">
+        <label for="textInput">Paste your text here:</label>
+        <textarea id="textInput" rows="10" placeholder="Enter the text you want to extract keywords from..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="keywordCount">Number of keywords:</label>
+        <select id="keywordCount">
+          <option value="5">5 keywords</option>
+          <option value="10" selected>10 keywords</option>
+          <option value="15">15 keywords</option>
+          <option value="20">20 keywords</option>
+        </select>
+      </div>
+
+      <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-top: var(--spacing-md);">
+        <button onclick="extractKeywords()" class="btn btn-primary">Extract Keywords</button>
+        <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+      </div>
+
+      <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+
+      <div id="actions"
+        style="display:none; margin-top: var(--spacing-md); display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+        <button onclick="copyKeywords()" class="btn btn-secondary">📋 Copy Keywords</button>
+        <button onclick="downloadKeywords()" class="btn btn-secondary">⬇️ Download</button>
+      </div>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
+
     <section class="mt-lg">
       <h2>About This Tool</h2>
       <div class="card">
         <p>Extract important keywords and phrases from text automatically.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
+        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our
+          servers.</p>
       </div>
     </section>
-    
+
     <section class="mt-lg">
       <h2>Related Tools</h2>
       <div class="grid grid-4">
@@ -104,14 +128,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +151,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +160,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +171,181 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
   <script src="/assets/js/main.js"></script>
+  <script>
+    function extractKeywords() {
+      const input = document.getElementById('textInput').value.trim();
+      const output = document.getElementById('output');
+      const actions = document.getElementById('actions');
+      const keywordCount = parseInt(document.getElementById('keywordCount').value);
+
+      if (!input) {
+        showNotification('Please enter some text to extract keywords', 'error');
+        return;
+      }
+
+      try {
+        // Stop words to exclude
+        const stopWords = new Set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'been', 'be', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'can', 'this', 'that', 'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they', 'what', 'which', 'who', 'when', 'where', 'why', 'how', 'there', 'here', 'all', 'some', 'any', 'each', 'every', 'both', 'few', 'more', 'most', 'other', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 'just', 'also', 'about', 'after', 'before', 'between', 'into', 'through', 'during', 'above', 'below', 'up', 'down', 'out', 'off', 'over', 'under', 'again', 'further', 'then', 'once']);
+
+        // Extract words
+        const words = input.toLowerCase().match(/\b[a-z]{3,}\b/g) || [];
+
+        // Calculate word frequencies
+        const wordFreq = {};
+        words.forEach(word => {
+          if (!stopWords.has(word)) {
+            wordFreq[word] = (wordFreq[word] || 0) + 1;
+          }
+        });
+
+        // Calculate TF-IDF scores (simplified TF for single document)
+        const totalWords = Object.values(wordFreq).reduce((a, b) => a + b, 0);
+        const wordScores = {};
+
+        for (const [word, freq] of Object.entries(wordFreq)) {
+          // Term Frequency
+          const tf = freq / totalWords;
+
+          // Add position bonus (words appearing early get higher score)
+          const firstPosition = words.indexOf(word);
+          const positionBonus = 1 + (1 - firstPosition / words.length) * 0.3;
+
+          // Calculate score
+          wordScores[word] = tf * freq * positionBonus;
+        }
+
+        // Sort by score and get top keywords
+        const keywords = Object.entries(wordScores)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, keywordCount);
+
+        if (keywords.length === 0) {
+          output.innerHTML = '<p style="color: var(--text-secondary);">No keywords found. Try entering more text.</p>';
+          output.style.display = 'block';
+          actions.style.display = 'none';
+          return;
+        }
+
+        // Calculate max score for normalization
+        const maxScore = keywords[0][1];
+
+        // Generate color based on relevance
+        const getColor = (score) => {
+          const normalized = (score / maxScore) * 100;
+          if (normalized > 70) return '#10b981';
+          if (normalized > 40) return '#3b82f6';
+          return '#6b7280';
+        };
+
+        // Display keywords
+        output.innerHTML = `
+          <div class="card">
+            <h3>Extracted Keywords</h3>
+            <p style="color: var(--text-secondary); margin-top: var(--spacing-sm);">
+              Found ${keywords.length} relevant keywords sorted by importance
+            </p>
+            
+            <div style="margin-top: var(--spacing-lg);">
+              ${keywords.map(([word, score], index) => {
+          const normalized = (score / maxScore) * 100;
+          const color = getColor(score);
+          return `
+                  <div style="display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border-color);">
+                    <div style="min-width: 30px; font-weight: 700; color: var(--text-secondary);">#${index + 1}</div>
+                    <div style="flex: 1;">
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xs);">
+                        <span style="font-size: 1.1rem; font-weight: 600;">${word}</span>
+                        <span style="font-size: 0.875rem; color: ${color}; font-weight: 600;">${normalized.toFixed(1)}%</span>
+                      </div>
+                      <div style="background: var(--border-color); border-radius: var(--radius-sm); height: 6px; overflow: hidden;">
+                        <div style="background: ${color}; height: 100%; width: ${normalized}%; transition: width 0.5s;"></div>
+                      </div>
+                    </div>
+                    <div style="min-width: 50px; text-align: right; color: var(--text-secondary); font-size: 0.875rem;">
+                      ${wordFreq[word]} times
+                    </div>
+                  </div>
+                `;
+        }).join('')}
+            </div>
+            
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+              <h4 style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: var(--spacing-sm);">KEYWORD TAGS</h4>
+              <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                ${keywords.map(([word]) => `
+                  <span style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: var(--radius-md); font-size: 0.875rem;">
+                    ${word}
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+            
+            <div style="margin-top: var(--spacing-lg); display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--spacing-md); padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md);">
+              <div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Total Words</div>
+                <div style="font-size: 1.5rem; font-weight: 600;">${words.length}</div>
+              </div>
+              <div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Unique Words</div>
+                <div style="font-size: 1.5rem; font-weight: 600;">${Object.keys(wordFreq).length}</div>
+              </div>
+              <div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">Keywords</div>
+                <div style="font-size: 1.5rem; font-weight: 600;">${keywords.length}</div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        output.style.display = 'block';
+        actions.style.display = 'flex';
+
+        showNotification('Keywords extracted successfully!', 'success');
+      } catch (error) {
+        output.textContent = `Error: ${error.message}`;
+        output.style.display = 'block';
+        actions.style.display = 'none';
+        showNotification('Error extracting keywords', 'error');
+      }
+    }
+
+    function clearAll() {
+      document.getElementById('textInput').value = '';
+      document.getElementById('output').style.display = 'none';
+      document.getElementById('actions').style.display = 'none';
+    }
+
+    function copyKeywords() {
+      const output = document.getElementById('output');
+      const keywords = Array.from(output.querySelectorAll('span[style*="font-size: 1.1rem"]'))
+        .map(el => el.textContent.trim())
+        .join(', ');
+      copyToClipboard(keywords, event.target);
+    }
+
+    function downloadKeywords() {
+      const output = document.getElementById('output');
+      const keywords = Array.from(output.querySelectorAll('span[style*="font-size: 1.1rem"]'))
+        .map((el, i) => `${i + 1}. ${el.textContent.trim()}`)
+        .join('\n');
+      downloadAsFile(keywords, 'keywords.txt', 'text/plain');
+      showNotification('Downloaded!', 'success');
+    }
+  </script>
 </body>
+
 </html>

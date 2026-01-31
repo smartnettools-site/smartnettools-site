@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Analyze sentiment in text. Detect positive, negative, or neutral emotions.">
   <meta name="keywords" content="sentiment analyzer, sentiment analysis, emotion detection">
-  
+
   <meta property="og:title" content="Sentiment Analyzer - SmartNet Tools">
   <meta property="og:description" content="Analyze sentiment in text. Detect positive, negative, or neutral emotions.">
   <meta property="og:url" content="https://smartnettools.site/ai/sentiment-analyzer/">
-  
+
   <title>Sentiment Analyzer - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,44 +46,58 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>Sentiment Analyzer</h1>
       <p>Analyze sentiment in text. Detect positive, negative, or neutral emotions.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/ai/" class="btn btn-primary">← Back to Ai Tools</a>
-      </p>
+      <div class="form-group">
+        <label for="textInput">Enter text to analyze:</label>
+        <textarea id="textInput" rows="8" placeholder="Enter the text you want to analyze for sentiment..."></textarea>
+      </div>
+
+      <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap; margin-top: var(--spacing-md);">
+        <button onclick="analyzeSentiment()" class="btn btn-primary">Analyze Sentiment</button>
+        <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+      </div>
+
+      <div id="sentimentResult" style="display:none; margin-top: var(--spacing-lg);"></div>
+
+      <div id="detailsSection" style="display:none; margin-top: var(--spacing-lg);"></div>
+
+      <div id="actions"
+        style="display:none; margin-top: var(--spacing-md); display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+        <button onclick="copyResults()" class="btn btn-secondary">📋 Copy Results</button>
+        <button onclick="downloadResults()" class="btn btn-secondary">⬇️ Download</button>
+      </div>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
+
     <section class="mt-lg">
       <h2>About This Tool</h2>
       <div class="card">
         <p>Analyze sentiment in text. Detect positive, negative, or neutral emotions.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
+        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our
+          servers.</p>
       </div>
     </section>
-    
+
     <section class="mt-lg">
       <h2>Related Tools</h2>
       <div class="grid grid-4">
@@ -104,14 +120,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +143,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +152,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +163,204 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
   <script src="/assets/js/main.js"></script>
+  <script>
+    // Sentiment word dictionaries
+    const positiveWords = new Set(['good', 'great', 'excellent', 'amazing', 'wonderful', 'fantastic', 'love', 'best', 'beautiful', 'perfect', 'happy', 'joy', 'success', 'successful', 'brilliant', 'awesome', 'outstanding', 'superb', 'delightful', 'pleasant', 'positive', 'beneficial', 'valuable', 'impressive', 'remarkable', 'exceptional', 'fabulous', 'terrific', 'magnificent', 'marvelous', 'splendid', 'enjoy', 'enjoyed', 'like', 'liked', 'better', 'improved', 'thank', 'thanks', 'appreciate', 'appreciated', 'recommend', 'recommended', 'satisfied', 'glad', 'pleased', 'excited', 'exciting']);
+
+    const negativeWords = new Set(['bad', 'terrible', 'awful', 'horrible', 'worst', 'poor', 'hate', 'dislike', 'disappointing', 'disappointed', 'sad', 'angry', 'fail', 'failed', 'failure', 'problem', 'issue', 'wrong', 'error', 'difficult', 'hard', 'complicated', 'confusing', 'annoying', 'frustrated', 'frustrating', 'boring', 'waste', 'useless', 'broken', 'never', 'nothing', 'nobody', 'neither', 'nowhere', 'cannot', 'unable', 'difficult', 'disaster', 'pathetic', 'ridiculous', 'absurd', 'stupid', 'dumb', 'ugly', 'disgusting', 'unacceptable', 'inadequate', 'inferior']);
+
+    function analyzeSentiment() {
+      const input = document.getElementById('textInput').value.trim();
+      const resultDiv = document.getElementById('sentimentResult');
+      const detailsDiv = document.getElementById('detailsSection');
+      const actions = document.getElementById('actions');
+
+      if (!input) {
+        showNotification('Please enter some text to analyze', 'error');
+        return;
+      }
+
+      try {
+        // Tokenize and analyze
+        const words = input.toLowerCase().match(/\b[a-z]+\b/g) || [];
+        let positiveCount = 0;
+        let negativeCount = 0;
+        const foundPositive = [];
+        const foundNegative = [];
+
+        words.forEach(word => {
+          if (positiveWords.has(word)) {
+            positiveCount++;
+            if (!foundPositive.includes(word)) foundPositive.push(word);
+          }
+          if (negativeWords.has(word)) {
+            negativeCount++;
+            if (!foundNegative.includes(word)) foundNegative.push(word);
+          }
+        });
+
+        // Calculate sentiment score
+        const totalSentimentWords = positiveCount + negativeCount;
+        const sentimentScore = totalSentimentWords > 0
+          ? ((positiveCount - negativeCount) / totalSentimentWords) * 100
+          : 0;
+
+        // Determine overall sentiment
+        let sentiment, color, emoji, description;
+        if (sentimentScore > 20) {
+          sentiment = 'Positive';
+          color = '#10b981';
+          emoji = '😊';
+          description = 'The text expresses a positive sentiment overall.';
+        } else if (sentimentScore < -20) {
+          sentiment = 'Negative';
+          color = '#ef4444';
+          emoji = '😞';
+          description = 'The text expresses a negative sentiment overall.';
+        } else {
+          sentiment = 'Neutral';
+          color = '#6b7280';
+          emoji = '😐';
+          description = 'The text has a balanced or neutral sentiment.';
+        }
+
+        // Calculate percentages
+        const positivePercent = totalSentimentWords > 0 ? ((positiveCount / totalSentimentWords) * 100).toFixed(1) : 0;
+        const negativePercent = totalSentimentWords > 0 ? ((negativeCount / totalSentimentWords) * 100).toFixed(1) : 0;
+
+        // Display main sentiment result
+        resultDiv.innerHTML = `
+          <div style="text-align: center; padding: var(--spacing-xl); background: linear-gradient(135deg, ${color}15, ${color}05); border-radius: var(--radius-lg); border: 2px solid ${color};">
+            <div style="font-size: 4rem; margin-bottom: var(--spacing-sm);">${emoji}</div>
+            <h2 style="font-size: 2rem; color: ${color}; margin: 0;">${sentiment}</h2>
+            <p style="color: var(--text-secondary); margin-top: var(--spacing-sm);">${description}</p>
+            <div style="margin-top: var(--spacing-lg); font-size: 2.5rem; font-weight: 700; color: ${color};">
+              ${sentimentScore > 0 ? '+' : ''}${sentimentScore.toFixed(1)}
+            </div>
+            <div style="color: var(--text-secondary); font-size: 0.875rem;">Sentiment Score</div>
+          </div>
+        `;
+        resultDiv.style.display = 'block';
+
+        // Display detailed analysis
+        detailsDiv.innerHTML = `
+          <div class="card">
+            <h3>Detailed Analysis</h3>
+            
+            <div style="margin-top: var(--spacing-lg);">
+              <h4 style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-sm);">SENTIMENT DISTRIBUTION</h4>
+              <div style="display: flex; gap: var(--spacing-md); margin-bottom: var(--spacing-sm);">
+                <div style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-xs);">
+                    <span>Positive</span>
+                    <span style="font-weight: 600;">${positivePercent}%</span>
+                  </div>
+                  <div style="background: var(--border-color); border-radius: var(--radius-sm); height: 8px; overflow: hidden;">
+                    <div style="background: #10b981; height: 100%; width: ${positivePercent}%; transition: width 0.5s;"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; gap: var(--spacing-md);">
+                <div style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-xs);">
+                    <span>Negative</span>
+                    <span style="font-weight: 600;">${negativePercent}%</span>
+                  </div>
+                  <div style="background: var(--border-color); border-radius: var(--radius-sm); height: 8px; overflow: hidden;">
+                    <div style="background: #ef4444; height: 100%; width: ${negativePercent}%; transition: width 0.5s;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg); margin-top: var(--spacing-lg);">
+              <div>
+                <h4 style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-sm);">STATISTICS</h4>
+                <div style="display: flex; flex-direction: column; gap: var(--spacing-xs);">
+                  <div style="display: flex; justify-content: space-between;">
+                    <span>Total Words:</span>
+                    <span style="font-weight: 600;">${words.length}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span>Positive Words:</span>
+                    <span style="font-weight: 600; color: #10b981;">${positiveCount}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span>Negative Words:</span>
+                    <span style="font-weight: 600; color: #ef4444;">${negativeCount}</span>
+                  </div>
+                </div>
+              </div>
+              
+              ${foundPositive.length > 0 ? `
+              <div>
+                <h4 style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-sm);">POSITIVE WORDS FOUND</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                  ${foundPositive.slice(0, 10).map(word => `<span style="background: #10b98120; color: #10b981; padding: 4px 8px; border-radius: var(--radius-sm); font-size: 0.875rem;">${word}</span>`).join('')}
+                  ${foundPositive.length > 10 ? `<span style="color: var(--text-secondary); font-size: 0.875rem;">+${foundPositive.length - 10} more</span>` : ''}
+                </div>
+              </div>
+              ` : ''}
+              
+              ${foundNegative.length > 0 ? `
+              <div>
+                <h4 style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-sm);">NEGATIVE WORDS FOUND</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                  ${foundNegative.slice(0, 10).map(word => `<span style="background: #ef444420; color: #ef4444; padding: 4px 8px; border-radius: var(--radius-sm); font-size: 0.875rem;">${word}</span>`).join('')}
+                  ${foundNegative.length > 10 ? `<span style="color: var(--text-secondary); font-size: 0.875rem;">+${foundNegative.length - 10} more</span>` : ''}
+                </div>
+              </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+        detailsDiv.style.display = 'block';
+        actions.style.display = 'flex';
+
+        showNotification('Sentiment analyzed successfully!', 'success');
+      } catch (error) {
+        resultDiv.textContent = `Error: ${error.message}`;
+        resultDiv.style.display = 'block';
+        detailsDiv.style.display = 'none';
+        actions.style.display = 'none';
+        showNotification('Error analyzing sentiment', 'error');
+      }
+    }
+
+    function clearAll() {
+      document.getElementById('textInput').value = '';
+      document.getElementById('sentimentResult').style.display = 'none';
+      document.getElementById('detailsSection').style.display = 'none';
+      document.getElementById('actions').style.display = 'none';
+    }
+
+    function copyResults() {
+      const result = document.getElementById('sentimentResult').textContent;
+      const details = document.getElementById('detailsSection').textContent;
+      copyToClipboard(result + '\n\n' + details, event.target);
+    }
+
+    function downloadResults() {
+      const result = document.getElementById('sentimentResult').textContent;
+      const details = document.getElementById('detailsSection').textContent;
+      downloadAsFile(result + '\n\n' + details, 'sentiment-analysis.txt', 'text/plain');
+      showNotification('Downloaded!', 'success');
+    }
+  </script>
 </body>
+
 </html>
