@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Validate HTML, CSS, and JavaScript code syntax.">
+    <meta name="keywords" content="code validator, HTML validator, CSS validator, JS validator">
+    <meta property="og:title" content="Code Validator - SmartNet Tools">
+    <meta property="og:description" content="Validate HTML, CSS, and JavaScript code syntax.">
+    <meta property="og:url" content="https://smartnettools.site/web/code-validator/">
+    <title>Code Validator - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Code Validator</h1>
+            <p>Validate HTML, CSS, and JavaScript code syntax.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="grid grid-3" style="margin-bottom: var(--spacing-md);">
+                <button onclick="setType('html')" class="btn btn-primary" id="htmlBtn">HTML</button>
+                <button onclick="setType('css')" class="btn btn-secondary" id="cssBtn">CSS</button>
+                <button onclick="setType('js')" class="btn btn-secondary" id="jsBtn">JavaScript</button>
+            </div>
+            <div class="form-group"><label for="code">Code:</label><textarea id="code"
+                    placeholder="Enter your code here..." style="min-height: 250px;"></textarea></div>
+            <button onclick="validate()" class="btn btn-primary">Validate Code</button>
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);">
+                <h3>Validation Results</h3>
+                <div id="results"></div>
+            </div>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        let codeType = 'html';
+        function setType(type) {
+            codeType = type;
+            document.getElementById('htmlBtn').className = type === 'html' ? 'btn btn-primary' : 'btn btn-secondary';
+            document.getElementById('cssBtn').className = type === 'css' ? 'btn btn-primary' : 'btn btn-secondary';
+            document.getElementById('jsBtn').className = type === 'js' ? 'btn btn-primary' : 'btn btn-secondary';
+        }
+        function validate() {
+            const code = document.getElementById('code').value;
+            if (!code.trim()) { showNotification('Please enter code', 'error'); return; }
+            let issues = [], valid = true;
+            if (codeType === 'html') {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(code, 'text/html');
+                const errors = doc.querySelectorAll('parsererror');
+                if (errors.length > 0) { issues.push('HTML parsing errors detected'); valid = false; }
+                if (!code.includes('<!DOCTYPE')) issues.push('Missing DOCTYPE declaration');
+                if (!code.includes('<html')) issues.push('Missing <html> tag');
+            } else if (codeType === 'css') {
+                const braceCount = (code.match(/{/g) || []).length - (code.match(/}/g) || []).length;
+                if (braceCount !== 0) { issues.push('Unmatched braces'); valid = false; }
+                if (code.includes(';;')) issues.push('Double semicolons detected');
+            } else if (codeType === 'js') {
+                try { new Function(code); } catch (e) { issues.push(`Syntax error: ${e.message}`); valid = false; }
+            }
+            let html = valid && issues.length === 0 ? '<div class="card" style="background:rgba(81,207,102,0.1);border-left:4px solid #51cf66;"><strong>✓ Code is valid!</strong></div>' : '<div class="card" style="background:rgba(255,107,107,0.1);border-left:4px solid #ff6b6b;"><strong>Issues found:</strong><br>' + issues.map(i => '• ' + i).join('<br>') + '</div>';
+            document.getElementById('results').innerHTML = html;
+            document.getElementById('output').style.display = 'block';
+            showNotification('Validation complete', valid ? 'success' : 'error');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Minify JavaScript code to reduce file size and improve loading times.">
+    <meta name="keywords" content="JS minifier, JavaScript minifier, minify JavaScript">
+    <meta property="og:title" content="JavaScript Minifier - SmartNet Tools">
+    <meta property="og:description" content="Minify JavaScript code to reduce file size and improve loading times.">
+    <meta property="og:url" content="https://smartnettools.site/web/js-minifier/">
+    <title>JavaScript Minifier - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>JavaScript Minifier</h1>
+            <p>Minify JavaScript code to reduce file size and improve loading times.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="form-group"><label for="input">JavaScript Code:</label><textarea id="input"
+                    placeholder="function hello() { console.log('Hello World'); }"
+                    style="min-height: 200px;"></textarea></div>
+            <button onclick="minify()" class="btn btn-primary">Minify JavaScript</button>
+            <div id="stats" style="margin-top: var(--spacing-md); display: none;"></div>
+            <div class="form-group" style="margin-top: var(--spacing-lg);"><label for="output">Minified Output:</label>
+                <div class="tool-output" id="output" style="min-height: 150px;"></div>
+            </div>
+            <button onclick="copyOutput()" class="btn btn-secondary" style="margin-top: var(--spacing-md);">📋 Copy
+                Minified Code</button>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function minify() {
+            const code = document.getElementById('input').value;
+            if (!code.trim()) { showNotification('Please enter JavaScript code', 'error'); return; }
+            const minified = code.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '').replace(/\s+/g, ' ').replace(/\s*([{}();,:])\s*/g, '$1').trim();
+            const originalSize = new Blob([code]).size;
+            const minifiedSize = new Blob([minified]).size;
+            const savings = ((1 - minifiedSize / originalSize) * 100).toFixed(1);
+            document.getElementById('output').textContent = minified;
+            document.getElementById('stats').innerHTML = `<div class="card"><strong>Original:</strong> ${originalSize} bytes | <strong>Minified:</strong> ${minifiedSize} bytes | <strong>Saved:</strong> ${savings}%</div>`;
+            document.getElementById('stats').style.display = 'block';
+            showNotification('JavaScript minified!', 'success');
+        }
+        function copyOutput() { copyToClipboard(document.getElementById('output').textContent, event.target); }
+    </script>
+</body>
+
+</html>

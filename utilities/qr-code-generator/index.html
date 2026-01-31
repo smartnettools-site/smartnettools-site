@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Generate QR codes from text or URLs. Download as PNG image.">
   <meta name="keywords" content="QR code generator, create QR code, QR code maker">
-  
+
   <meta property="og:title" content="QR Code Generator - SmartNet Tools">
   <meta property="og:description" content="Generate QR codes from text or URLs. Download as PNG image.">
   <meta property="og:url" content="https://smartnettools.site/utilities/qr-code-generator/">
-  
+
   <title>QR Code Generator - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,44 +46,53 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>QR Code Generator</h1>
       <p>Generate QR codes from text or URLs. Download as PNG image.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/utilities/" class="btn btn-primary">← Back to Utilities Tools</a>
-      </p>
+      <div class="form-group"><label for="qrText">Text or URL:</label><input type="text" id="qrText"
+          placeholder="https://smartnettools.site" value="https://smartnettools.site"></div>
+      <div class="grid grid-2">
+        <div class="form-group"><label for="qrSize">Size (px):</label><input type="number" id="qrSize" value="256"
+            min="128" max="512" step="64"></div>
+        <div class="form-group"><label for="qrColor">Color:</label><input type="color" id="qrColor" value="#000000">
+        </div>
+      </div>
+      <button onclick="generateQR()" class="btn btn-primary">Generate QR Code</button>
+      <div id="qrcode"
+        style="margin-top: var(--spacing-lg); text-align: center; padding: var(--spacing-lg); background: #fff; border-radius: var(--radius-md);">
+      </div>
+      <button onclick="downloadQR()" class="btn btn-secondary" style="margin-top: var(--spacing-md); display: none;"
+        id="downloadBtn">📥 Download QR Code</button>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
+
     <section class="mt-lg">
       <h2>About This Tool</h2>
       <div class="card">
         <p>Generate QR codes from text or URLs. Download as PNG image.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
+        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our
+          servers.</p>
       </div>
     </section>
-    
+
     <section class="mt-lg">
       <h2>Related Tools</h2>
       <div class="grid grid-4">
@@ -104,14 +115,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +138,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +147,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +158,45 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
   <script src="/assets/js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    let qrcode = null;
+    function generateQR() {
+      const text = document.getElementById('qrText').value;
+      if (!text.trim()) { showNotification('Please enter text or URL', 'error'); return; }
+      const size = parseInt(document.getElementById('qrSize').value);
+      const color = document.getElementById('qrColor').value;
+      const container = document.getElementById('qrcode');
+      container.innerHTML = '';
+      qrcode = new QRCode(container, { text: text, width: size, height: size, colorDark: color, colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.H });
+      document.getElementById('downloadBtn').style.display = 'inline-block';
+      showNotification('QR code generated!', 'success');
+    }
+    function downloadQR() {
+      const canvas = document.querySelector('#qrcode canvas');
+      if (!canvas) { showNotification('Generate a QR code first', 'error'); return; }
+      const link = document.createElement('a');
+      link.download = 'qrcode.png';
+      link.href = canvas.toDataURL();
+      link.click();
+      showNotification('QR code downloaded!', 'success');
+    }
+    generateQR();
+  </script>
 </body>
+
 </html>

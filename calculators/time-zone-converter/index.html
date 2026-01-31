@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert time between different time zones instantly.">
+    <meta name="keywords" content="time zone converter, world clock, time conversion">
+    <meta property="og:title" content="Time Zone Converter - SmartNet Tools">
+    <meta property="og:description" content="Convert time between different time zones instantly.">
+    <meta property="og:url" content="https://smartnettools.site/calculators/time-zone-converter/">
+    <title>Time Zone Converter - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Time Zone Converter</h1>
+            <p>Convert time between different time zones instantly.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="form-group"><label for="sourceTime">Time:</label><input type="datetime-local" id="sourceTime">
+            </div>
+            <div class="grid grid-2">
+                <div class="form-group"><label for="fromZone">From Time Zone:</label><select id="fromZone"
+                        onchange="convert()"></select></div>
+                <div class="form-group"><label for="toZone">To Time Zone:</label><select id="toZone"
+                        onchange="convert()"></select></div>
+            </div>
+            <div id="output" style="margin-top: var(--spacing-lg);">
+                <h3>Converted Time</h3>
+                <div id="result" class="card" style="font-size: 1.2em; text-align: center; padding: var(--spacing-xl);">
+                </div>
+            </div>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        const zones = ['UTC', 'America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles', 'Europe/London', 'Europe/Paris', 'Europe/Berlin', 'Asia/Dubai', 'Asia/Kolkata', 'Asia/Shanghai', 'Asia/Tokyo', 'Asia/Singapore', 'Australia/Sydney', 'Pacific/Auckland'];
+        const zoneSelect = zones.map(z => `<option value="${z}">${z.replace('_', ' ')}</option>`).join('');
+        document.getElementById('fromZone').innerHTML = zoneSelect;
+        document.getElementById('toZone').innerHTML = zoneSelect;
+        document.getElementById('fromZone').value = 'UTC';
+        document.getElementById('toZone').value = 'America/New_York';
+        const now = new Date();
+        const offset = now.getTimezoneOffset() * 60000;
+        const localTime = new Date(now - offset);
+        document.getElementById('sourceTime').value = localTime.toISOString().slice(0, 16);
+        function convert() {
+            const timeStr = document.getElementById('sourceTime').value;
+            if (!timeStr) { showNotification('Please select a time', 'error'); return; }
+            const fromZone = document.getElementById('fromZone').value;
+            const toZone = document.getElementById('toZone').value;
+            const date = new Date(timeStr + ':00Z');
+            const fromOffset = getOffset(fromZone, date);
+            const toOffset = getOffset(toZone, date);
+            const convertedTime = new Date(date.getTime() - fromOffset + toOffset);
+            const formatted = convertedTime.toLocaleString('en-US', { timeZone: toZone, year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+            document.getElementById('result').innerHTML = `<strong>${formatted}</strong><br><small>${toZone.replace('_', ' ')}</small>`;
+        }
+        function getOffset(zone, date) {
+            const utc = date.toLocaleString('en-US', { timeZone: 'UTC' });
+            const local = date.toLocaleString('en-US', { timeZone: zone });
+            return new Date(local).getTime() - new Date(utc).getTime();
+        }
+        convert();
+    </script>
+</body>
+
+</html>

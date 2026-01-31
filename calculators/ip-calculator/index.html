@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate IP addresses, subnet masks, network ranges, and broadcast addresses.">
+    <meta name="keywords" content="IP calculator, subnet calculator, network calculator, CIDR">
+    <meta property="og:title" content="IP Calculator - SmartNet Tools">
+    <meta property="og:description"
+        content="Calculate IP addresses, subnet masks, network ranges, and broadcast addresses.">
+    <meta property="og:url" content="https://smartnettools.site/calculators/ip-calculator/">
+    <title>IP Calculator - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>IP Calculator</h1>
+            <p>Calculate IP addresses, subnet masks, network ranges, and broadcast addresses.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="grid grid-2">
+                <div class="form-group"><label for="ipAddress">IP Address:</label><input type="text" id="ipAddress"
+                        placeholder="192.168.1.10" value="192.168.1.10"></div>
+                <div class="form-group"><label for="subnetMask">Subnet Mask or CIDR:</label><input type="text"
+                        id="subnetMask" placeholder="255.255.255.0 or /24" value="255.255.255.0"></div>
+            </div>
+            <button onclick="calculateIP()" class="btn btn-primary">Calculate</button>
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);">
+                <h3>IP Information</h3>
+                <div id="results"></div>
+            </div>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function calculateIP() {
+            const ipStr = document.getElementById('ipAddress').value.trim();
+            let maskStr = document.getElementById('subnetMask').value.trim();
+            const ipParts = ipStr.split('.').map(Number);
+            if (ipParts.length !== 4 || ipParts.some(p => p < 0 || p > 255)) { showNotification('Invalid IP address', 'error'); return; }
+            let maskBits;
+            if (maskStr.startsWith('/')) maskBits = parseInt(maskStr.slice(1));
+            else if (maskStr.includes('.')) {
+                const maskParts = maskStr.split('.').map(Number);
+                if (maskParts.length !== 4 || maskParts.some(p => p < 0 || p > 255)) { showNotification('Invalid subnet mask', 'error'); return; }
+                const maskInt = (maskParts[0] << 24) + (maskParts[1] << 16) + (maskParts[2] << 8) + maskParts[3];
+                maskBits = maskInt.toString(2).split('1').length - 1;
+            } else { showNotification('Invalid subnet mask format', 'error'); return; }
+            if (maskBits < 0 || maskBits > 32) { showNotification('Invalid CIDR (0-32)', 'error'); return; }
+            const ipInt = (ipParts[0] << 24) + (ipParts[1] << 16) + (ipParts[2] << 8) + ipParts[3];
+            const maskInt = ((1 << maskBits) - 1) << (32 - maskBits);
+            const networkInt = ipInt & maskInt;
+            const broadcastInt = networkInt | ~maskInt;
+            const toIP = int => [(int >>> 24) & 255, (int >>> 16) & 255, (int >>> 8) & 255, int & 255].join('.');
+            const subnetMask = toIP(maskInt);
+            const network = toIP(networkInt);
+            const broadcast = toIP(broadcastInt);
+            const firstHost = toIP(networkInt + 1);
+            const lastHost = toIP(broadcastInt - 1);
+            const totalHosts = Math.pow(2, 32 - maskBits);
+            const usableHosts = Math.max(0, totalHosts - 2);
+            const ipClass = ipParts[0] < 128 ? 'A' : ipParts[0] < 192 ? 'B' : ipParts[0] < 224 ? 'C' : ipParts[0] < 240 ? 'D' : 'E';
+            const isPrivate = (ipParts[0] === 10) || (ipParts[0] === 172 && ipParts[1] >= 16 && ipParts[1] <= 31) || (ipParts[0] === 192 && ipParts[1] === 168);
+            document.getElementById('results').innerHTML = `<div class="card"><strong>IP Address:</strong> ${ipStr}<br><strong>Subnet Mask:</strong> ${subnetMask}<br><strong>CIDR Notation:</strong> /${maskBits}<br><strong>Network Address:</strong> ${network}<br><strong>Broadcast Address:</strong> ${broadcast}<br><strong>First Host:</strong> ${firstHost}<br><strong>Last Host:</strong> ${lastHost}<br><strong>Total Hosts:</strong> ${totalHosts.toLocaleString()}<br><strong>Usable Hosts:</strong> ${usableHosts.toLocaleString()}<br><strong>IP Class:</strong> ${ipClass}<br><strong>Type:</strong> ${isPrivate ? 'Private' : 'Public'}</div>`;
+            document.getElementById('output').style.display = 'block';
+            showNotification('Calculation complete!', 'success');
+        }
+        calculateIP();
+    </script>
+</body>
+
+</html>

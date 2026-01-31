@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate bandwidth requirements and data transfer estimates.">
+    <meta name="keywords" content="bandwidth calculator, data transfer, network speed">
+    <meta property="og:title" content="Bandwidth Calculator - SmartNet Tools">
+    <meta property="og:description" content="Calculate bandwidth requirements and data transfer estimates.">
+    <meta property="og:url" content="https://smartnettools.site/calculators/bandwidth-calculator/">
+    <title>Bandwidth Calculator - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Bandwidth Calculator</h1>
+            <p>Calculate bandwidth requirements and data transfer estimates.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="grid grid-2">
+                <div class="form-group"><label for="fileSize">File Size:</label><input type="number" id="fileSize"
+                        value="100" min="0" step="0.01" oninput="calculate()"></div>
+                <div class="form-group"><label for="sizeUnit">Unit:</label><select id="sizeUnit" onchange="calculate()">
+                        <option value="MB">MB</option>
+                        <option value="GB" selected>GB</option>
+                        <option value="TB">TB</option>
+                    </select></div>
+            </div>
+            <div class="grid grid-2">
+                <div class="form-group"><label for="bandwidth">Bandwidth:</label><input type="number" id="bandwidth"
+                        value="100" min="0" step="0.01" oninput="calculate()"></div>
+                <div class="form-group"><label for="bandwidthUnit">Unit:</label><select id="bandwidthUnit"
+                        onchange="calculate()">
+                        <option value="Mbps" selected>Mbps</option>
+                        <option value="Gbps">Gbps</option>
+                    </select></div>
+            </div>
+            <div id="output" style="margin-top: var(--spacing-lg);">
+                <h3>Transfer Time</h3>
+                <div id="results" class="card"></div>
+            </div>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function calculate() {
+            const fileSize = parseFloat(document.getElementById('fileSize').value) || 0;
+            const sizeUnit = document.getElementById('sizeUnit').value;
+            const bandwidth = parseFloat(document.getElementById('bandwidth').value) || 1;
+            const bandwidthUnit = document.getElementById('bandwidthUnit').value;
+            let fileSizeMB = fileSize;
+            if (sizeUnit === 'GB') fileSizeMB = fileSize * 1024;
+            else if (sizeUnit === 'TB') fileSizeMB = fileSize * 1024 * 1024;
+            let bandwidthMbps = bandwidth;
+            if (bandwidthUnit === 'Gbps') bandwidthMbps = bandwidth * 1000;
+            const fileSizeMb = fileSizeMB * 8;
+            const timeSeconds = fileSizeMb / bandwidthMbps;
+            const hours = Math.floor(timeSeconds / 3600);
+            const minutes = Math.floor((timeSeconds % 3600) / 60);
+            const seconds = Math.floor(timeSeconds % 60);
+            let timeStr = '';
+            if (hours > 0) timeStr += `${hours}h `;
+            if (minutes > 0) timeStr += `${minutes}m `;
+            timeStr += `${seconds}s`;
+            const efficiency = 0.8;
+            const realTimeSeconds = timeSeconds / efficiency;
+            const realHours = Math.floor(realTimeSeconds / 3600);
+            const realMinutes = Math.floor((realTimeSeconds % 3600) / 60);
+            const realSeconds = Math.floor(realTimeSeconds % 60);
+            let realTimeStr = '';
+            if (realHours > 0) realTimeStr += `${realHours}h `;
+            if (realMinutes > 0) realTimeStr += `${realMinutes}m `;
+            realTimeStr += `${realSeconds}s`;
+            document.getElementById('results').innerHTML = `<strong>File Size:</strong> ${fileSize} ${sizeUnit}<br><strong>Bandwidth:</strong> ${bandwidth} ${bandwidthUnit}<br><br><strong>Theoretical Time:</strong> ${timeStr}<br><strong>Real-World Time (80% efficiency):</strong> ${realTimeStr}<br><br><small>Note: Real-world speeds may vary due to network overhead, latency, and other factors.</small>`;
+        }
+        calculate();
+    </script>
+</body>
+
+</html>

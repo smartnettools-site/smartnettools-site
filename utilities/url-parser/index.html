@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Parse and analyze URLs, extract parameters, and decode encoded values.">
+    <meta name="keywords" content="URL parser, URL decoder, query string parser">
+    <meta property="og:title" content="URL Parser - SmartNet Tools">
+    <meta property="og:description" content="Parse and analyze URLs, extract parameters, and decode encoded values.">
+    <meta property="og:url" content="https://smartnettools.site/utilities/url-parser/">
+    <title>URL Parser - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>URL Parser</h1>
+            <p>Parse and analyze URLs, extract parameters, and decode encoded values.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="form-group"><label for="urlInput">Enter URL:</label><input type="text" id="urlInput"
+                    placeholder="https://example.com/path?param1=value1&param2=value2"
+                    value="https://example.com/search?q=hello+world&page=1&filter=new"></div>
+            <button onclick="parseURL()" class="btn btn-primary">Parse URL</button>
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);">
+                <h3>URL Components</h3>
+                <div id="results"></div>
+            </div>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function parseURL() {
+            const urlStr = document.getElementById('urlInput').value.trim();
+            if (!urlStr) { showNotification('Please enter a URL', 'error'); return; }
+            try {
+                const url = new URL(urlStr);
+                const params = new URLSearchParams(url.search);
+                let paramsHTML = '';
+                if (params.toString()) {
+                    paramsHTML = '<h4>Query Parameters:</h4><div class="card">';
+                    params.forEach((value, key) => {
+                        paramsHTML += `<strong>${key}:</strong> ${decodeURIComponent(value)}<br>`;
+                    });
+                    paramsHTML += '</div>';
+                } else {
+                    paramsHTML = '<div class="card"><em>No query parameters</em></div>';
+                }
+                const hashValue = url.hash ? url.hash.substring(1) : '<em>None</em>';
+                document.getElementById('results').innerHTML = `
+          <div class="card"><strong>Protocol:</strong> ${url.protocol}</div>
+          <div class="card"><strong>Host:</strong> ${url.host}</div>
+          <div class="card"><strong>Hostname:</strong> ${url.hostname}</div>
+          <div class="card"><strong>Port:</strong> ${url.port || '<em>Default</em>'}</div>
+          <div class="card"><strong>Path:</strong> ${url.pathname}</div>
+          ${paramsHTML}
+          <div class="card"><strong>Hash:</strong> ${hashValue}</div>
+        `;
+                document.getElementById('output').style.display = 'block';
+                showNotification('URL parsed successfully!', 'success');
+            } catch (e) {
+                showNotification('Invalid URL format', 'error');
+            }
+        }
+        parseURL();
+    </script>
+</body>
+
+</html>
