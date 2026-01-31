@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Analyze text readability using Flesch Reading Ease and other metrics.">
+    <meta name="keywords" content="readability analyzer, Flesch score, text analysis">
+    <meta property="og:title" content="Readability Analyzer - SmartNet Tools">
+    <meta property="og:description" content="Analyze text readability using Flesch Reading Ease and other metrics.">
+    <meta property="og:url" content="https://smartnettools.site/accessibility/readability-analyzer/">
+    <title>Readability Analyzer - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Readability Analyzer</h1>
+            <p>Analyze text readability using Flesch Reading Ease and other metrics.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="form-group"><label for="textInput">Paste your text:</label><textarea id="textInput"
+                    placeholder="Enter your text here..." style="min-height: 200px;"></textarea></div>
+            <button onclick="analyzeReadability()" class="btn btn-primary">Analyze Readability</button>
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);">
+                <h3>Readability Metrics</h3>
+                <div id="results"></div>
+            </div>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function analyzeReadability() {
+            const text = document.getElementById('textInput').value;
+            if (!text.trim()) { showNotification('Please enter text', 'error'); return; }
+            const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+            const words = text.match(/\b\w+\b/g) || [];
+            const syllables = words.reduce((sum, word) => sum + countSyllables(word), 0);
+            const avgWordsPerSentence = words.length / sentences.length;
+            const avgSyllablesPerWord = syllables / words.length;
+            const flesch = 206.835 - 1.015 * avgWordsPerSentence - 84.6 * avgSyllablesPerWord;
+            const level = flesch >= 90 ? 'Very Easy' : flesch >= 80 ? 'Easy' : flesch >= 70 ? 'Fairly Easy' : flesch >= 60 ? 'Standard' : flesch >= 50 ? 'Fairly Difficult' : flesch >= 30 ? 'Difficult' : 'Very Difficult';
+            document.getElementById('results').innerHTML = `<div class="card"><strong>Words:</strong> ${words.length}<br><strong>Sentences:</strong> ${sentences.length}<br><strong>Avg Words/Sentence:</strong> ${avgWordsPerSentence.toFixed(1)}<br><strong>Flesch Reading Ease:</strong> ${flesch.toFixed(1)}<br><strong>Level:</strong> ${level}</div>`;
+            document.getElementById('output').style.display = 'block';
+            showNotification('Analysis complete!', 'success');
+        }
+        function countSyllables(word) { word = word.toLowerCase(); if (word.length <= 3) return 1; word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, ''); word = word.replace(/^y/, ''); const matches = word.match(/[aeiouy]{1,2}/g); return matches ? matches.length : 1; }
+    </script>
+</body>
+
+</html>

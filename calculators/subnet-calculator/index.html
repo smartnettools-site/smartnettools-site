@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Calculate subnet masks, network addresses, and IP ranges.">
   <meta name="keywords" content="subnet calculator, CIDR calculator, IP subnet, network calculator">
-  
+
   <meta property="og:title" content="Subnet Calculator - SmartNet Tools">
   <meta property="og:description" content="Calculate subnet masks, network addresses, and IP ranges.">
   <meta property="og:url" content="https://smartnettools.site/calculators/subnet-calculator/">
-  
+
   <title>Subnet Calculator - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,44 +46,46 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>Subnet Calculator</h1>
       <p>Calculate subnet masks, network addresses, and IP ranges.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/calculators/" class="btn btn-primary">← Back to Calculators Tools</a>
-      </p>
+      <div class="form-group"><label for="ipInput">IP Address / CIDR:</label><input type="text" id="ipInput"
+          placeholder="192.168.1.0/24"></div>
+      <button onclick="calculateSubnet()" class="btn btn-primary">Calculate Subnet</button>
+      <div id="output" style="display:none; margin-top: var(--spacing-lg);">
+        <h3>Subnet Information</h3>
+        <div id="subnetInfo" class="card"></div>
+      </div>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
+
     <section class="mt-lg">
       <h2>About This Tool</h2>
       <div class="card">
         <p>Calculate subnet masks, network addresses, and IP ranges.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
+        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our
+          servers.</p>
       </div>
     </section>
-    
+
     <section class="mt-lg">
       <h2>Related Tools</h2>
       <div class="grid grid-4">
@@ -104,14 +108,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +131,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +140,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +151,39 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
   <script src="/assets/js/main.js"></script>
+  <script>
+    function calculateSubnet() {
+      const input = document.getElementById('ipInput').value.trim(); const [ip, cidr] = input.split('/'); if (!ip || !cidr) { showNotification('Please enter IP/CIDR (e.g., 192.168.1.0/24)', 'error'); return; }
+      const mask = parseInt(cidr); if (mask < 0 || mask > 32) { showNotification('Invalid CIDR (0-32)', 'error'); return; }
+      const ipParts = ip.split('.').map(Number); if (ipParts.length !== 4 || ipParts.some(p => p < 0 || p > 255)) { showNotification('Invalid IP address', 'error'); return; }
+      const ipInt = (ipParts[0] << 24) + (ipParts[1] << 16) + (ipParts[2] << 8) + ipParts[3];
+      const maskInt = ((1 << mask) - 1) << (32 - mask);
+      const networkInt = ipInt & maskInt; const broadcastInt = networkInt | ~maskInt;
+      const totalHosts = (1 << (32 - mask)) - 2; const usableHosts = Math.max(0, totalHosts);
+      const toIP = int => [(int >>> 24) & 255, (int >>> 16) & 255, (int >>> 8) & 255, int & 255].join('.');
+      const subnetMask = toIP(maskInt);
+      const network = toIP(networkInt);
+      const broadcast = toIP(broadcastInt);
+      const firstHost = toIP(networkInt + 1);
+      const lastHost = toIP(broadcastInt - 1);
+      document.getElementById('subnetInfo').innerHTML = `<strong>IP Address:</strong> ${ip}<br><strong>CIDR:</strong> /${mask}<br><strong>Subnet Mask:</strong> ${subnetMask}<br><strong>Network Address:</strong> ${network}<br><strong>Broadcast Address:</strong> ${broadcast}<br><strong>First Host:</strong> ${firstHost}<br><strong>Last Host:</strong> ${lastHost}<br><strong>Total Hosts:</strong> ${Math.pow(2, 32 - mask)}<br><strong>Usable Hosts:</strong> ${usableHosts}`;
+      document.getElementById('output').style.display = 'block'; showNotification('Subnet calculated!', 'success');
+    }
+  </script>
 </body>
+
 </html>

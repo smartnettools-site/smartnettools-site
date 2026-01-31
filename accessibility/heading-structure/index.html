@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Analyze and visualize HTML heading structure for better accessibility and SEO.">
+    <meta name="keywords" content="heading structure, h1 h2 h3, accessibility, SEO">
+    <meta property="og:title" content="Heading Structure Analyzer - SmartNet Tools">
+    <meta property="og:description"
+        content="Analyze and visualize HTML heading structure for better accessibility and SEO.">
+    <meta property="og:url" content="https://smartnettools.site/accessibility/heading-structure/">
+    <title>Heading Structure Analyzer - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Heading Structure Analyzer</h1>
+            <p>Analyze and visualize HTML heading structure for better accessibility and SEO.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="form-group"><label for="htmlInput">Paste your HTML:</label><textarea id="htmlInput"
+                    placeholder="<html><h1>Title</h1><h2>Subtitle</h2>...</html>" style="min-height: 200px;"></textarea>
+            </div>
+            <button onclick="analyzeHeadings()" class="btn btn-primary">Analyze Headings</button>
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);">
+                <h3>Heading Structure</h3>
+                <div id="results"></div>
+            </div>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function analyzeHeadings() {
+            const html = document.getElementById('htmlInput').value;
+            if (!html.trim()) { showNotification('Please enter HTML', 'error'); return; }
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            if (headings.length === 0) { showNotification('No headings found', 'error'); return; }
+            let structure = '<div class="card">';
+            let lastLevel = 0;
+            headings.forEach((h, i) => {
+                const level = parseInt(h.tagName[1]);
+                const indent = (level - 1) * 20;
+                const text = h.textContent.substring(0, 50);
+                const color = level === 1 ? '#ff6b6b' : level === 2 ? '#ffa94d' : level === 3 ? '#ffd43b' : level === 4 ? '#74c0fc' : level === 5 ? '#b197fc' : '#da77f2';
+                structure += `<div style="margin-left: ${indent}px; padding: 8px; border-left: 3px solid ${color}; margin-bottom: 8px;"><strong>${h.tagName}</strong>: ${text}</div>`;
+                if (level - lastLevel > 1) structure += `<div style="margin-left: ${indent}px; color: #ff6b6b; font-size: 0.9em;">⚠️ Skipped heading level</div>`;
+                lastLevel = level;
+            });
+            structure += '</div>';
+            document.getElementById('results').innerHTML = structure;
+            document.getElementById('output').style.display = 'block';
+            showNotification('Analysis complete!', 'success');
+        }
+    </script>
+</body>
+
+</html>

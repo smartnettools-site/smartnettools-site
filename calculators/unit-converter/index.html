@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Convert between different units: length, weight, temperature, and more.">
   <meta name="keywords" content="unit converter, convert units, measurement converter">
-  
+
   <meta property="og:title" content="Unit Converter - SmartNet Tools">
   <meta property="og:description" content="Convert between different units: length, weight, temperature, and more.">
   <meta property="og:url" content="https://smartnettools.site/calculators/unit-converter/">
-  
+
   <title>Unit Converter - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,44 +46,55 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>Unit Converter</h1>
       <p>Convert between different units: length, weight, temperature, and more.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/calculators/" class="btn btn-primary">← Back to Calculators Tools</a>
-      </p>
+      <div class="form-group"><label for="category">Category:</label><select id="category" onchange="updateUnits()">
+          <option value="length">Length</option>
+          <option value="weight">Weight</option>
+          <option value="temperature">Temperature</option>
+        </select></div>
+      <div class="grid grid-2">
+        <div class="form-group"><label for="fromValue">From:</label><input type="number" id="fromValue" step="any"
+            oninput="convert()" placeholder="1"></div>
+        <div class="form-group"><label for="fromUnit">Unit:</label><select id="fromUnit" onchange="convert()"></select>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <div class="form-group"><label for="toValue">To:</label><input type="number" id="toValue" readonly></div>
+        <div class="form-group"><label for="toUnit">Unit:</label><select id="toUnit" onchange="convert()"></select>
+        </div>
+      </div>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
+
     <section class="mt-lg">
       <h2>About This Tool</h2>
       <div class="card">
         <p>Convert between different units: length, weight, temperature, and more.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
+        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our
+          servers.</p>
       </div>
     </section>
-    
+
     <section class="mt-lg">
       <h2>Related Tools</h2>
       <div class="grid grid-4">
@@ -104,14 +117,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +140,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +149,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +160,38 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
   <script src="/assets/js/main.js"></script>
+  <script>
+    const units = { length: { m: 1, km: 0.001, cm: 100, mm: 1000, mi: 0.000621371, yd: 1.09361, ft: 3.28084, in: 39.3701 }, weight: { kg: 1, g: 1000, mg: 1000000, lb: 2.20462, oz: 35.274 }, temperature: { c: null, f: null, k: null } };
+    function updateUnits() {
+      const cat = document.getElementById('category').value, opts = Object.keys(units[cat]).map(u => `<option value="${u}">${u.toUpperCase()}</option>`).join('');
+      document.getElementById('from Unit').innerHTML = opts; document.getElementById('toUnit').innerHTML = opts;
+      document.getElementById('toUnit').selectedIndex = 1; convert();
+    }
+    function convert() {
+      const from = parseFloat(document.getElementById('fromValue').value) || 0, cat = document.getElementById('category').value, fromU = document.getElementById('fromUnit').value, toU = document.getElementById('toUnit').value;
+      let result;
+      if (cat === 'temperature') {
+        let c = from; if (fromU === 'f') c = (from - 32) * 5 / 9; else if (fromU === 'k') c = from - 273.15;
+        if (toU === 'c') result = c; else if (toU === 'f') result = c * 9 / 5 + 32; else result = c + 273.15;
+      } else { result = from / units[cat][fromU] * units[cat][toU]; }
+      document.getElementById('toValue').value = result.toFixed(6).replace(/\.?0+$/, '');
+    }
+    updateUnits();
+  </script>
 </body>
+
 </html>

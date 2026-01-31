@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Convert between color formats: HEX, RGB, HSL, and HSV.">
   <meta name="keywords" content="color converter, hex to RGB, RGB to hex, color code">
-  
+
   <meta property="og:title" content="Color Converter - SmartNet Tools">
   <meta property="og:description" content="Convert between color formats: HEX, RGB, HSL, and HSV.">
   <meta property="og:url" content="https://smartnettools.site/calculators/color-converter/">
-  
+
   <title>Color Converter - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,44 +46,60 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>Color Converter</h1>
       <p>Convert between color formats: HEX, RGB, HSL, and HSV.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/calculators/" class="btn btn-primary">← Back to Calculators Tools</a>
-      </p>
+      <div class="form-group"><label for="hexInput">HEX Color:</label><input type="text" id="hexInput"
+          placeholder="#FF5733" oninput="convertFrom('hex')"></div>
+      <div class="grid grid-3">
+        <div class="form-group"><label for="rInput">R:</label><input type="number" id="rInput" min="0" max="255"
+            placeholder="255" oninput="convertFrom('rgb')"></div>
+        <div class="form-group"><label for="gInput">G:</label><input type="number" id="gInput" min="0" max="255"
+            placeholder="87" oninput="convertFrom('rgb')"></div>
+        <div class="form-group"><label for="bInput">B:</label><input type="number" id="bInput" min="0" max="255"
+            placeholder="51" oninput="convertFrom('rgb')"></div>
+      </div>
+      <div class="grid grid-3">
+        <div class="form-group"><label for="hInput">H:</label><input type="number" id="hInput" min="0" max="360"
+            placeholder="14" oninput="convertFrom('hsl')"></div>
+        <div class="form-group"><label for="sInput">S (%):</label><input type="number" id="sInput" min="0" max="100"
+            placeholder="100" oninput="convertFrom('hsl')"></div>
+        <div class="form-group"><label for="lInput">L (%):</label><input type="number" id="lInput" min="0" max="100"
+            placeholder="60" oninput="convertFrom('hsl')"></div>
+      </div>
+      <div id="colorPreview"
+        style="width: 100%; height: 100px; border-radius: var(--radius-md); border: 2px solid var(--border-color); margin-top: var(--spacing-md); background: #FF5733;">
+      </div>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
+
     <section class="mt-lg">
       <h2>About This Tool</h2>
       <div class="card">
         <p>Convert between color formats: HEX, RGB, HSL, and HSV.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
+        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our
+          servers.</p>
       </div>
     </section>
-    
+
     <section class="mt-lg">
       <h2>Related Tools</h2>
       <div class="grid grid-4">
@@ -104,14 +122,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +145,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +154,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +165,33 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
   <script src="/assets/js/main.js"></script>
+  <script>
+    function hexToRgb(hex) { const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16); return { r, g, b }; }
+    function rgbToHex(r, g, b) { return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('').toUpperCase(); }
+    function rgbToHsl(r, g, b) { r /= 255; g /= 255; b /= 255; const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2; if (max === min) return { h: 0, s: 0, l: Math.round(l * 100) }; const d = max - min, s = l > .5 ? d / (2 - max - min) : d / (max + min); let h; if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) / 6; else if (max === g) h = ((b - r) / d + 2) / 6; else h = ((r - g) / d + 4) / 6; return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) }; }
+    function hslToRgb(h, s, l) { s /= 100; l /= 100; const c = (1 - Math.abs(2 * l - 1)) * s, x = c * (1 - Math.abs((h / 60) % 2 - 1)), m = l - c / 2; let r, g, b; if (h < 60) [r, g, b] = [c, x, 0]; else if (h < 120) [r, g, b] = [x, c, 0]; else if (h < 180) [r, g, b] = [0, c, x]; else if (h < 240) [r, g, b] = [0, x, c]; else if (h < 300) [r, g, b] = [x, 0, c]; else[r, g, b] = [c, 0, x]; return { r: Math.round((r + m) * 255), g: Math.round((g + m) * 255), b: Math.round((b + m) * 255) }; }
+    function convertFrom(type) {
+      try {
+        if (type === 'hex') { const hex = document.getElementById('hexInput').value; if (!/^#[0-9A-F]{6}$/i.test(hex)) return; const rgb = hexToRgb(hex); document.getElementById('rInput').value = rgb.r; document.getElementById('gInput').value = rgb.g; document.getElementById('bInput').value = rgb.b; const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b); document.getElementById('hInput').value = hsl.h; document.getElementById('sInput').value = hsl.s; document.getElementById('lInput').value = hsl.l; document.getElementById('colorPreview').style.background = hex; }
+        else if (type === 'rgb') { const r = parseInt(document.getElementById('rInput').value) || 0, g = parseInt(document.getElementById('gInput').value) || 0, b = parseInt(document.getElementById('bInput').value) || 0; const hex = rgbToHex(r, g, b); document.getElementById('hexInput').value = hex; const hsl = rgbToHsl(r, g, b); document.getElementById('hInput').value = hsl.h; document.getElementById('sInput').value = hsl.s; document.getElementById('lInput').value = hsl.l; document.getElementById('colorPreview').style.background = hex; }
+        else if (type === 'hsl') { const h = parseInt(document.getElementById('hInput').value) || 0, s = parseInt(document.getElementById('sInput').value) || 0, l = parseInt(document.getElementById('lInput').value) || 0; const rgb = hslToRgb(h, s, l); document.getElementById('rInput').value = rgb.r; document.getElementById('gInput').value = rgb.g; document.getElementById('bInput').value = rgb.b; const hex = rgbToHex(rgb.r, rgb.g, rgb.b); document.getElementById('hexInput').value = hex; document.getElementById('colorPreview').style.background = hex; }
+      } catch (e) { }
+    }
+  </script>
 </body>
+
 </html>

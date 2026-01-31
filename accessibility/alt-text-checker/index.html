@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Check image alt text quality and accessibility compliance.">
   <meta name="keywords" content="alt text checker, image accessibility, alt attribute">
-  
+
   <meta property="og:title" content="Alt Text Checker - SmartNet Tools">
   <meta property="og:description" content="Check image alt text quality and accessibility compliance.">
   <meta property="og:url" content="https://smartnettools.site/accessibility/alt-text-checker/">
-  
+
   <title>Alt Text Checker - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,44 +46,46 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>Alt Text Checker</h1>
       <p>Check image alt text quality and accessibility compliance.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/accessibility/" class="btn btn-primary">← Back to Accessibility Tools</a>
-      </p>
+      <div class="form-group"><label for="htmlInput">Paste your HTML containing images:</label><textarea id="htmlInput"
+          placeholder='<img src="photo.jpg" alt="A sunset over mountains">' style="min-height: 250px;"></textarea></div>
+      <button onclick="checkAlt()" class="btn btn-primary">Check Alt Text</button>
+      <div id="output" style="display:none; margin-top: var(--spacing-lg);">
+        <h3>Alt Text Analysis</h3>
+        <div id="results"></div>
+      </div>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
+
     <section class="mt-lg">
       <h2>About This Tool</h2>
       <div class="card">
         <p>Check image alt text quality and accessibility compliance.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
+        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our
+          servers.</p>
       </div>
     </section>
-    
+
     <section class="mt-lg">
       <h2>Related Tools</h2>
       <div class="grid grid-4">
@@ -104,14 +108,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +131,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +140,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +151,31 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
   <script src="/assets/js/main.js"></script>
+  <script>
+    function checkAlt() {
+      const html = document.getElementById('htmlInput').value; if (!html.trim()) { showNotification('Please enter HTML', 'error'); return; }
+      const parser = new DOMParser(); const doc = parser.parseFromString(html, 'text/html'); const imgs = doc.querySelectorAll('img');
+      let missing = 0, empty = 0, good = 0, tooShort = 0, tooLong = 0; const details = [];
+      imgs.forEach((img, i) => { const alt = img.getAttribute('alt'); const src = img.src || 'image-' + (i + 1); if (alt === null) { missing++; details.push(`❌ Missing: <code>${src}</code>`); } else if (alt === '') { empty++; details.push(`⚠️ Empty: <code>${src}</code>`); } else if (alt.length < 5) { tooShort++; details.push(`⚠️ Too short (${alt.length} chars): <code>${src}</code> - "${alt}"`); } else if (alt.length > 125) { tooLong++; details.push(`⚠️ Too long (${alt.length} chars): <code>${src}</code>`); } else { good++; details.push(`✓ Good: <code>${src}</code> - "${alt}"`); } });
+      const total = imgs.length; let resultsHTML = `<div class="card"><strong>Summary:</strong><br>• Total Images: ${total}<br>• Good Alt Text: ${good}<br>• Missing Alt: ${missing}<br>• Empty Alt: ${empty}<br>• Too Short: ${tooShort}<br>• Too Long: ${tooLong}</div>`;
+      if (details.length) resultsHTML += `<div class="card" style="margin-top:var(--spacing-md);"><strong>Details:</strong><br>${details.slice(0, 20).join('<br>')}</div>`;
+      document.getElementById('results').innerHTML = resultsHTML; document.getElementById('output').style.display = 'block'; showNotification('Alt text check complete', 'success');
+    }
+  </script>
 </body>
+
 </html>
