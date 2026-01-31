@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free WCAG color contrast checker. Check if your color combinations meet accessibility standards (AA and AAA).">
+  <meta name="keywords" content="color contrast checker, WCAG, accessibility, contrast ratio, color accessibility">
+  
+  <title>Color Contrast Checker - SmartNet Tools</title>
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <header class="site-header">
+    <div class="header-container">
+      <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
+        <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
+        <span>SmartNet Tools</span>
+      </a>
+      
+      <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
+      
+      <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/web/">Web</a></li>
+          <li><a href="/seo/">SEO</a></li>
+          <li><a href="/accessibility/">Accessibility</a></li>
+          <li><a href="/ai/">AI</a></li>
+          <li><a href="/vibe-code/">Vibe Code</a></li>
+          <li><a href="/utilities/">Utilities</a></li>
+          <li><a href="/calculators/">Calculators</a></li>
+          <li><a href="/certificates/">Certificates</a></li>
+          <li><a href="/get-advice/">Get Advice</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <div class="ad-container ad-header">
+    <!-- Google AdSense: paste script here -->
+    <!-- Adsterra: paste script here -->
+    <!-- Montag Ads: paste script here -->
+    <span>Advertisement</span>
+  </div>
+  
+  <main id="main-content">
+    <div class="page-header">
+      <h1>♿ Color Contrast Checker</h1>
+      <p>Check if your color combinations meet WCAG accessibility standards. Ensure your text is readable for everyone.</p>
+    </div>
+    
+    <div class="tool-interface">
+      <div class="grid grid-2" style="gap: var(--spacing-md);">
+        <div class="form-group">
+          <label for="fgColor">Foreground Color (Text)</label>
+          <div style="display: flex; gap: var(--spacing-sm);">
+            <input type="color" id="fgColor" value="#ffffff" style="width: 60px; height: 40px;">
+            <input type="text" id="fgColorHex" value="#ffffff" style="flex: 1;" pattern="^#[0-9A-Fa-f]{6}$">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="bgColor">Background Color</label>
+          <div style="display: flex; gap: var(--spacing-sm);">
+            <input type="color" id="bgColor" value="#000000" style="width: 60px; height: 40px;">
+            <input type="text" id="bgColorHex" value="#000000" style="flex: 1;" pattern="^#[0-9A-Fa-f]{6}$">
+          </div>
+        </div>
+      </div>
+      
+      <div style="display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-md); flex-wrap: wrap;">
+        <button onclick="checkContrast()" class="btn btn-primary">Check Contrast</button>
+        <button onclick="swapColors()" class="btn btn-secondary">Swap Colors</button>
+      </div>
+      
+      <div id="preview" style="margin-top: var(--spacing-lg); padding: var(--spacing-xl); border: 2px solid var(--border-color); border-radius: var(--radius-lg); text-align: center;">
+        <h2 style="margin-bottom: var(--spacing-sm);">Preview Text (24px)</h2>
+        <p style="font-size: 1.125rem;">Normal text preview (18px)</p>
+        <p style="font-size: 0.875rem;">Small text preview (14px)</p>
+      </div>
+      
+      <div id="results" style="display: none; margin-top: var(--spacing-lg);"></div>
+    </div>
+    
+    <div class="ad-container ad-inline">
+      <!-- Google AdSense: paste script here -->
+      <!-- Adsterra: paste script here -->
+      <!-- Montag Ads: paste script here -->
+      <span>Advertisement</span>
+    </div>
+    
+    <section class="mt-lg">
+      <h2>About WCAG Contrast Requirements</h2>
+      <div class="card">
+        <h3>What is Color Contrast?</h3>
+        <p>Color contrast ratio measures the difference in perceived brightness between foreground and background colors. Higher ratios mean better readability.</p>
+        
+        <h3 style="margin-top: var(--spacing-md);">WCAG Standards:</h3>
+        <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 2;">
+          <li><strong>Level AA (Minimum):</strong>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+              <li>4.5:1 for normal text (&lt;24px or &lt;18px bold)</li>
+              <li>3:1 for large text (≥24px or ≥18px bold)</li>
+            </ul>
+          </li>
+          <li style="margin-top: 0.5rem;"><strong>Level AAA (Enhanced):</strong>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+              <li>7:1 for normal text</li>
+              <li>4.5:1 for large text</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+    
+    <section class="mt-lg">
+      <h2>Related Tools</h2>
+      <div class="grid grid-4">
+        <a href="/accessibility/wcag-checker/" class="tool-card">
+          <h3>WCAG Checker</h3>
+          <p>Comprehensive accessibility audit</p>
+        </a>
+        <a href="/accessibility/accessible-color-picker/" class="tool-card">
+          <h3>Accessible Color Picker</h3>
+          <p>Find WCAG-compliant colors</p>
+        </a>
+        <a href="/calculators/color-converter/" class="tool-card">
+          <h3>Color Converter</h3>
+          <p>Convert between color formats</p>
+        </a>
+        <a href="/web/gradient-generator/" class="tool-card">
+          <h3>Gradient Generator</h3>
+          <p>Create CSS gradients</p>
+        </a>
+      </div>
+    </section>
+  </main>
+  
+  <div class="ad-container ad-footer">
+    <!-- Google AdSense: paste script here -->
+    <!-- Adsterra: paste script here -->
+    <!-- Montag Ads: paste script here -->
+    <span>Advertisement</span>
+  </div>
+  
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>Tool Categories</h3>
+          <ul>
+            <li><a href="/web/">Web Tools</a></li>
+            <li><a href="/seo/">SEO Tools</a></li>
+            <li><a href="/accessibility/">Accessibility</a></li>
+            <li><a href="/ai/">AI Tools</a></li>
+            <li><a href="/vibe-code/">Vibe Code</a></li>
+            <li><a href="/utilities/">Utilities</a></li>
+            <li><a href="/calculators/">Calculators</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="/certificates/">Free IT Certificates</a></li>
+            <li><a href="/get-advice/">Get Expert Advice</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="/privacy-policy/">Privacy Policy</a></li>
+            <li><a href="/cookies-policy/">Cookies Policy</a></li>
+            <li><a href="/terms/">Terms & Conditions</a></li>
+            <li><a href="/disclaimer/">Disclaimer</a></li>
+            <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>About</h3>
+          <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="/assets/js/main.js"></script>
+  <script>
+    // Sync color pickers with text inputs
+    document.getElementById('fgColor').addEventListener('input', (e) => {
+      document.getElementById('fgColorHex').value = e.target.value;
+      updatePreview();
+    });
+    
+    document.getElementById('bgColor').addEventListener('input', (e) => {
+      document.getElementById('bgColorHex').value = e.target.value;
+      updatePreview();
+    });
+    
+    document.getElementById('fgColorHex').addEventListener('input', (e) => {
+      if (/^#[0-9A-Fa-f]{6}$/.test(e.target.value)) {
+        document.getElementById('fgColor').value = e.target.value;
+        updatePreview();
+      }
+    });
+    
+    document.getElementById('bgColorHex').addEventListener('input', (e) => {
+      if (/^#[0-9A-Fa-f]{6}$/.test(e.target.value)) {
+        document.getElementById('bgColor').value = e.target.value;
+        updatePreview();
+      }
+    });
+    
+    function updatePreview() {
+      const fg = document.getElementById('fgColor').value;
+      const bg = document.getElementById('bgColor').value;
+      const preview = document.getElementById('preview');
+      
+      preview.style.color = fg;
+      preview.style.backgroundColor = bg;
+    }
+    
+    function swapColors() {
+      const fg = document.getElementById('fgColor').value;
+      const bg = document.getElementById('bgColor').value;
+      
+      document.getElementById('fgColor').value = bg;
+      document.getElementById('fgColorHex').value = bg;
+      document.getElementById('bgColor').value = fg;
+      document.getElementById('bgColorHex').value = fg;
+      
+      updatePreview();
+    }
+    
+    function getLuminance(hex) {
+      const rgb = parseInt(hex.slice(1), 16);
+      const r = (rgb >> 16) & 0xff;
+      const g = (rgb >> 8) & 0xff;
+      const b = (rgb >> 0) & 0xff;
+      
+      const rsRGB = r / 255;
+      const gsRGB = g / 255;
+      const bsRGB = b / 255;
+      
+      const rLinear = rsRGB <= 0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
+      const gLinear = gsRGB <= 0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
+      const bLinear = bsRGB <= 0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
+      
+      return 0.2126 * rLinear + 0.7152 * gLinear + 0.0722 * bLinear;
+    }
+    
+    function getContrastRatio(fg, bg) {
+      const l1 = getLuminance(fg);
+      const l2 = getLuminance(bg);
+      
+      const lighter = Math.max(l1, l2);
+      const darker = Math.min(l1, l2);
+      
+      return (lighter + 0.05) / (darker + 0.05);
+    }
+    
+    function checkContrast() {
+      const fg = document.getElementById('fgColorHex').value;
+      const bg = document.getElementById('bgColorHex').value;
+      
+      if (!/^#[0-9A-Fa-f]{6}$/.test(fg) || !/^#[0-9A-Fa-f]{6}$/.test(bg)) {
+        showNotification('Please enter valid hex colors', 'error');
+        return;
+      }
+      
+      const ratio = getContrastRatio(fg, bg);
+      const results = document.getElementById('results');
+      
+      const normalAA = ratio >= 4.5;
+      const normalAAA = ratio >= 7;
+      const largeAA = ratio >= 3;
+      const largeAAA = ratio >= 4.5;
+      
+      results.innerHTML = `
+        <div class="card">
+          <h2 style="color: var(--neon-cyan); margin-bottom: var(--spacing-md);">Contrast Ratio: ${ratio.toFixed(2)}:1</h2>
+          
+          <div class="grid grid-2" style="gap: var(--spacing-md);">
+            <div>
+              <h3>Normal Text (&lt;24px)</h3>
+              <p style="margin: var(--spacing-sm) 0;">
+                <strong>WCAG AA:</strong> 
+                <span style="color: ${normalAA ? 'var(--success-color)' : 'var(--error-color)'};">
+                  ${normalAA ? '✓ Pass' : '✗ Fail'} (4.5:1 required)
+                </span>
+              </p>
+              <p>
+                <strong>WCAG AAA:</strong> 
+                <span style="color: ${normalAAA ? 'var(--success-color)' : 'var(--error-color)'};">
+                  ${normalAAA ? '✓ Pass' : '✗ Fail'} (7:1 required)
+                </span>
+              </p>
+            </div>
+            
+            <div>
+              <h3>Large Text (≥24px)</h3>
+              <p style="margin: var(--spacing-sm) 0;">
+                <strong>WCAG AA:</strong> 
+                <span style="color: ${largeAA ? 'var(--success-color)' : 'var(--error-color)'};">
+                  ${largeAA ? '✓ Pass' : '✗ Fail'} (3:1 required)
+                </span>
+              </p>
+              <p>
+                <strong>WCAG AAA:</strong> 
+                <span style="color: ${largeAAA ? 'var(--success-color)' : 'var(--error-color)'};">
+                  ${largeAAA ? '✓ Pass' : '✗ Fail'} (4.5:1 required)
+                </span>
+              </p>
+            </div>
+          </div>
+          
+          ${!normalAA ? `
+            <div style="margin-top: var(--spacing-md); padding: var(--spacing-md); background: var(--bg-tertiary); border-radius: var(--radius-sm);">
+              <strong>⚠️ Recommendation:</strong> This color combination does not meet WCAG AA standards for normal text. 
+              Consider adjusting the colors to improve contrast and accessibility.
+            </div>
+          ` : ''}
+        </div>
+      `;
+      
+      results.style.display = 'block';
+      showNotification('Contrast ratio calculated!', 'success');
+    }
+    
+    // Initial preview
+    updatePreview();
+  </script>
+</body>
+</html>
