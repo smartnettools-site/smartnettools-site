@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Validate JSON-LD schema markup for structured data and SEO.">
+    <meta name="keywords" content="schema validator, JSON-LD validator, structured data">
+    <meta property="og:title" content="Schema Validator - SmartNet Tools">
+    <meta property="og:description" content="Validate JSON-LD schema markup for structured data and SEO.">
+    <meta property="og:url" content="https://smartnettools.site/seo/schema-validator/">
+    <title>Schema Validator - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Schema Validator</h1>
+            <p>Validate JSON-LD schema markup for structured data and SEO.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="form-group"><label for="schema">JSON-LD Schema:</label><textarea id="schema"
+                    placeholder='{"@context": "https://schema.org", "@type": "Organization", "name": "Your Company"}'
+                    style="min-height: 300px;"></textarea></div>
+            <button onclick="validate()" class="btn btn-primary">Validate Schema</button>
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);">
+                <h3>Validation Results</h3>
+                <div id="results"></div>
+            </div>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function validate() {
+            const schema = document.getElementById('schema').value.trim();
+            if (!schema) { showNotification('Please enter schema markup', 'error'); return; }
+            let errors = [], warnings = [];
+            try {
+                const json = JSON.parse(schema);
+                if (!json['@context']) warnings.push('Missing @context property');
+                if (!json['@type']) errors.push('Missing required @type property');
+                else {
+                    const validTypes = ['Organization', 'Person', 'Product', 'Article', 'WebPage', 'WebSite', 'BreadcrumbList', 'Event', 'LocalBusiness', 'Recipe'];
+                    if (!validTypes.includes(json['@type'])) warnings.push(`Uncommon @type: ${json['@type']}`);
+                }
+                if (json['@type'] === 'Organization' && !json.name) warnings.push('Organization should have a name property');
+                if (json['@type'] === 'Person' && !json.name) warnings.push('Person should have a name property');
+                if (json['@type'] === 'Product' && (!json.name || !json.offers)) warnings.push('Product should have name and offers properties');
+                let html = '';
+                if (errors.length === 0 && warnings.length === 0) {
+                    html = '<div class="card" style="background:rgba(81,207,102,0.1);border-left:4px solid #51cf66;"><strong>✓ Schema is valid!</strong><br>@type: ' + json['@type'] + '</div>';
+                } else {
+                    html = '<div class="card">';
+                    if (errors.length) html += '<div style="color:#ff6b6b;margin-bottom:var(--spacing-md);"><strong>Errors:</strong><br>' + errors.map(e => '❌ ' + e).join('<br>') + '</div>';
+                    if (warnings.length) html += '<div style="color:#ffa94d;"><strong>Warnings:</strong><br>' + warnings.map(w => '⚠️ ' + w).join('<br>') + '</div>';
+                    html += '</div>';
+                }
+                document.getElementById('results').innerHTML = html;
+                document.getElementById('output').style.display = 'block';
+                showNotification('Validation complete', errors.length ? 'error' : 'success');
+            } catch (e) {
+                document.getElementById('results').innerHTML = '<div class="card" style="background:rgba(255,107,107,0.1);border-left:4px solid #ff6b6b;"><strong>Invalid JSON:</strong><br>' + e.message + '</div>';
+                document.getElementById('output').style.display = 'block';
+                showNotification('Invalid JSON', 'error');
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate X (Twitter) Card meta tags for optimized social sharing on X platform.">
+    <meta name="keywords" content="X Card generator, Twitter Card, social media meta tags">
+    <meta property="og:title" content="X Card Generator - SmartNet Tools">
+    <meta property="og:description"
+        content="Generate X (Twitter) Card meta tags for optimized social sharing on X platform.">
+    <meta property="og:url" content="https://smartnettools.site/seo/x-card-generator/">
+    <title>X Card Generator - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>X Card Generator</h1>
+            <p>Generate X (Twitter) Card meta tags for optimized social sharing on X platform.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="grid grid-2">
+                <div class="form-group"><label for="cardType">Card Type:</label><select id="cardType">
+                        <option value="summary">Summary</option>
+                        <option value="summary_large_image">Summary Large Image</option>
+                        <option value="app">App</option>
+                        <option value="player">Player</option>
+                    </select></div>
+                <div class="form-group"><label for="site">Site @username:</label><input type="text" id="site"
+                        placeholder="@yoursite"></div>
+            </div>
+            <div class="grid grid-2">
+                <div class="form-group"><label for="title">Title:</label><input type="text" id="title"
+                        placeholder="Page Title"></div>
+                <div class="form-group"><label for="creator">Creator @username:</label><input type="text" id="creator"
+                        placeholder="@creator"></div>
+            </div>
+            <div class="form-group"><label for="description">Description:</label><textarea id="description"
+                    placeholder="Brief description (max 200 chars)" maxlength="200"
+                    style="min-height: 80px;"></textarea></div>
+            <div class="form-group"><label for="image">Image URL:</label><input type="text" id="image"
+                    placeholder="https://example.com/image.jpg"></div>
+            <button onclick="generate()" class="btn btn-primary">Generate X Card Tags</button>
+            <div class="form-group" style="margin-top: var(--spacing-lg);"><label for="output">Generated Meta
+                    Tags:</label>
+                <div class="tool-output" id="output" style="min-height: 150px;"></div>
+            </div>
+            <button onclick="copyOutput()" class="btn btn-secondary">📋 Copy Tags</button>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function generate() {
+            const cardType = document.getElementById('cardType').value;
+            const site = document.getElementById('site').value;
+            const title = document.getElementById('title').value;
+            const creator = document.getElementById('creator').value;
+            const desc = document.getElementById('description').value;
+            const image = document.getElementById('image').value;
+            if (!title) { showNotification('Title is required', 'error'); return; }
+            let html = `<meta name="twitter:card" content="${cardType}" />\n`;
+            if (site) html += `<meta name="twitter:site" content="${site}" />\n`;
+            html += `<meta name="twitter:title" content="${title}" />\n`;
+            if (desc) html += `<meta name="twitter:description" content="${desc}" />\n`;
+            if (creator) html += `<meta name="twitter:creator" content="${creator}" />\n`;
+            if (image) html += `<meta name="twitter:image" content="${image}" />`;
+            document.getElementById('output').textContent = html;
+            showNotification('X Card tags generated!', 'success');
+        }
+        function copyOutput() { copyToClipboard(document.getElementById('output').textContent, event.target); }
+    </script>
+</body>
+
+</html>

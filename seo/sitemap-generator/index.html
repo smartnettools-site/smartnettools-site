@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Generate XML sitemaps for your website to improve SEO and search engine indexing.">
+    <meta name="keywords" content="sitemap generator, XML sitemap, SEO sitemap">
+    <meta property="og:title" content="Sitemap Generator - SmartNet Tools">
+    <meta property="og:description"
+        content="Generate XML sitemaps for your website to improve SEO and search engine indexing.">
+    <meta property="og:url" content="https://smartnettools.site/seo/sitemap-generator/">
+    <title>Sitemap Generator - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Sitemap Generator</h1>
+            <p>Generate XML sitemaps for your website to improve SEO and search engine indexing.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="form-group"><label for="domain">Website Domain:</label><input type="text" id="domain"
+                    placeholder="https://example.com" value="https://example.com"></div>
+            <div class="form-group"><label for="urls">URLs (one per line):</label><textarea id="urls"
+                    placeholder="/&#10;/about&#10;/contact&#10;/blog/article-1" style="min-height: 200px;"></textarea>
+            </div>
+            <div class="grid grid-3">
+                <div class="form-group"><label for="changefreq">Change Frequency:</label><select id="changefreq">
+                        <option value="always">Always</option>
+                        <option value="hourly">Hourly</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly" selected>Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                        <option value="never">Never</option>
+                    </select></div>
+                <div class="form-group"><label for="priority">Priority:</label><input type="number" id="priority"
+                        value="0.8" min="0" max="1" step="0.1"></div>
+                <div class="form-group"><label>&nbsp;</label><button onclick="generate()" class="btn btn-primary"
+                        style="width:100%;">Generate Sitemap</button></div>
+            </div>
+            <div class="form-group" style="margin-top: var(--spacing-lg);"><label for="output">Generated
+                    Sitemap:</label>
+                <div class="tool-output" id="output" style="min-height: 250px;"></div>
+            </div>
+            <button onclick="copyOutput()" class="btn btn-secondary">📋 Copy Sitemap</button>
+            <button onclick="downloadSitemap()" class="btn btn-secondary" style="margin-left: var(--spacing-sm);">📥
+                Download sitemap.xml</button>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function generate() {
+            const domain = document.getElementById('domain').value.trim().replace(/\/$/, '');
+            const urlsText = document.getElementById('urls').value.trim();
+            if (!domain || !urlsText) { showNotification('Please enter domain and URLs', 'error'); return; }
+            const urls = urlsText.split('\n').filter(u => u.trim());
+            const changefreq = document.getElementById('changefreq').value;
+            const priority = document.getElementById('priority').value;
+            const now = new Date().toISOString().split('T')[0];
+            let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+            urls.forEach(url => {
+                const fullUrl = domain + (url.startsWith('/') ? url : '/' + url);
+                xml += `  <url>\n    <loc>${fullUrl}</loc>\n    <lastmod>${now}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>\n`;
+            });
+            xml += '</urlset>';
+            document.getElementById('output').textContent = xml;
+            showNotification(`Sitemap generated with ${urls.length} URLs!`, 'success');
+        }
+        function copyOutput() { copyToClipboard(document.getElementById('output').textContent, event.target); }
+        function downloadSitemap() {
+            const content = document.getElementById('output').textContent;
+            if (!content) { showNotification('Generate a sitemap first', 'error'); return; }
+            const blob = new Blob([content], { type: 'text/xml' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'sitemap.xml';
+            link.click();
+            showNotification('Sitemap downloaded!', 'success');
+        }
+    </script>
+</body>
+
+</html>

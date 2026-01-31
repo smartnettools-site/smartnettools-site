@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Analyze HTML heading structure (H1-H6) for SEO optimization.">
+    <meta name="keywords" content="heading analyzer, H1 checker, SEO headings">
+    <meta property="og:title" content="Heading Analyzer - SmartNet Tools">
+    <meta property="og:description" content="Analyze HTML heading structure (H1-H6) for SEO optimization.">
+    <meta property="og:url" content="https://smartnettools.site/seo/heading-analyzer/">
+    <title>Heading Analyzer - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Heading Analyzer</h1>
+            <p>Analyze HTML heading structure (H1-H6) for SEO optimization.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="form-group"><label for="html">HTML Content:</label><textarea id="html"
+                    placeholder="<h1>Main Title</h1>&#10;<h2>Section 1</h2>&#10;<h3>Subsection</h3>"
+                    style="min-height: 200px;"></textarea></div>
+            <button onclick="analyze()" class="btn btn-primary">Analyze Headings</button>
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);">
+                <h3>Analysis Results</h3>
+                <div id="results"></div>
+            </div>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function analyze() {
+            const html = document.getElementById('html').value;
+            if (!html.trim()) { showNotification('Please enter HTML', 'error'); return; }
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            if (headings.length === 0) { showNotification('No headings found', 'error'); return; }
+            const counts = { h1: 0, h2: 0, h3: 0, h4: 0, h5: 0, h6: 0 };
+            const issues = [];
+            let structure = '';
+            let lastLevel = 0;
+            headings.forEach((h, i) => {
+                const tag = h.tagName.toLowerCase();
+                const level = parseInt(h.tagName[1]);
+                const text = h.textContent.substring(0, 60);
+                counts[tag]++;
+                const indent = (level - 1) * 20;
+                const color = level === 1 ? '#ff6b6b' : level === 2 ? '#ffa94d' : level === 3 ? '#ffd43b' : level === 4 ? '#74c0fc' : level === 5 ? '#b197fc' : '#da77f2';
+                structure += `<div style="margin-left:${indent}px;padding:8px;border-left:3px solid ${color};margin-bottom:8px;"><strong>${h.tagName}</strong>: ${text}</div>`;
+                if (level - lastLevel > 1) issues.push(`Skipped heading level before ${h.tagName}`);
+                lastLevel = level;
+            });
+            if (counts.h1 === 0) issues.push('No H1 tag found');
+            if (counts.h1 > 1) issues.push(`Multiple H1 tags found (${counts.h1})`);
+            let html_result = `<div class="card"><strong>Summary:</strong><br>H1: ${counts.h1} | H2: ${counts.h2} | H3: ${counts.h3} | H4: ${counts.h4} | H5: ${counts.h5} | H6: ${counts.h6}</div>`;
+            if (issues.length) html_result += `<div class="card" style="background:rgba(255,184,0,0.1);border-left:4px solid #ffb800;margin-top:var(--spacing-md);"><strong>Issues:</strong><br>${issues.map(i => '⚠️ ' + i).join('<br>')}</div>`;
+            html_result += `<div class="card" style="margin-top:var(--spacing-md);"><strong>Structure:</strong><br>${structure}</div>`;
+            document.getElementById('results').innerHTML = html_result;
+            document.getElementById('output').style.display = 'block';
+            showNotification('Analysis complete!', 'success');
+        }
+    </script>
+</body>
+
+</html>

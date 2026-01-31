@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Preview how your page will appear in Google search results.">
+    <meta name="keywords" content="SERP simulator, Google preview, search results preview">
+    <meta property="og:title" content="SERP Simulator - SmartNet Tools">
+    <meta property="og:description" content="Preview how your page will appear in Google search results.">
+    <meta property="og:url" content="https://smartnettools.site/seo/serp-simulator/">
+    <title>SERP Simulator - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>SERP Simulator</h1>
+            <p>Preview how your page will appear in Google search results.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="form-group"><label for="title">Page Title (max 60 chars):</label><input type="text" id="title"
+                    placeholder="Your Page Title" maxlength="60" oninput="updatePreview()"></div>
+            <div class="form-group"><label for="url">URL:</label><input type="text" id="url"
+                    placeholder="https://example.com/page" oninput="updatePreview()"></div>
+            <div class="form-group"><label for="description">Meta Description (max 160 chars):</label><textarea
+                    id="description" placeholder="Brief description of your page content" maxlength="160"
+                    style="min-height: 80px;" oninput="updatePreview()"></textarea></div>
+            <div style="margin-top: var(--spacing-lg);">
+                <h3>Google Search Preview</h3>
+                <div id="preview"
+                    style="background:#fff;padding:var(--spacing-lg);border-radius:var(--radius-md);border:1px solid var(--border-color);font-family:arial,sans-serif;">
+                    <div style="color:#1a0dab;font-size:20px;line-height:1.3;margin-bottom:2px;">Your Page Title</div>
+                    <div style="color:#006621;font-size:14px;margin-bottom:3px;">https://example.com/page</div>
+                    <div style="color:#545454;font-size:14px;line-height:1.4;">Brief description of your page content
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: var(--spacing-md);" id="stats"></div>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function updatePreview() {
+            const title = document.getElementById('title').value || 'Your Page Title';
+            const url = document.getElementById('url').value || 'https://example.com/page';
+            const desc = document.getElementById('description').value || 'Brief description of your page content';
+            const titleLen = title.length;
+            const descLen = desc.length;
+            const titleColor = titleLen > 60 ? '#ff6b6b' : titleLen > 50 ? '#ffa94d' : '#51cf66';
+            const descColor = descLen > 160 ? '#ff6b6b' : descLen > 150 ? '#ffa94d' : '#51cf66';
+            document.getElementById('preview').innerHTML = `<div style="color:#1a0dab;font-size:20px;line-height:1.3;margin-bottom:2px;">${title}</div><div style="color:#006621;font-size:14px;margin-bottom:3px;">${url}</div><div style="color:#545454;font-size:14px;line-height:1.4;">${desc}</div>`;
+            document.getElementById('stats').innerHTML = `<div class="card"><strong>Title:</strong> <span style="color:${titleColor}">${titleLen}/60 chars</span> | <strong>Description:</strong> <span style="color:${descColor}">${descLen}/160 chars</span></div>`;
+        }
+        updatePreview();
+    </script>
+</body>
+
+</html>

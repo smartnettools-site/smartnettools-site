@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Generate Open Graph meta tags for better social media sharing on Facebook, LinkedIn, and more.">
+    <meta name="keywords" content="Open Graph generator, OG tags, social media meta tags">
+    <meta property="og:title" content="Open Graph Generator - SmartNet Tools">
+    <meta property="og:description"
+        content="Generate Open Graph meta tags for better social media sharing on Facebook, LinkedIn, and more.">
+    <meta property="og:url" content="https://smartnettools.site/seo/open-graph-generator/">
+    <title>Open Graph Generator - SmartNet Tools</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container"><a href="/" class="site-logo" aria-label="SmartNet Tools Home"><img
+                    src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40"
+                    height="40"><span>SmartNet Tools</span></a><button class="mobile-menu-toggle" aria-expanded="false"
+                aria-controls="main-navigation">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Open Graph Generator</h1>
+            <p>Generate Open Graph meta tags for better social media sharing on Facebook, LinkedIn, and more.</p>
+        </div>
+        <div class="tool-interface">
+            <div class="grid grid-2">
+                <div class="form-group"><label for="ogTitle">Title:</label><input type="text" id="ogTitle"
+                        placeholder="Your Page Title"></div>
+                <div class="form-group"><label for="ogType">Type:</label><select id="ogType">
+                        <option value="website">Website</option>
+                        <option value="article">Article</option>
+                        <option value="product">Product</option>
+                        <option value="video">Video</option>
+                    </select></div>
+            </div>
+            <div class="form-group"><label for="ogDescription">Description:</label><textarea id="ogDescription"
+                    placeholder="Brief description of your page" style="min-height: 80px;"></textarea></div>
+            <div class="grid grid-2">
+                <div class="form-group"><label for="ogUrl">URL:</label><input type="text" id="ogUrl"
+                        placeholder="https://example.com/page"></div>
+                <div class="form-group"><label for="ogImage">Image URL:</label><input type="text" id="ogImage"
+                        placeholder="https://example.com/image.jpg"></div>
+            </div>
+            <div class="grid grid-2">
+                <div class="form-group"><label for="ogSiteName">Site Name:</label><input type="text" id="ogSiteName"
+                        placeholder="Your Website Name"></div>
+                <div class="form-group"><label for="ogLocale">Locale:</label><input type="text" id="ogLocale"
+                        placeholder="en_US" value="en_US"></div>
+            </div>
+            <button onclick="generate()" class="btn btn-primary">Generate Open Graph Tags</button>
+            <div class="form-group" style="margin-top: var(--spacing-lg);"><label for="output">Generated Meta
+                    Tags:</label>
+                <div class="tool-output" id="output" style="min-height: 200px;"></div>
+            </div>
+            <button onclick="copyOutput()" class="btn btn-secondary">📋 Copy Tags</button>
+        </div>
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+    </main>
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/get-advice/">Get Expert Advice</a></li>
+                        <li><a href="/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function generate() {
+            const title = document.getElementById('ogTitle').value;
+            const type = document.getElementById('ogType').value;
+            const desc = document.getElementById('ogDescription').value;
+            const url = document.getElementById('ogUrl').value;
+            const image = document.getElementById('ogImage').value;
+            const siteName = document.getElementById('ogSiteName').value;
+            const locale = document.getElementById('ogLocale').value;
+            if (!title || !url) { showNotification('Title and URL are required', 'error'); return; }
+            let html = `<meta property="og:title" content="${title}" />\n`;
+            html += `<meta property="og:type" content="${type}" />\n`;
+            if (desc) html += `<meta property="og:description" content="${desc}" />\n`;
+            html += `<meta property="og:url" content="${url}" />\n`;
+            if (image) html += `<meta property="og:image" content="${image}" />\n`;
+            if (siteName) html += `<meta property="og:site_name" content="${siteName}" />\n`;
+            html += `<meta property="og:locale" content="${locale}" />`;
+            document.getElementById('output').textContent = html;
+            showNotification('Open Graph tags generated!', 'success');
+        }
+        function copyOutput() { copyToClipboard(document.getElementById('output').textContent, event.target); }
+    </script>
+</body>
+
+</html>
