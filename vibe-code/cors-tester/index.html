@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test CORS configuration. Check cross-origin resource sharing headers.">
+    <meta name="keywords" content="CORS tester, cross-origin, cors headers, cors debugging">
+
+    <title>CORS Tester - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>CORS Tester</h1>
+            <p>Test cross-origin resource sharing (CORS) configuration for APIs.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div class="form-group">
+                <label for="url">API URL to Test:</label>
+                <input type="url" id="url" placeholder="https://api.example.com/endpoint">
+            </div>
+
+            <div class="form-group">
+                <label for="method">HTTP Method:</label>
+                <select id="method">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="DELETE">DELETE</option>
+                </select>
+            </div>
+
+            <button onclick="testCORS()" class="btn btn-primary">Test CORS</button>
+
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 SmartNet Tools.</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        async function testCORS() {
+            const url = document.getElementById('url').value.trim();
+            const method = document.getElementById('method').value;
+            const output = document.getElementById('output');
+
+            if (!url) {
+                showNotification('Please enter a URL', 'error');
+                return;
+            }
+
+            output.innerHTML = '<div class="card"><p>Testing CORS...</p></div>';
+            output.style.display = 'block';
+
+            try {
+                const response = await fetch(url, { method: method });
+
+                const corsHeaders = {
+                    'access-control-allow-origin': response.headers.get('access-control-allow-origin'),
+                    'access-control-allow-methods': response.headers.get('access-control-allow-methods'),
+                    'access-control-allow-headers': response.headers.get('access-control-allow-headers'),
+                    'access-control-allow-credentials': response.headers.get('access-control-allow-credentials'),
+                    'access-control-expose-headers': response.headers.get('access-control-expose-headers'),
+                    'access-control-max-age': response.headers.get('access-control-max-age')
+                };
+
+                const hasCORS = Object.values(corsHeaders).some(v => v !== null);
+                const corsConfigured = hasCORS && corsHeaders['access-control-allow-origin'] !== null;
+
+                const statusColor = corsConfigured ? '#10b981' : '#ef4444';
+                const statusText = corsConfigured ? 'CORS Enabled' : 'CORS Not Configured';
+                const statusIcon = corsConfigured ? '✅' : '❌';
+
+                output.innerHTML = `
+          <div class="card">
+            <div style="text-align: center; padding: var(--spacing-xl); background: linear-gradient(135deg, ${statusColor}15, ${statusColor}05); border-radius: var(--radius-lg); border: 2px solid ${statusColor}; margin-bottom: var(--spacing-lg);">
+              <div style="font-size: 4rem; margin-bottom: var(--spacing-sm);">${statusIcon}</div>
+              <div style="font-size: 1.5rem; font-weight: 600; color: ${statusColor};">
+                ${statusText}
+              </div>
+            </div>
+            
+            <h3>CORS Headers</h3>
+            <div style="margin-top: var(--spacing-md); background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-md);">
+              ${Object.entries(corsHeaders).map(([key, value]) => `
+                <div style="padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+                  <span style="font-weight: 500;">${key}:</span>
+                  <span style="color: ${value ? '#10b981' : '#6b7280'};">${value || 'Not set'}</span>
+                </div>
+              `).join('')}
+            </div>
+            
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: #3b82f615; border-left: 4px solid #3b82f6; border-radius: var(--radius-sm);">
+              <h4 style="margin: 0 0 var(--spacing-sm) 0;">💡 Understanding CORS</h4>
+              <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.875rem;">
+                <li><strong>Access-Control-Allow-Origin:</strong> Specifies which origins can access the resource</li>
+                <li><strong>Access-Control-Allow-Methods:</strong> Specifies allowed HTTP methods</li>
+                <li><strong>Access-Control-Allow-Headers:</strong> Specifies allowed request headers</li>
+                <li><strong>Access-Control-Allow-Credentials:</strong> Indicates if credentials are allowed</li>
+              </ul>
+            </div>
+            
+            ${!corsConfigured ? `
+              <div style="margin-top: var(--spacing-md); padding: var(--spacing-md); background: #ef444415; border-left: 4px solid #ef4444; border-radius: var(--radius-sm);">
+                <h4 style="margin: 0 0 var(--spacing-sm) 0; color: #ef4444;">⚠️ CORS Not Configured</h4>
+                <p style="margin: 0; font-size: 0.875rem;">The API doesn't have proper CORS headers set. To fix this, the server must include the appropriate Access-Control-* headers in its responses.</p>
+              </div>
+            ` : ''}
+          </div>
+        `;
+
+                showNotification(corsConfigured ? 'CORS is configured' : 'CORS not found', corsConfigured ? 'success' : 'warning');
+            } catch (error) {
+                output.innerHTML = `
+          <div class="card">
+            <div style="text-align: center; padding: var(--spacing-xl); background: #ef444415; border-radius: var(--radius-lg); border: 2px solid #ef4444;">
+              <div style="font-size: 4rem; margin-bottom: var(--spacing-sm);">❌</div>
+              <div style="font-size: 1.5rem; font-weight: 600; color: #ef4444;">CORS Test Failed</div>
+            </div>
+            
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: #ef444415; border-left: 4px solid #ef4444; border-radius: var(--radius-sm);">
+              <h4 style="margin: 0 0 var(--spacing-sm) 0; color: #ef4444;">Error</h4>
+              <p style="margin: 0;">${error.message}</p>
+              
+              <h4 style="margin: var(--spacing-md) 0 var(--spacing-sm) 0; color: #ef4444;">Common Causes:</h4>
+              <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.875rem;">
+                <li>The API blocks cross-origin requests (most common)</li>
+                <li>Network connectivity issues</li>
+                <li>Invalid URL or endpoint doesn't exist</li>
+                <li>Server requires authentication</li>
+              </ul>
+              
+              <h4 style="margin: var(--spacing-md) 0 var(--spacing-sm) 0; color: #ef4444;">How to Fix:</h4>
+              <p style="margin: 0; font-size: 0.875rem;">The server must include CORS headers like <code>Access-Control-Allow-Origin: *</code> in its response to allow cross-origin requests.</p>
+            </div>
+          </div>
+        `;
+                showNotification('CORS test failed', 'error');
+            }
+        }
+    </script>
+</body>
+
+</html>

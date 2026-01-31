@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate .gitignore files for your projects. Select from popular templates.">
+    <meta name="keywords" content="gitignore generator, git, gitignore template">
+
+    <title>Gitignore Generator - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Gitignore Generator</h1>
+            <p>Generate .gitignore files for your programming projects.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div class="form-group">
+                <label>Select Technologies:</label>
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--spacing-sm); margin-top: var(--spacing-sm);">
+                    <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+                        <input type="checkbox" value="node" onchange="generateGitignore()"> Node.js
+                    </label>
+                    <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+                        <input type="checkbox" value="python" onchange="generateGitignore()"> Python
+                    </label>
+                    <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+                        <input type="checkbox" value="java" onchange="generateGitignore()"> Java
+                    </label>
+                    <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+                        <input type="checkbox" value="react" onchange="generateGitignore()"> React
+                    </label>
+                    <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+                        <input type="checkbox" value="vue" onchange="generateGitignore()"> Vue
+                    </label>
+                    <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+                        <input type="checkbox" value="dotnet" onchange="generateGitignore()"> .NET
+                    </label>
+                    <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+                        <input type="checkbox" value="macos" onchange="generateGitignore()"> macOS
+                    </label>
+                    <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+                        <input type="checkbox" value="windows" onchange="generateGitignore()"> Windows
+                    </label>
+                </div>
+            </div>
+
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+
+            <div id="actions" style="display:none; margin-top: var(--spacing-md);">
+                <button onclick="copyGitignore()" class="btn btn-secondary">📋 Copy</button>
+                <button onclick="downloadGitignore()" class="btn btn-secondary">⬇️ Download .gitignore</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 SmartNet Tools.</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        const templates = {
+            node: `# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+.npm
+.env
+.env.local
+dist/
+build/`,
+            python: `# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+.pytest_cache/`,
+            java: `# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+.gradle/
+build/
+*.log`,
+            react: `# React
+node_modules/
+build/
+.env.local
+.DS_Store
+npm-debug.log*`,
+            vue: `# Vue
+node_modules/
+dist/
+.env.local
+*.log`,
+            dotnet: `# .NET
+bin/
+obj/
+*.user
+*.suo
+packages/
+.vs/`,
+            macos: `# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*`,
+            windows: `# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/`
+        };
+
+        function generateGitignore() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const selected = Array.from(checkboxes).map(cb => cb.value);
+            const output = document.getElementById('output');
+            const actions = document.getElementById('actions');
+
+            if (selected.length === 0) {
+                output.style.display = 'none';
+                actions.style.display = 'none';
+                return;
+            }
+
+            let gitignore = '# Generated by SmartNet Tools\n# ' + new Date().toISOString().split('T')[0] + '\n\n';
+
+            selected.forEach(tech => {
+                gitignore += templates[tech] + '\n\n';
+            });
+
+            gitignore += `# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# General
+*.log
+*.tmp
+.cache/`;
+
+            output.innerHTML = `
+        <div class="card">
+          <h3>.gitignore File</h3>
+          <pre style="background: #1e1e1e; color: #d4d4d4; padding: var(--spacing-lg); border-radius: var(--radius-md); overflow-x: auto;"><code>${gitignore}</code></pre>
+        </div>
+      `;
+
+            output.style.display = 'block';
+            actions.style.display = 'block';
+        }
+
+        function copyGitignore() {
+            const code = document.querySelector('#output code').textContent;
+            copyToClipboard(code, event.target);
+        }
+
+        function downloadGitignore() {
+            const code = document.querySelector('#output code').textContent;
+            downloadAsFile(code, '.gitignore', 'text/plain');
+            showNotification('Downloaded!', 'success');
+        }
+    </script>
+</body>
+
+</html>

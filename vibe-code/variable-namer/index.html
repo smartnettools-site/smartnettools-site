@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Variable name generator. Generate variable names in different naming conventions.">
+    <meta name="keywords" content="variable namer, naming convention, camelCase, snake_case, PascalCase">
+
+    <title>Variable Namer - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Variable Namer</h1>
+            <p>Generate variable names in different naming conventions.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div class="form-group">
+                <label for="description">Describe the variable:</label>
+                <input type="text" id="description" placeholder="e.g., user first name, total price, is logged in">
+            </div>
+
+            <button onclick="generateNames()" class="btn btn-primary">Generate Names</button>
+
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 SmartNet Tools.</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function generateNames() {
+            const desc = document.getElementById('description').value.trim();
+            const output = document.getElementById('output');
+
+            if (!desc) {
+                showNotification('Please enter a description', 'error');
+                return;
+            }
+
+            const words = desc.toLowerCase().replace(/[^a-z\s]/g, '').split(/\s+/);
+
+            const camelCase = words[0] + words.slice(1).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+            const pascalCase = words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+            const snakeCase = words.join('_');
+            const kebabCase = words.join('-');
+            const screamingSnake = words.join('_').toUpperCase();
+
+            output.innerHTML = `
+        <div class="card">
+          <h3>Generated Variable Names</h3>
+          <div style="display: grid; gap: var(--spacing-md); margin-top: var(--spacing-md);">
+            ${createNameCard('camelCase', camelCase, 'JavaScript, Java, TypeScript')}
+            ${createNameCard('PascalCase', pascalCase, 'Classes, Components')}
+            ${createNameCard('snake_case', snakeCase, 'Python, Ruby, PHP')}
+            ${createNameCard('kebab-case', kebabCase, 'CSS, HTML attributes')}
+            ${createNameCard('SCREAMING_SNAKE', screamingSnake, 'Constants')}
+          </div>
+          
+          <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: #3b82f615; border-left: 4px solid #3b82f6; border-radius: var(--radius-sm);">
+            <h4 style="margin: 0 0 var(--spacing-sm) 0;">💡 Best Practices</h4>
+            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.875rem;">
+              <li>Use descriptive, meaningful names</li>
+              <li>Avoid single-letter names (except in loops)</li>
+              <li>Be consistent with your chosen convention</li>
+              <li>Avoid abbreviations unless widely known</li>
+            </ul>
+          </div>
+        </div>
+      `;
+
+            output.style.display = 'block';
+            showNotification('Names generated!', 'success');
+        }
+
+        function createNameCard(convention, name, usage) {
+            return `
+        <div style="padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--radius-md); cursor: pointer;" onclick="copyName('${name}', this)">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-weight: 600; margin-bottom: var(--spacing-xs);">${convention}</div>
+              <code style="background: var(--bg-primary); padding: 4px 8px; border-radius: var(--radius-sm); font-size: 1.1rem;">${name}</code>
+              <div style="color: var(--text-secondary); font-size: 0.75rem; margin-top: var(--spacing-xs);">${usage}</div>
+            </div>
+            <span style="color: var(--text-secondary);">📋</span>
+          </div>
+        </div>
+      `;
+        }
+
+        function copyName(name, element) {
+            copyToClipboard(name, element);
+            element.style.transform = 'scale(0.98)';
+            setTimeout(() => element.style.transform = 'scale(1)', 100);
+        }
+    </script>
+</body>
+
+</html>

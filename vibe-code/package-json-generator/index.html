@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate package.json files for Node.js projects with interactive form.">
+    <meta name="keywords" content="package.json generator, npm, node.js">
+
+    <title>Package.json Generator - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Package.json Generator</h1>
+            <p>Create package.json files for your Node.js projects.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                <div class="form-group">
+                    <label for="name">Package Name*:</label>
+                    <input type="text" id="name" placeholder="my-awesome-project">
+                </div>
+
+                <div class="form-group">
+                    <label for="version">Version:</label>
+                    <input type="text" id="version" value="1.0.0" placeholder="1.0.0">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" placeholder="A brief description">
+                </div>
+
+                <div class="form-group">
+                    <label for="author">Author:</label>
+                    <input type="text" id="author" placeholder="Your Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="license">License:</label>
+                    <select id="license">
+                        <option value="MIT">MIT</option>
+                        <option value="ISC">ISC</option>
+                        <option value="Apache-2.0">Apache 2.0</option>
+                        <option value="GPL-3.0">GPL 3.0</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="main">Main File:</label>
+                    <input type="text" id="main" value="index.js" placeholder="index.js">
+                </div>
+            </div>
+
+            <div style="margin-top: var(--spacing-md);">
+                <button onclick="generatePackageJson()" class="btn btn-primary">Generate package.json</button>
+            </div>
+
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+
+            <div id="actions" style="display:none; margin-top: var(--spacing-md);">
+                <button onclick="copyJson()" class="btn btn-secondary">📋 Copy</button>
+                <button onclick="downloadJson()" class="btn btn-secondary">⬇️ Download</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 SmartNet Tools.</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function generatePackageJson() {
+            const name = document.getElementById('name').value.trim();
+            const version = document.getElementById('version').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const author = document.getElementById('author').value.trim();
+            const license = document.getElementById('license').value;
+            const main = document.getElementById('main').value.trim();
+            const output = document.getElementById('output');
+            const actions = document.getElementById('actions');
+
+            if (!name) {
+                showNotification('Package name is required', 'error');
+                return;
+            }
+
+            const pkg = {
+                name: name,
+                version: version || '1.0.0',
+                description: description || '',
+                main: main || 'index.js',
+                scripts: {
+                    test: 'echo "Error: no test specified" && exit 1',
+                    start: 'node index.js'
+                },
+                keywords: [],
+                author: author || '',
+                license: license,
+                dependencies: {},
+                devDependencies: {}
+            };
+
+            const json = JSON.stringify(pkg, null, 2);
+
+            output.innerHTML = `
+        <div class="card">
+          <h3>package.json</h3>
+          <pre style="background: #1e1e1e; color: #d4d4d4; padding: var(--spacing-lg); border-radius: var(--radius-md); overflow-x: auto;"><code>${json}</code></pre>
+        </div>
+      `;
+
+            output.style.display = 'block';
+            actions.style.display = 'block';
+            showNotification('package.json generated!', 'success');
+        }
+
+        function copyJson() {
+            const code = document.querySelector('#output code').textContent;
+            copyToClipboard(code, event.target);
+        }
+
+        function downloadJson() {
+            const code = document.querySelector('#output code').textContent;
+            downloadAsFile(code, 'package.json', 'application/json');
+            showNotification('Downloaded!', 'success');
+        }
+    </script>
+</body>
+
+</html>

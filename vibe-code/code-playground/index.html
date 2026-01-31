@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Online code playground for HTML, CSS, and JavaScript. Write and preview code in real-time.">
+    <meta name="keywords"
+        content="code playground, online editor, HTML editor, CSS editor, JavaScript editor, code preview">
+
+    <title>Code Playground - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <style>
+        .playground-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .editor-section {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .editor-tabs {
+            display: flex;
+            gap: var(--spacing-xs);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .editor-tab {
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .editor-tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .editor-area {
+            flex: 1;
+            min-height: 400px;
+            display: none;
+        }
+
+        .editor-area.active {
+            display: block;
+        }
+
+        .editor-area textarea {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: #1e1e1e;
+            color: #d4d4d4;
+            resize: vertical;
+        }
+
+        .preview-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .preview-frame {
+            flex: 1;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: white;
+            min-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .playground-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+            <button class="mobile-menu-toggle" aria-expanded="false">☰ Menu</button>
+            <nav class="main-nav" id="main-navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/get-advice/">Get Advice</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="ad-container ad-header"><span>Advertisement</span></div>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Code Playground</h1>
+            <p>Write HTML, CSS, and JavaScript code and see the results in real-time.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div style="display: flex; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                <button onclick="runCode()" class="btn btn-primary">▶ Run Code</button>
+                <button onclick="clearAll()" class="btn btn-secondary">Clear All</button>
+                <button onclick="saveCode()" class="btn btn-secondary">💾 Save</button>
+                <button onclick="loadCode()" class="btn btn-secondary">📂 Load</button>
+            </div>
+
+            <div class="playground-container">
+                <div class="editor-section">
+                    <div class="editor-tabs">
+                        <button class="editor-tab active" onclick="switchTab('html')">HTML</button>
+                        <button class="editor-tab" onclick="switchTab('css')">CSS</button>
+                        <button class="editor-tab" onclick="switchTab('js')">JavaScript</button>
+                    </div>
+
+                    <div id="html-editor" class="editor-area active">
+                        <textarea id="html-code" placeholder="<!-- Write your HTML here -->"><!DOCTYPE html>
+<html>
+<head>
+  <title>My Page</title>
+</head>
+<body>
+  <h1>Hello World!</h1>
+  <p>Start coding...</p>
+</body>
+</html></textarea>
+                    </div>
+
+                    <div id="css-editor" class="editor-area">
+                        <textarea id="css-code" placeholder="/* Write your CSS here */">body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+h1 {
+  color: #3b82f6;
+}</textarea>
+                    </div>
+
+                    <div id="js-editor" class="editor-area">
+                        <textarea id="js-code" placeholder="// Write your JavaScript here">console.log('Hello from JavaScript!');
+
+// Add your code here</textarea>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <h3 style="margin-bottom: var(--spacing-sm);">Preview</h3>
+                    <iframe id="preview-frame" class="preview-frame" sandbox="allow-scripts"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-container ad-inline"><span>Advertisement</span></div>
+
+        <section class="mt-lg">
+            <h2>About Code Playground</h2>
+            <div class="card">
+                <p>An interactive code playground where you can write HTML, CSS, and JavaScript code and see the results
+                    instantly. Perfect for testing ideas, learning, and prototyping.</p>
+                <h3>Features:</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
+                    <li>Live code preview</li>
+                    <li>Separate editors for HTML, CSS, and JavaScript</li>
+                    <li>Save and load your code</li>
+                    <li>Syntax-aware text editors</li>
+                    <li>100% client-side execution</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mt-lg">
+            <h2>Related Tools</h2>
+            <div class="grid grid-4">
+                <a href="/vibe-code/" class="tool-card">
+                    <h3>All Vibe Code Tools</h3>
+                    <p>Browse all tools</p>
+                </a>
+                <a href="/vibe-code/code-beautifier/" class="tool-card">
+                    <h3>Code Beautifier</h3>
+                    <p>Format your code</p>
+                </a>
+                <a href="/vibe-code/syntax-highlighter/" class="tool-card">
+                    <h3>Syntax Highlighter</h3>
+                    <p>Highlight code syntax</p>
+                </a>
+                <a href="/utilities/json-formatter/" class="tool-card">
+                    <h3>JSON Formatter</h3>
+                    <p>Format JSON data</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div class="ad-container ad-footer"><span>Advertisement</span></div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.editor-area').forEach(a => a.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById(tab + '-editor').classList.add('active');
+        }
+
+        function runCode() {
+            const html = document.getElementById('html-code').value;
+            const css = document.getElementById('css-code').value;
+            const js = document.getElementById('js-code').value;
+
+            const iframe = document.getElementById('preview-frame');
+            const doc = iframe.contentDocument || iframe.contentWindow.document;
+
+            const code = `
+        ${html}
+        <style>${css}</style>
+        <script>${js}<\/script>
+      `;
+
+            doc.open();
+            doc.write(code);
+            doc.close();
+
+            showNotification('Code executed!', 'success');
+        }
+
+        function clearAll() {
+            if (confirm('Clear all code?')) {
+                document.getElementById('html-code').value = '';
+                document.getElementById('css-code').value = '';
+                document.getElementById('js-code').value = '';
+                const iframe = document.getElementById('preview-frame');
+                const doc = iframe.contentDocument || iframe.contentWindow.document;
+                doc.open();
+                doc.write('');
+                doc.close();
+                showNotification('Cleared!', 'success');
+            }
+        }
+
+        function saveCode() {
+            const code = {
+                html: document.getElementById('html-code').value,
+                css: document.getElementById('css-code').value,
+                js: document.getElementById('js-code').value
+            };
+            localStorage.setItem('playground-code', JSON.stringify(code));
+            showNotification('Code saved!', 'success');
+        }
+
+        function loadCode() {
+            const saved = localStorage.getItem('playground-code');
+            if (saved) {
+                const code = JSON.parse(saved);
+                document.getElementById('html-code').value = code.html;
+                document.getElementById('css-code').value = code.css;
+                document.getElementById('js-code').value = code.js;
+                showNotification('Code loaded!', 'success');
+            } else {
+                showNotification('No saved code found', 'error');
+            }
+        }
+
+        // Auto-run on load
+        setTimeout(runCode, 100);
+    </script>
+</body>
+
+</html>

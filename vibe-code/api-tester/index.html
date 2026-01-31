@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test HTTP APIs online. Make GET, POST, PUT, DELETE requests and view responses.">
+    <meta name="keywords" content="API tester, HTTP client, REST API, test API">
+
+    <title>API Tester - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>API Tester</h1>
+            <p>Test REST APIs by making HTTP requests and viewing responses.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div style="display: grid; grid-template-columns: auto 1fr auto; gap: var(--spacing-sm); align-items: end;">
+                <div class="form-group" style="margin: 0;">
+                    <label for="method">Method:</label>
+                    <select id="method" style="width: 120px;">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="DELETE">DELETE</option>
+                        <option value="PATCH">PATCH</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin: 0;">
+                    <label for="url">URL:</label>
+                    <input type="url" id="url" placeholder="https://api.example.com/endpoint">
+                </div>
+
+                <button onclick="sendRequest()" class="btn btn-primary">Send Request</button>
+            </div>
+
+            <div class="form-group">
+                <label for="headers">Headers (JSON format):</label>
+                <textarea id="headers" rows="3" placeholder='{"Content-Type": "application/json"}'
+                    style="font-family: monospace;">{"Content-Type": "application/json"}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="body">Request Body (for POST/PUT/PATCH):</label>
+                <textarea id="body" rows="6" placeholder='{"key": "value"}' style="font-family: monospace;"></textarea>
+            </div>
+
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 SmartNet Tools.</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        async function sendRequest() {
+            const method = document.getElementById('method').value;
+            const url = document.getElementById('url').value.trim();
+            const headersText = document.getElementById('headers').value.trim();
+            const body = document.getElementById('body').value.trim();
+            const output = document.getElementById('output');
+
+            if (!url) {
+                showNotification('Please enter a URL', 'error');
+                return;
+            }
+
+            output.innerHTML = '<div class="card"><p>Sending request...</p></div>';
+            output.style.display = 'block';
+
+            try {
+                let headers = {};
+                if (headersText) {
+                    headers = JSON.parse(headersText);
+                }
+
+                const options = {
+                    method: method,
+                    headers: headers
+                };
+
+                if (body && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
+                    options.body = body;
+                }
+
+                const startTime = Date.now();
+                const response = await fetch(url, options);
+                const endTime = Date.now();
+                const duration = endTime - startTime;
+
+                const contentType = response.headers.get('content-type');
+                let data;
+                if (contentType && contentType.includes('application/json')) {
+                    data = await response.json();
+                } else {
+                    data = await response.text();
+                }
+
+                const isJson = typeof data === 'object';
+                const displayData = isJson ? JSON.stringify(data, null, 2) : data;
+
+                const statusColor = response.ok ? '#10b981' : '#ef4444';
+
+                output.innerHTML = `
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+              <h3>Response</h3>
+              <div style="display: flex; gap: var(--spacing-sm); align-items: center;">
+                <span style="background: ${statusColor}; color: white; padding: 4px 12px; border-radius: var(--radius-md); font-weight: 600;">
+                  ${response.status} ${response.statusText}
+                </span>
+                <span style="color: var(--text-secondary); font-size: 0.875rem;">${duration}ms</span>
+              </div>
+            </div>
+            
+            <h4>Response Body</h4>
+            <pre style="background: #1e1e1e; color: #d4d4d4; padding: var(--spacing-lg); border-radius: var(--radius-md); overflow-x: auto; max-height: 400px;"><code>${escapeHtml(displayData)}</code></pre>
+            
+            <h4 style="margin-top: var(--spacing-lg);">Response Headers</h4>
+            <div style="background: var(--bg-secondary); padding: var(--spacing-md); border-radius: var(--radius-md); max-height: 200px; overflow-y: auto;">
+              ${Array.from(response.headers.entries()).map(([key, value]) =>
+                    `<div style="padding: var(--spacing-xs) 0;"><strong>${key}:</strong> ${value}</div>`
+                ).join('')}
+            </div>
+          </div>
+        `;
+
+                showNotification('Request completed!', 'success');
+            } catch (error) {
+                output.innerHTML = `
+          <div class="card">
+            <h3 style="color: #ef4444;">Error</h3>
+            <p>${error.message}</p>
+            <div style="margin-top: var(--spacing-md); padding: var(--spacing-md); background: #ef444415; border-left: 4px solid #ef4444; border-radius: var(--radius-sm);">
+              <strong>Common Causes:</strong>
+              <ul style="margin: var(--spacing-sm) 0 0 1.5rem;">
+                <li>CORS restrictions (use CORS Tester tool)</li>
+                <li>Network connectivity issues</li>
+                <li>Invalid URL or endpoint</li>
+                <li>Server not responding</li>
+              </ul>
+            </div>
+          </div>
+        `;
+                showNotification('Request failed', 'error');
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+
+</html>

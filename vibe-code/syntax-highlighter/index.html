@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Syntax highlighter for code. Highlight code in multiple programming languages with different themes.">
+    <meta name="keywords" content="syntax highlighter, code highlighter, programming, code colors">
+
+    <title>Syntax Highlighter - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Syntax Highlighter</h1>
+            <p>Highlight your code with syntax coloring for better readability.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div class="form-group">
+                <label for="language">Language:</label>
+                <select id="language">
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="theme">Theme:</label>
+                <select id="theme">
+                    <option value="dark">Dark</option>
+                    <option value="light">Light</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="code">Code:</label>
+                <textarea id="code" rows="12" placeholder="Paste your code here..."
+                    style="font-family: monospace;"></textarea>
+            </div>
+
+            <button onclick="highlightCode()" class="btn btn-primary">Highlight Code</button>
+
+            <div id="output" style="display:none; margin-top: var(--spacing-lg);"></div>
+
+            <div id="actions" style="display:none; margin-top: var(--spacing-md);">
+                <button onclick="copyHighlighted()" class="btn btn-secondary">📋 Copy HTML</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 SmartNet Tools.</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        const colors = {
+            dark: { bg: '#1e1e1e', text: '#d4d4d4', keyword: '#569cd6', string: '#ce9178', comment: '#6a9955', function: '#dcdcaa', number: '#b5cea8' },
+            light: { bg: '#ffffff', text: '#000000', keyword: '#0000ff', string: '#a31515', comment: '#008000', function: '#795e26', number: '#098658' }
+        };
+
+        function highlightCode() {
+            const code = document.getElementById('code').value;
+            const lang = document.getElementById('language').value;
+            const theme = document.getElementById('theme').value;
+            const output = document.getElementById('output');
+            const actions = document.getElementById('actions');
+
+            if (!code.trim()) {
+                showNotification('Please enter code', 'error');
+                return;
+            }
+
+            const c = colors[theme];
+            let highlighted = code;
+
+            if (lang === 'javascript' || lang === 'java') {
+                highlighted = highlighted.replace(/(function|const|let|var|if|else|for|while|return|class|public|private|static)/g, `<span style="color:${c.keyword}">$1</span>`)
+                    .replace(/(['"`])(.*?)\1/g, `<span style="color:${c.string}">$1$2$1</span>`)
+                    .replace(/(\/\/.*)/g, `<span style="color:${c.comment}">$1</span>`)
+                    .replace(/\b(\d+)\b/g, `<span style="color:${c.number}">$1</span>`);
+            } else if (lang === 'python') {
+                highlighted = highlighted.replace(/(def|class|if|else|for|while|return|import|from)/g, `<span style="color:${c.keyword}">$1</span>`)
+                    .replace(/(['"`])(.*?)\1/g, `<span style="color:${c.string}">$1$2$1</span>`)
+                    .replace(/(#.*)/g, `<span style="color:${c.comment}">$1</span>`);
+            } else if (lang === 'html') {
+                highlighted = highlighted.replace(/(&lt;[^&]+&gt;)/g, `<span style="color:${c.keyword}">$1</span>`);
+            }
+
+            output.innerHTML = `
+        <div class="card">
+          <h3>Highlighted Code</h3>
+          <pre style="background:${c.bg};color:${c.text};padding:var(--spacing-lg);border-radius:var(--radius-md);overflow-x:auto;"><code>${highlighted}</code></pre>
+        </div>
+      `;
+
+            output.style.display = 'block';
+            actions.style.display = 'block';
+            showNotification('Code highlighted!', 'success');
+        }
+
+        function copyHighlighted() {
+            const html = document.querySelector('#output code').innerHTML;
+            copyToClipboard(html, event.target);
+        }
+    </script>
+</body>
+
+</html>
