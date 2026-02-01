@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Beautify code in multiple languages. Format HTML, CSS, JavaScript, JSON, and more.">
   <meta name="keywords" content="code beautifier, format code, code formatter, prettify code">
-  
+
   <meta property="og:title" content="Code Beautifier - SmartNet Tools">
-  <meta property="og:description" content="Beautify code in multiple languages. Format HTML, CSS, JavaScript, JSON, and more.">
+  <meta property="og:description"
+    content="Beautify code in multiple languages. Format HTML, CSS, JavaScript, JSON, and more.">
   <meta property="og:url" content="https://smartnettools.site/vibe-code/code-beautifier/">
-  
+
   <title>Code Beautifier - SmartNet Tools</title>
-  
+
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
         <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
         <span>SmartNet Tools</span>
       </a>
-      
+
       <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
-      
+
       <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="/">Home</a></li>
@@ -44,44 +47,76 @@
       </nav>
     </div>
   </header>
-  
+
   <div class="ad-container ad-header">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <main id="main-content">
     <div class="page-header">
       <h1>Code Beautifier</h1>
       <p>Beautify code in multiple languages. Format HTML, CSS, JavaScript, JSON, and more.</p>
     </div>
-    
+
     <div class="tool-interface">
-      <p style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-        This tool is currently under development. Please check back soon!
-      </p>
-      <p style="text-align: center;">
-        <a href="/vibe-code/" class="btn btn-primary">← Back to Vibe-Code Tools</a>
-      </p>
+      <div class="form-group">
+        <label for="language">Language:</label>
+        <select id="language">
+          <option value="javascript">JavaScript</option>
+          <option value="html">HTML</option>
+          <option value="css">CSS</option>
+          <option value="json">JSON</option>
+          <option value="python">Python</option>
+          <option value="java">Java</option>
+          <option value="sql">SQL</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="indentSize">Indent Size:</label>
+        <select id="indentSize">
+          <option value="2">2 spaces</option>
+          <option value="4" selected>4 spaces</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="code">Code to Beautify:</label>
+        <textarea id="code" rows="12" placeholder="Paste your code here..." style="font-family: monospace;"></textarea>
+      </div>
+
+      <button onclick="beautifyCode()" class="btn btn-primary">Beautify Code</button>
+
+      <div id="output" style="display:none; margin-top: var(--spacing-lg);">
+        <h3>Beautified Code</h3>
+        <div style="position: relative;">
+          <pre id="beautifiedCode"
+            style="background: var(--bg-tertiary); color: var(--text-primary); padding: var(--spacing-lg); border-radius: var(--radius-md); overflow-x: auto; font-family: monospace; white-space: pre;"></pre>
+          <button onclick="copyBeautified()" class="btn btn-secondary" style="margin-top: var(--spacing-sm);">📋 Copy
+            Code</button>
+        </div>
+      </div>
     </div>
-    
+
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
       <!-- Adsterra: paste script here -->
       <!-- Montag Ads: paste script here -->
       <span>Advertisement</span>
     </div>
-    
+
     <section class="mt-lg">
       <h2>About This Tool</h2>
       <div class="card">
         <p>Beautify code in multiple languages. Format HTML, CSS, JavaScript, JSON, and more.</p>
-        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our servers.</p>
+        <p>This tool processes all data locally in your browser for maximum privacy and security. No data is sent to our
+          servers.</p>
       </div>
     </section>
-    
+
     <section class="mt-lg">
       <h2>Related Tools</h2>
       <div class="grid grid-4">
@@ -104,14 +139,14 @@
       </div>
     </section>
   </main>
-  
+
   <div class="ad-container ad-footer">
     <!-- Google AdSense: paste script here -->
     <!-- Adsterra: paste script here -->
     <!-- Montag Ads: paste script here -->
     <span>Advertisement</span>
   </div>
-  
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-grid">
@@ -127,7 +162,7 @@
             <li><a href="/calculators/">Calculators</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Resources</h3>
           <ul>
@@ -136,7 +171,7 @@
             <li><a href="/contact/">Contact Us</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>Legal</h3>
           <ul>
@@ -147,19 +182,231 @@
             <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h3>About</h3>
           <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
   <script src="/assets/js/main.js"></script>
+  <script>
+    function beautifyCode() {
+      const code = document.getElementById('code').value;
+      const language = document.getElementById('language').value;
+      const indentSize = parseInt(document.getElementById('indentSize').value);
+
+      if (!code.trim()) {
+        showNotification('Please enter code to beautify', 'error');
+        return;
+      }
+
+      let beautified = '';
+
+      try {
+        switch (language) {
+          case 'json':
+            beautified = beautifyJSON(code, indentSize);
+            break;
+          case 'html':
+            beautified = beautifyHTML(code, indentSize);
+            break;
+          case 'css':
+            beautified = beautifyCSS(code, indentSize);
+            break;
+          case 'javascript':
+          case 'java':
+            beautified = beautifyJavaScript(code, indentSize);
+            break;
+          case 'python':
+            beautified = beautifyPython(code, indentSize);
+            break;
+          case 'sql':
+            beautified = beautifySQL(code, indentSize);
+            break;
+          default:
+            beautified = beautifyGeneric(code, indentSize);
+        }
+
+        document.getElementById('beautifiedCode').textContent = beautified;
+        document.getElementById('output').style.display = 'block';
+        showNotification('Code beautified successfully!', 'success');
+      } catch (e) {
+        showNotification('Error beautifying code: ' + e.message, 'error');
+      }
+    }
+
+    function beautifyJSON(code, indentSize) {
+      const obj = JSON.parse(code);
+      return JSON.stringify(obj, null, indentSize);
+    }
+
+    function beautifyHTML(code, indentSize) {
+      const indent = ' '.repeat(indentSize);
+      let level = 0;
+      let result = '';
+      const lines = code.replace(/>\s*</g, '>\n<').split('\n');
+
+      lines.forEach(line => {
+        line = line.trim();
+        if (!line) return;
+
+        if (line.startsWith('</')) {
+          level = Math.max(0, level - 1);
+        }
+
+        result += indent.repeat(level) + line + '\n';
+
+        if (line.startsWith('<') && !line.startsWith('</') && !line.endsWith('/>') && !line.includes('</')) {
+          level++;
+        }
+      });
+
+      return result.trim();
+    }
+
+    function beautifyCSS(code, indentSize) {
+      const indent = ' '.repeat(indentSize);
+      let level = 0;
+      let result = '';
+
+      code = code.replace(/\s*\{\s*/g, ' {\n')
+        .replace(/\s*\}\s*/g, '\n}\n')
+        .replace(/\s*;\s*/g, ';\n')
+        .replace(/\s*,\s*/g, ', ');
+
+      const lines = code.split('\n');
+
+      lines.forEach(line => {
+        line = line.trim();
+        if (!line) return;
+
+        if (line === '}') {
+          level = Math.max(0, level - 1);
+        }
+
+        result += indent.repeat(level) + line + '\n';
+
+        if (line.endsWith('{')) {
+          level++;
+        }
+      });
+
+      return result.trim();
+    }
+
+    function beautifyJavaScript(code, indentSize) {
+      const indent = ' '.repeat(indentSize);
+      let level = 0;
+      let result = '';
+
+      code = code.replace(/\{/g, '{\n')
+        .replace(/\}/g, '\n}\n')
+        .replace(/;/g, ';\n')
+        .replace(/,/g, ',\n');
+
+      const lines = code.split('\n');
+
+      lines.forEach(line => {
+        line = line.trim();
+        if (!line) return;
+
+        if (line.startsWith('}')) {
+          level = Math.max(0, level - 1);
+        }
+
+        result += indent.repeat(level) + line + '\n';
+
+        if (line.endsWith('{')) {
+          level++;
+        }
+      });
+
+      return result.trim();
+    }
+
+    function beautifyPython(code, indentSize) {
+      const indent = ' '.repeat(indentSize);
+      let level = 0;
+      let result = '';
+      const lines = code.split('\n');
+
+      lines.forEach(line => {
+        const trimmed = line.trim();
+        if (!trimmed) {
+          result += '\n';
+          return;
+        }
+
+        if (trimmed.startsWith('return') || trimmed.startsWith('pass') ||
+          trimmed.startsWith('break') || trimmed.startsWith('continue') ||
+          trimmed.startsWith('elif') || trimmed.startsWith('else') ||
+          trimmed.startsWith('except') || trimmed.startsWith('finally')) {
+          level = Math.max(0, level - 1);
+        }
+
+        result += indent.repeat(level) + trimmed + '\n';
+
+        if (trimmed.endsWith(':')) {
+          level++;
+        }
+      });
+
+      return result.trim();
+    }
+
+    function beautifySQL(code, indentSize) {
+      const indent = ' '.repeat(indentSize);
+      const keywords = ['SELECT', 'FROM', 'WHERE', 'JOIN', 'LEFT JOIN', 'RIGHT JOIN',
+        'INNER JOIN', 'ORDER BY', 'GROUP BY', 'HAVING', 'LIMIT',
+        'INSERT INTO', 'VALUES', 'UPDATE', 'SET', 'DELETE FROM'];
+
+      let result = code.toUpperCase();
+
+      keywords.forEach(keyword => {
+        const regex = new RegExp('\\b' + keyword + '\\b', 'g');
+        result = result.replace(regex, '\n' + keyword);
+      });
+
+      const lines = result.split('\n').map(line => line.trim()).filter(line => line);
+      return lines.join('\n' + indent);
+    }
+
+    function beautifyGeneric(code, indentSize) {
+      const indent = ' '.repeat(indentSize);
+      let level = 0;
+      let result = '';
+      const lines = code.split('\n');
+
+      lines.forEach(line => {
+        const trimmed = line.trim();
+        if (!trimmed) return;
+
+        if (trimmed.includes('}') || trimmed.includes(']') || trimmed.includes(')')) {
+          level = Math.max(0, level - 1);
+        }
+
+        result += indent.repeat(level) + trimmed + '\n';
+
+        if (trimmed.includes('{') || trimmed.includes('[') || trimmed.includes('(')) {
+          level++;
+        }
+      });
+
+      return result.trim();
+    }
+
+    function copyBeautified() {
+      const code = document.getElementById('beautifiedCode').textContent;
+      copyToClipboard(code, event.target);
+    }
+  </script>
 </body>
+
 </html>
