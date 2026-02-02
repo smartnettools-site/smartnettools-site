@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Find your public IP address instantly. View your IPv4 and IPv6 addresses, location information, and ISP details.">
+    <meta name="keywords" content="find my ip, what is my ip, ip address lookup, my ip address">
+
+    <meta property="og:title" content="Find My IP Address - SmartNet Tools">
+    <meta property="og:description"
+        content="Find your public IP address instantly. View your IPv4 and IPv6 addresses, location information, and ISP details.">
+    <meta property="og:url" content="https://smartnettools.site/utilities/find-my-ip/">
+
+    <title>Find My IP Address - SmartNet Tools</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo" aria-label="SmartNet Tools Home">
+                <img src="/assets/img/logo-smart-net-tools.png" alt="SmartNet Tools Logo" width="40" height="40">
+                <span>SmartNet Tools</span>
+            </a>
+
+            <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="main-navigation">☰ Menu</button>
+
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/web/">Web</a></li>
+                    <li><a href="/seo/">SEO</a></li>
+                    <li><a href="/accessibility/">Accessibility</a></li>
+                    <li><a href="/ai/">AI</a></li>
+                    <li><a href="/vibe-code/">Vibe Code</a></li>
+                    <li><a href="/utilities/">Utilities</a></li>
+                    <li><a href="/calculators/">Calculators</a></li>
+                    <li><a href="/certificates/">Certificates</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="ad-container ad-header">
+        <!-- Google AdSense: paste script here -->
+        <!-- Adsterra: paste script here -->
+        <!-- Montag Ads: paste script here -->
+        <span>Advertisement</span>
+    </div>
+
+    <main id="main-content">
+        <div class="page-header">
+            <h1>Find My IP Address</h1>
+            <p>Instantly discover your public IP address and related network information.</p>
+        </div>
+
+        <div class="tool-interface">
+            <div class="card text-center">
+                <h2>Your IP Address</h2>
+                <div id="ipDisplay"
+                    style="font-size: 2.5rem; color: var(--neon-cyan); font-weight: bold; margin: var(--spacing-lg) 0;">
+                    <span id="ipAddress">Loading...</span>
+                </div>
+                <button onclick="copyIP()" class="btn btn-primary" id="copyBtn">
+                    📋 Copy IP Address
+                </button>
+            </div>
+
+            <div class="grid grid-2 mt-lg">
+                <div class="card">
+                    <h3>📍 Location Information</h3>
+                    <div id="locationInfo" style="color: var(--text-secondary); line-height: 2;">
+                        <p><strong>Country:</strong> <span id="country">-</span></p>
+                        <p><strong>Region:</strong> <span id="region">-</span></p>
+                        <p><strong>City:</strong> <span id="city">-</span></p>
+                        <p><strong>Timezone:</strong> <span id="timezone">-</span></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🌐 Network Information</h3>
+                    <div id="networkInfo" style="color: var(--text-secondary); line-height: 2;">
+                        <p><strong>ISP:</strong> <span id="isp">-</span></p>
+                        <p><strong>Organization:</strong> <span id="org">-</span></p>
+                        <p><strong>IP Type:</strong> <span id="ipType">IPv4</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-lg">
+                <h3>ℹ️ About Your IP Address</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    An IP (Internet Protocol) address is a unique identifier assigned to your device when connected to
+                    the internet.
+                    Your public IP address is visible to websites and services you connect to. This tool shows your
+                    current public IP address
+                    and provides additional information about your connection, including approximate location and ISP
+                    details.
+                </p>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-top: var(--spacing-sm);">
+                    <strong>Privacy Note:</strong> All information is retrieved client-side using third-party APIs. We
+                    do not store or track your IP address.
+                </p>
+            </div>
+        </div>
+
+        <div class="ad-container ad-inline">
+            <!-- Google AdSense: paste script here -->
+            <!-- Adsterra: paste script here -->
+            <!-- Montag Ads: paste script here -->
+            <span>Advertisement</span>
+        </div>
+
+        <section class="mt-lg">
+            <h2>Related Tools</h2>
+            <div class="grid grid-4">
+                <a href="/utilities/" class="tool-card">
+                    <h3>All Utilities Tools</h3>
+                    <p>Browse all tools in this category</p>
+                </a>
+                <a href="/calculators/subnet-calculator/" class="tool-card">
+                    <h3>Subnet Calculator</h3>
+                    <p>Calculate subnet masks and ranges</p>
+                </a>
+                <a href="/calculators/ip-calculator/" class="tool-card">
+                    <h3>IP Calculator</h3>
+                    <p>Calculate IP addresses and subnets</p>
+                </a>
+                <a href="/utilities/url-parser/" class="tool-card">
+                    <h3>URL Parser</h3>
+                    <p>Parse and analyze URLs</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div class="ad-container ad-footer">
+        <!-- Google AdSense: paste script here -->
+        <!-- Adsterra: paste script here -->
+        <!-- Montag Ads: paste script here -->
+        <span>Advertisement</span>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Tool Categories</h3>
+                    <ul>
+                        <li><a href="/web/">Web Tools</a></li>
+                        <li><a href="/seo/">SEO Tools</a></li>
+                        <li><a href="/accessibility/">Accessibility</a></li>
+                        <li><a href="/ai/">AI Tools</a></li>
+                        <li><a href="/vibe-code/">Vibe Code</a></li>
+                        <li><a href="/utilities/">Utilities</a></li>
+                        <li><a href="/calculators/">Calculators</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/certificates/">Free IT Certificates</a></li>
+                        <li><a href="/contact/">Contact & Get Advice</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="/cookies-policy/">Cookies Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                        <li><a href="/disclaimer/">Disclaimer</a></li>
+                        <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>SmartNet Tools provides free, privacy-focused developer tools and utilities.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 SmartNet Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        let currentIP = '';
+
+        // Fetch IP address using ipify API
+        async function fetchIPAddress() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                currentIP = data.ip;
+                document.getElementById('ipAddress').textContent = currentIP;
+
+                // Determine IP type
+                document.getElementById('ipType').textContent = currentIP.includes(':') ? 'IPv6' : 'IPv4';
+
+                // Fetch additional info
+                fetchIPInfo(currentIP);
+            } catch (error) {
+                document.getElementById('ipAddress').textContent = 'Unable to fetch IP';
+                showNotification('Failed to retrieve IP address', 'error');
+            }
+        }
+
+        // Fetch additional IP information
+        async function fetchIPInfo(ip) {
+            try {
+                const response = await fetch(`https://ipapi.co/${ip}/json/`);
+                const data = await response.json();
+
+                if (data.error) {
+                    console.error('IP info error:', data.reason);
+                    return;
+                }
+
+                // Update location info
+                document.getElementById('country').textContent = data.country_name || '-';
+                document.getElementById('region').textContent = data.region || '-';
+                document.getElementById('city').textContent = data.city || '-';
+                document.getElementById('timezone').textContent = data.timezone || '-';
+
+                // Update network info
+                document.getElementById('isp').textContent = data.org || '-';
+                document.getElementById('org').textContent = data.org || '-';
+            } catch (error) {
+                console.error('Failed to fetch IP information:', error);
+            }
+        }
+
+        // Copy IP to clipboard
+        function copyIP() {
+            if (!currentIP) {
+                showNotification('No IP address to copy', 'error');
+                return;
+            }
+
+            navigator.clipboard.writeText(currentIP).then(() => {
+                showNotification('IP address copied to clipboard!', 'success');
+                document.getElementById('copyBtn').textContent = '✓ Copied!';
+                setTimeout(() => {
+                    document.getElementById('copyBtn').textContent = '📋 Copy IP Address';
+                }, 2000);
+            }).catch(() => {
+                showNotification('Failed to copy IP address', 'error');
+            });
+        }
+
+        // Fetch IP on page load
+        fetchIPAddress();
+    </script>
+</body>
+
+</html>
