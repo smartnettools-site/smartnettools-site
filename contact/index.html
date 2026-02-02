@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Contact SmartNet Tools. Get in touch with our team for support, feedback, or inquiries.">
+  <meta name="description" content="Contact SmartNet Tools or request expert advice on web development, SEO, accessibility, and digital strategy. Get professional consultation from our team.">
   
-  <title>Contact Us - SmartNet Tools</title>
+  <title>Contact Us & Get Expert Advice - SmartNet Tools</title>
   
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
   <link rel="stylesheet" href="/assets/css/main.css">
@@ -33,7 +33,6 @@
           <li><a href="/utilities/">Utilities</a></li>
           <li><a href="/calculators/">Calculators</a></li>
           <li><a href="/certificates/">Certificates</a></li>
-          <li><a href="/get-advice/">Get Advice</a></li>
           <li><a href="/contact/">Contact</a></li>
         </ul>
       </nav>
@@ -47,41 +46,97 @@
     <span>Advertisement</span>
   </div>
   
-  <main id="main-content" style="max-width: 800px; margin: 0 auto;">
+  <main id="main-content">
     <div class="page-header">
-      <h1>Contact Us</h1>
-      <p>Have a question, suggestion, or feedback? We'd love to hear from you!</p>
+      <h1>Contact Us & Get Expert Advice</h1>
+      <p>Have a question, need support, or looking for professional consultation? We're here to help with all your web development, SEO, and digital strategy needs.</p>
     </div>
     
-    <div class="card">
-      <form id="contactForm" onsubmit="handleSubmit(event)">
-        <div class="form-group">
-          <label for="name">Name <span style="color: var(--error-color);">*</span></label>
-          <input type="text" id="name" name="name" required aria-required="true">
-          <span class="form-error">Please enter your name</span>
+    <!-- Expert Advice Section -->
+    <section class="grid grid-2">
+      <div>
+        <div class="card">
+          <h2>🎯 Our Services</h2>
+          <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 2;">
+            <li><strong>Web Development Consultation</strong><br>Architecture, performance, best practices</li>
+            <li><strong>SEO Strategy & Optimization</strong><br>Technical SEO, content strategy, analytics</li>
+            <li><strong>Accessibility Audits</strong><br>WCAG compliance, remediation guidance</li>
+            <li><strong>Digital Marketing Strategy</strong><br>Content, social media, conversion optimization</li>
+            <li><strong>Technology Assessment</strong><br>Stack evaluation, tool recommendations</li>
+          </ul>
         </div>
         
-        <div class="form-group">
-          <label for="email">Email <span style="color: var(--error-color);">*</span></label>
-          <input type="email" id="email" name="email" required aria-required="true">
-          <span class="form-error">Please enter a valid email address</span>
+        <div class="card mt-lg">
+          <h2>💼 Who We Help</h2>
+          <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 2;">
+            <li>Startups building their first product</li>
+            <li>SMBs looking to improve digital presence</li>
+            <li>Developers seeking architecture advice</li>
+            <li>Marketing teams optimizing campaigns</li>
+            <li>Organizations ensuring accessibility</li>
+          </ul>
         </div>
-        
-        <div class="form-group">
-          <label for="subject">Subject <span style="color: var(--error-color);">*</span></label>
-          <input type="text" id="subject" name="subject" required aria-required="true">
-          <span class="form-error">Please enter a subject</span>
+      </div>
+      
+      <div>
+        <div class="card" style="position: sticky; top: calc(var(--spacing-md) + 60px);">
+          <h2>Request Consultation or Contact Us</h2>
+          <p>Fill out the form below and we'll get back to you within 24-48 hours.</p>
+          
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+              <label for="name">Name <span style="color: var(--error-color);">*</span></label>
+              <input type="text" id="name" name="name" required aria-required="true">
+              <span class="form-error">Please enter your name</span>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" aria-required="false">
+              <span class="form-error">Please enter a valid email address</span>
+            </div>
+            
+            <div class="form-group">
+              <label for="website">Website URL (optional)</label>
+              <input type="url" id="website" name="website" placeholder="https://example.com">
+              <span class="form-error">Please enter a valid URL</span>
+            </div>
+            
+            <div class="form-group">
+              <label for="service">Service Needed</label>
+              <select id="service" name="service">
+                <option value="">Select a service (optional)...</option>
+                <option value="general">General Inquiry</option>
+                <option value="web-dev">Web Development</option>
+                <option value="seo">SEO Strategy</option>
+                <option value="accessibility">Accessibility Audit</option>
+                <option value="marketing">Digital Marketing</option>
+                <option value="tech-assessment">Technology Assessment</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Your Message <span style="color: var(--error-color);">*</span></label>
+              <textarea id="message" name="message" required aria-required="true" placeholder="Tell us about your project, question, or how we can help..."></textarea>
+              <span class="form-error">Please enter your message</span>
+            </div>
+            
+            <!-- Human Verification -->
+            <div class="form-group">
+              <label for="captcha">Human Verification <span style="color: var(--error-color);">*</span></label>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: var(--spacing-xs);">
+                What is <span id="captchaQuestion" style="color: var(--neon-cyan); font-weight: bold;"></span>?
+              </p>
+              <input type="number" id="captcha" name="captcha" required aria-required="true" placeholder="Enter the answer">
+              <span class="form-error">Please solve the math problem</span>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
+          </form>
         </div>
-        
-        <div class="form-group">
-          <label for="message">Message <span style="color: var(--error-color);">*</span></label>
-          <textarea id="message" name="message" required aria-required="true"></textarea>
-          <span class="form-error">Please enter your message</span>
-        </div>
-        
-        <button type="submit" class="btn btn-primary">Send Message</button>
-      </form>
-    </div>
+      </div>
+    </section>
     
     <div class="ad-container ad-inline">
       <!-- Google AdSense: paste script here -->
@@ -90,24 +145,52 @@
       <span>Advertisement</span>
     </div>
     
-    <div class="grid grid-2 mt-lg">
-      <div class="card">
-        <h2>📧 Email Us</h2>
-        <p>For general inquiries:<br>
-        <strong style="color: var(--neon-cyan);">[Your email will be added here]</strong></p>
-      </div>
+    <section class="mt-lg">
+      <h2 class="text-center mb-lg">How It Works</h2>
       
-      <div class="card">
-        <h2>💼 Business Inquiries</h2>
-        <p>For partnerships and business:<br>
-        <strong style="color: var(--neon-cyan);">[Business email will be added here]</strong></p>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3 style="color: var(--neon-cyan);">1. Submit Request</h3>
+          <p>Fill out the form with details about your project and needs.</p>
+        </div>
+        
+        <div class="card">
+          <h3 style="color: var(--neon-magenta);">2. Initial Review</h3>
+          <p>We'll review your request and respond within 24-48 hours to discuss scope and pricing.</p>
+        </div>
+        
+        <div class="card">
+          <h3 style="color: var(--neon-yellow);">3. Get Results</h3>
+          <p>Receive expert guidance, actionable recommendations, and ongoing support.</p>
+        </div>
       </div>
-    </div>
+    </section>
     
-    <div class="card mt-lg">
-      <h2>Need Expert Advice?</h2>
-      <p>Looking for professional consultation on web development, SEO, or digital strategy? Check out our <a href="/get-advice/" style="color: var(--neon-magenta); font-weight: 600;">expert advice services</a>.</p>
-    </div>
+    <section class="mt-lg">
+      <div class="card text-center">
+        <h2>Why Choose Our Consulting Services?</h2>
+        
+        <div class="grid grid-3 mt-lg">
+          <div>
+            <div style="font-size: 3rem; margin-bottom: var(--spacing-sm);">⚡</div>
+            <h3>Fast Response</h3>
+            <p style="color: var(--text-secondary);">Quick turnaround on all inquiries and deliverables</p>
+          </div>
+          
+          <div>
+            <div style="font-size: 3rem; margin-bottom: var(--spacing-sm);">🎯</div>
+            <h3>Proven Results</h3>
+            <p style="color: var(--text-secondary);">Track record of successful projects and satisfied clients</p>
+          </div>
+          
+          <div>
+            <div style="font-size: 3rem; margin-bottom: var(--spacing-sm);">🔧</div>
+            <h3>Practical Advice</h3>
+            <p style="color: var(--text-secondary);">Actionable recommendations you can implement immediately</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
   
   <div class="ad-container ad-footer">
@@ -137,8 +220,7 @@
           <h3>Resources</h3>
           <ul>
             <li><a href="/certificates/">Free IT Certificates</a></li>
-            <li><a href="/get-advice/">Get Expert Advice</a></li>
-            <li><a href="/contact/">Contact Us</a></li>
+            <li><a href="/contact/">Contact & Get Advice</a></li>
           </ul>
         </div>
         
@@ -167,24 +249,46 @@
   
   <script src="/assets/js/main.js"></script>
   <script>
+    // Human verification math CAPTCHA
+    let captchaAnswer;
+    
+    function generateCaptcha() {
+      const num1 = Math.floor(Math.random() * 10) + 1;
+      const num2 = Math.floor(Math.random() * 10) + 1;
+      captchaAnswer = num1 + num2;
+      document.getElementById('captchaQuestion').textContent = num1 + ' + ' + num2;
+    }
+    
+    // Generate CAPTCHA on page load
+    generateCaptcha();
+    
     function handleSubmit(event) {
       event.preventDefault();
+      
+      // Validate CAPTCHA
+      const userAnswer = parseInt(document.getElementById('captcha').value);
+      if (isNaN(userAnswer) || userAnswer !== captchaAnswer) {
+        showNotification('Incorrect answer to the math problem. Please try again.', 'error');
+        generateCaptcha(); // Generate new question
+        document.getElementById('captcha').value = '';
+        return false;
+      }
       
       if (!validateForm('contactForm')) {
         return false;
       }
       
-      // In production, send to server
-      // For now, show success message
       const formData = new FormData(event.target);
       const data = Object.fromEntries(formData);
       
-      console.log('Form data:', data);
+      // In production, this would send to manly.downunder@yahoo.com
+      console.log('Form data to be sent to manly.downunder@yahoo.com:', data);
       
-      showNotification('Thank you! Your message has been received. We\'ll get back to you soon.', 'success');
+      showNotification('Thank you! We\'ll review your request and get back to you within 24-48 hours.', 'success');
       
-      // Reset form
+      // Reset form and generate new CAPTCHA
       event.target.reset();
+      generateCaptcha();
       
       return false;
     }
