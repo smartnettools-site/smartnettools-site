@@ -267,17 +267,35 @@ h1 {
             const iframe = document.getElementById('preview-frame');
             const doc = iframe.contentDocument || iframe.contentWindow.document;
 
-            const code = `
-        ${html}
-        <style>
-        body { background: #1e1e1e; color: #d4d4d4; }
-        ${css}
-        </style>
-        <script>${js}<\/script>
-      `;
+            // Inject default dark theme CSS + user CSS into the HTML
+            let processedHtml = html;
+
+            // If there's a closing head tag, inject styles there
+            if (processedHtml.includes('</head>')) {
+                const defaultStyle = `<style>
+                    body { background: #1e1e1e; color: #d4d4d4; margin: 0; }
+                    * { color: inherit; }
+                </style>
+                <style>${css}</style>`;
+                processedHtml = processedHtml.replace('</head>', defaultStyle + '</head>');
+            } else {
+                // No head tag, wrap everything
+                processedHtml = `<!DOCTYPE html><html><head>
+                    <style>
+                        body { background: #1e1e1e; color: #d4d4d4; margin: 0; }
+                        * { color: inherit; }
+                    </style>
+                    <style>${css}</style>
+                </head><body>${processedHtml}</body></html>`;
+            }
+
+            // Add JavaScript
+            if (js) {
+                processedHtml += `<script>${js}<\/script>`;
+            }
 
             doc.open();
-            doc.write(code);
+            doc.write(processedHtml);
             doc.close();
 
             showNotification('Code executed!', 'success');
