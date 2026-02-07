@@ -196,23 +196,47 @@ p {
             const iframe = document.getElementById('preview-frame');
             const doc = iframe.contentDocument || iframe.contentWindow.document;
 
-            // Build the complete document
-            let finalHtml = html;
+            // Clear the iframe first
+            doc.open();
+            doc.close();
 
-            // If there's a </head> tag, inject CSS there
-            if (finalHtml.toLowerCase().includes('</head>')) {
-                const styleTag = `<style>${css}</style>`;
-                finalHtml = finalHtml.replace(/<\/head>/i, styleTag + '</head>');
+            // Build complete HTML document
+            let finalHtml = html.trim();
+
+            // Check if user provided a complete HTML document
+            if (finalHtml.toLowerCase().includes('<!doctype') || finalHtml.toLowerCase().includes('<html')) {
+                // User has complete HTML - inject CSS into head
+                if (finalHtml.toLowerCase().includes('</head>')) {
+                    const styleTag = `\n<style>${css}</style>\n`;
+                    finalHtml = finalHtml.replace(/<\/head>/i, styleTag + '</head>');
+                } else {
+                    // Has html tag but no head tag - add one
+                    finalHtml = finalHtml.replace(/<html[^>]*>/i, match => match + `<head><style>${css}</style></head>`);
+                }
             } else {
-                // No head tag, wrap everything
-                finalHtml = `<!DOCTYPE html><html><head><style>${css}</style></head><body>${finalHtml}</body></html>`;
+                // User provided HTML fragment - wrap it
+                finalHtml = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>${css}</style>
+</head>
+<body>
+${finalHtml}
+</body>
+</html>`;
             }
 
-            // Add JavaScript at the end
+            // Add JavaScript before closing body tag if it exists
             if (js.trim()) {
-                finalHtml += `<script>${js}<\/script>`;
+                if (finalHtml.toLowerCase().includes('</body>')) {
+                    finalHtml = finalHtml.replace(/<\/body>/i, `<script>${js}<\/script>\n</body>`);
+                } else {
+                    finalHtml += `\n<script>${js}<\/script>`;
+                }
             }
 
+            // Write to iframe
             doc.open();
             doc.write(finalHtml);
             doc.close();
