@@ -196,51 +196,19 @@ p {
             const iframe = document.getElementById('preview-frame');
             const doc = iframe.contentDocument || iframe.contentWindow.document;
 
-            // Clear the iframe first
+            // Clear first
             doc.open();
             doc.close();
 
-            // Build complete HTML document
-            let finalHtml = html.trim();
-
-            // Check if user provided a complete HTML document
-            if (finalHtml.toLowerCase().includes('<!doctype') || finalHtml.toLowerCase().includes('<html')) {
-                // User has complete HTML - inject CSS into head
-                if (finalHtml.toLowerCase().includes('</head>')) {
-                    const styleTag = `\n<style>${css}</style>\n`;
-                    finalHtml = finalHtml.replace(/<\/head>/i, styleTag + '</head>');
-                } else {
-                    // Has html tag but no head tag - add one
-                    finalHtml = finalHtml.replace(/<html[^>]*>/i, match => match + `<head><style>${css}</style></head>`);
-                }
-            } else {
-                // User provided HTML fragment - wrap it
-                finalHtml = `<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <style>${css}</style>
-</head>
-<body>
-${finalHtml}
-</body>
-</html>`;
-            }
-
-            // Add JavaScript before closing body tag if it exists
-            if (js.trim()) {
-                if (finalHtml.toLowerCase().includes('</body>')) {
-                    finalHtml = finalHtml.replace(/<\/body>/i, `<script>${js}<\/script>\n</body>`);
-                } else {
-                    finalHtml += `\n<script>${js}<\/script>`;
-                }
-            }
+            // Inject CSS into head
+            let finalHtml = html;
+            const styleTag = `\n<style>${css}</style>\n`;
+            finalHtml = finalHtml.replace(/<\/head>/i, styleTag + '</head>');
 
             // Write to iframe
             doc.open();
             doc.write(finalHtml);
             doc.close();
-
             showNotification('Code executed!', 'success');
         }
 
